@@ -1,0 +1,121 @@
+view, text, textarea, input {
+  box-sizing: border-box;
+}
+image {
+  display: block;
+  height: auto;
+  background-size: 100% 100%;
+}
+input {
+  background: none;
+}
+page {
+  background: #F7F7F7;
+}
+.content {
+  width: 100%;
+  min-height: 100vh;
+}
+.content .navbara {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 999;
+}
+.content .navbara .child {
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  padding-left: 28rpx;
+}
+.content .navbara .child image {
+  width: 195rpx;
+}
+.content .banner {
+  width: 100%;
+  height: 801rpx;
+}
+.content .main_item {
+  width: 100%;
+  background: #fff;
+  padding: 35rpx 0 39rpx 29rpx;
+  margin-bottom: 19rpx;
+}
+.content .main_item scroll-view {
+  width: 100%;
+  white-space: nowrap;
+  margin-top: 26rpx;
+}
+.content .main_item scroll-view .label {
+  width: 249rpx;
+  overflow: hidden;
+  background: #F3F7F9;
+  border-radius: 20rpx;
+  margin-right: 30rpx;
+  display: inline-block;
+}
+.content .main_item scroll-view .label .pic {
+  width: 100%;
+  height: 178rpx;
+}
+.content .main_item scroll-view .label .pic image {
+  width: 100%;
+  height: 100%;
+}
+.content .main_item scroll-view .label text {
+  display: block;
+  font-size: 24rpx;
+  line-height: 60rpx;
+  text-align: center;
+  color: #494F5F;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  padding: 0 15rpx;
+}
+.content .main_item .title {
+  display: block;
+  font-size: 30rpx;
+  color: #494F5F;
+  font-weight: bold;
+  letter-spacing: 2rpx;
+}
+.content .main_item .title text {
+  color: #2765F2;
+  font-size: 32rpx;
+}
+.content .navbar {
+  overflow: hidden;
+  width: 702rpx;
+  margin: 0 auto;
+  background: #fff;
+  position: relative;
+  margin-top: -70rpx;
+  border-radius: 20rpx;
+  box-shadow: 0rpx 0rpx 29rpx 0rpx rgba(19, 108, 242, 0.35);
+  padding: 54rpx 0 9rpx 0;
+  display: flex;
+  margin-bottom: 43rpx;
+  flex-wrap: wrap;
+}
+.content .navbar view {
+  width: 33.33%;
+  overflow: hidden;
+  margin-bottom: 48rpx;
+}
+.content .navbar view image {
+  display: block;
+  margin: 0 auto;
+  width: 98rpx;
+  margin-bottom: 25rpx;
+}
+.content .navbar view text {
+  display: block;
+  font-size: 28rpx;
+  color: #6C768D;
+  text-align: center;
+}
+

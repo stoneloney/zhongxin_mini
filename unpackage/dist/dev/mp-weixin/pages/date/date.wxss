@@ -1,0 +1,259 @@
+view, text, textarea, input {
+  box-sizing: border-box;
+}
+image {
+  display: block;
+  height: auto;
+  background-size: 100% 100%;
+}
+input {
+  background: none;
+}
+page {
+  background: #F7F7F7;
+}
+.content {
+  width: 100%;
+  min-height: 100vh;
+  padding: 30rpx 24rpx;
+  position: relative;
+}
+.content .search {
+  width: 702rpx;
+  position: relative;
+  z-index: 99;
+  margin: 0 auto;
+  border: 1px solid #FFFFFF;
+  height: 72rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  padding-left: 13rpx;
+}
+.content .search image {
+  width: 30rpx;
+}
+.content .search input {
+  flex: 1;
+  height: 100%;
+  font-size: 28rpx;
+  color: #fff;
+  padding-left: 9rpx;
+}
+.content .search .s {
+  color: #fff;
+}
+.content .search view {
+  width: 108rpx;
+  height: 58rpx;
+  background: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  box-shadow: 0rpx 0rpx 29rpx 0rpx rgba(19, 108, 242, 0.35);
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 5rpx;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 28rpx;
+  z-index: 99;
+  color: #2764F2;
+}
+.content .list {
+  width: 702rpx;
+  position: relative;
+  z-index: 99;
+  margin: 0 auto;
+  margin-top: 27rpx;
+}
+.content .list .label {
+  width: 100%;
+  height: 185rpx;
+  background: #FFFFFF;
+  box-shadow: 0rpx 0rpx 29rpx 0rpx rgba(19, 108, 242, 0.35);
+  border-radius: 20rpx;
+  margin-bottom: 26rpx;
+}
+.content .list .label .bot {
+  width: 100%;
+  height: 61rpx;
+  border-top: 1px solid #EEEEEE;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 36rpx 0 39rpx;
+}
+.content .list .label .bot .icon {
+  display: flex;
+  align-items: center;
+}
+.content .list .label .bot .icon image {
+  width: 27rpx;
+  margin-right: 13rpx;
+}
+.content .list .label .bot .icon text {
+  font-size: 24rpx;
+  color: #444A58;
+}
+.content .list .label .bot .price {
+  display: flex;
+  align-items: flex-end;
+}
+.content .list .label .bot .price .des {
+  font-size: 20rpx;
+  margin-left: 11rpx;
+  color: #444A58;
+}
+.content .list .label .bot .price .f {
+  display: flex;
+  align-items: flex-end;
+  font-size: 22rpx;
+  font-weight: bold;
+  color: #D30101;
+}
+.content .list .label .bot .price .f text {
+  font-size: 34rpx;
+  line-height: 1;
+  display: inline-block;
+}
+.content .list .label .top {
+  overflow: hidden;
+  min-height: 123rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.content .list .label .top .mid {
+  overflow: hidden;
+}
+.content .list .label .top .mid .f {
+  display: block;
+  margin: 0 auto;
+  width: 34rpx;
+  margin-bottom: 4rpx;
+}
+.content .list .label .top .mid .l {
+  display: block;
+  margin: 0 auto;
+  width: 100rpx;
+  margin-bottom: 6rpx;
+}
+.content .list .label .top .mid view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.content .list .label .top .mid view image {
+  width: 18rpx;
+  margin-right: 6rpx;
+}
+.content .list .label .top .mid view text {
+  font-size: 20rpx;
+  color: #444A58;
+}
+.content .list .label .top .vi {
+  overflow: hidden;
+  width: 40%;
+  padding-bottom: 5rpx;
+}
+.content .list .label .top .vi .time {
+  display: block;
+  text-align: center;
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+  color: #222222;
+}
+.content .list .label .top .vi .name {
+  display: block;
+  text-align: center;
+  font-size: 24rpx;
+  color: #444A58;
+  padding: 0 20rpx;
+}
+.content .date {
+  width: 702rpx;
+  position: relative;
+  z-index: 99;
+  background: #fff;
+  margin: 0 auto;
+  margin-top: 22rpx;
+  overflow: hidden;
+  border-radius: 20rpx;
+  box-shadow: 0rpx 0rpx 29rpx 0rpx rgba(19, 108, 242, 0.35);
+  height: 126rpx;
+}
+.content .date .icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 106rpx;
+  z-index: 999;
+  padding-right: 33rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  background: linear-gradient(to right, white, white);
+}
+.content .date .icon image {
+  width: 44rpx;
+}
+.content .date scroll-view {
+  width: 100%;
+  height: 100%;
+  white-space: nowrap;
+}
+.content .date scroll-view view {
+  display: inline-block;
+  height: 100%;
+  width: 121rpx;
+  position: relative;
+  padding: 24rpx 0 0 0;
+}
+.content .date scroll-view view::after {
+  content: '';
+  width: 1px;
+  height: 102rpx;
+  background: #EEEEEE;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+.content .date scroll-view view .day {
+  display: block;
+  text-align: center;
+  font-size: 28rpx;
+  color: #000000;
+  line-height: 1;
+}
+.content .date scroll-view view .des {
+  display: block;
+  text-align: center;
+  font-size: 22rpx;
+  color: #000000;
+  line-height: 39rpx;
+  opacity: 0.5;
+}
+.content .date scroll-view view .price {
+  display: block;
+  text-align: center;
+  font-size: 22rpx;
+  color: #000000;
+  line-height: 1;
+}
+.content::after {
+  content: '';
+  width: 100%;
+  height: 564rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: linear-gradient(#2765F2, #F7F7F7);
+}
+

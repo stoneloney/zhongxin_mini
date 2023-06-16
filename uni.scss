@@ -1,0 +1,13 @@
+view, text, textarea, input{
+	box-sizing: border-box;
+}
+image{
+	display: block;
+	height: auto;
+	background-size: 100% 100%;
+}
+
+input{
+	background: none
+}
+@import "uview-ui/theme.scss";

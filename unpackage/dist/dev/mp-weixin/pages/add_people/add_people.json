@@ -1,0 +1,8 @@
+{
+  "navigationBarBackgroundColor": "#2765F2",
+  "navigationBarTitleText": "新增乘机人",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-picker": "/uview-ui/components/u-picker/u-picker"
+  }
+}

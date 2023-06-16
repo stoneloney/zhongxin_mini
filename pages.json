@@ -1,0 +1,116 @@
+{
+	"easycom": {
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/exchange/exchange",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "兑换礼券",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/date/date",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "城市摆渡",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/Booking/Booking",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "票务预定",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/Booking/Booking2",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "包机预定",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/Booking/Booking1",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "选择日期",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/predetermine/predetermine",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "起始地",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/add_people/add_people",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "新增乘机人",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/confire/confire",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "票务预定",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/list/info",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "空中游览",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/list/list",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "空中游览",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "我的",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "登录",
+				"navigationBarTextStyle": "white"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {}
+}

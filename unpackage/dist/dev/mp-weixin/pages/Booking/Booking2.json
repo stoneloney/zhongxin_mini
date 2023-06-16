@@ -1,0 +1,9 @@
+{
+  "navigationBarBackgroundColor": "#2765F2",
+  "navigationBarTitleText": "包机预定",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-popup": "/uview-ui/components/u-popup/u-popup",
+    "u-picker": "/uview-ui/components/u-picker/u-picker"
+  }
+}

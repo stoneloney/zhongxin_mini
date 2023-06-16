@@ -1,0 +1,25 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/exchange/exchange",
+    "pages/date/date",
+    "pages/Booking/Booking",
+    "pages/Booking/Booking2",
+    "pages/Booking/Booking1",
+    "pages/predetermine/predetermine",
+    "pages/add_people/add_people",
+    "pages/confire/confire",
+    "pages/list/info",
+    "pages/list/list",
+    "pages/user/user",
+    "pages/login/login"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "usingComponents": {}
+}
