@@ -1,26 +1,14 @@
 <template>
-	<view class="content" @click="link('info')">
-		<view class="label">
+	<view class="content">
+		<view class="label" v-for="(item, index) in tours" @tap.click="tourLink(item.id)">
 			<view class="pic">
-				<image src="https://qietu.ahqian.com/xiaot/5.12/list1.png" mode="aspectFill"></image>
+				<image :src="item.image" mode="aspectFill"></image>
 			</view>
 			<view class="info">
-				<text class="name">[市区观光]直升机观光旅程，以绝佳角度观赏深圳！</text>
+				<text class="name">{{ item.title }}</text>
 				<view>
-					<text class="price">￥1599</text>
-					<text class="num">已售642</text>
-				</view>
-			</view>
-		</view>
-		<view class="label">
-			<view class="pic">
-				<image src="https://qietu.ahqian.com/xiaot/5.12/list.png" mode="aspectFill"></image>
-			</view>
-			<view class="info">
-				<text class="name">[金沙湾观光]直升机擎天阔海，与爱人齐飞！</text>
-				<view>
-					<text class="price">￥799</text>
-					<text class="num">已售642</text>
+					<text class="price">￥{{ item.price }}</text>
+					<text class="num" v-if="item.sell > 0">已售{{ item.sell }}</text>
 				</view>
 			</view>
 		</view>
@@ -28,6 +16,7 @@
 </template>
 
 <script>
+	import { TourList } from "@/api/tour.js"
 	import footers from '@/compontents/footers/footers.vue'
 	export default {
 		components:{
@@ -35,23 +24,30 @@
 		},
 		data() {
 			return {
-				
+				tours: [],
+				page: 1,
+				limit: 20,
 			}
 		},
 		created() {
-			
+			TourList(this.page, this.limit, (res) => {
+				if (res.code !== 0) {
+					uni.showModal({
+						title: '错误提示',
+						content: '网络异常，请稍后重试',
+						showCancel: false
+					})
+				}
+				this.tours = res.data.list
+			})
 		},
 		methods: {
-			link(url){
+			tourLink(id) {
+				console.log('/pages/list/info?id=' + id)
 				uni.navigateTo({
-					url,
+					url: '/pages/list/info?id=' + id
 				})
-			},
-			links(url){
-				uni.switchTab({
-					url,
-				})
-			},
+			}
 		}
 	}
 </script>

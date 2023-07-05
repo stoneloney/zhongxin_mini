@@ -47,7 +47,7 @@
 					month: true,
 					day: true,
 					hour: true,
-					minute: true,
+					minute: false,
 					second: false
 				},
 				seat: ['A座(靠窗)', 'B座', 'C座(靠窗)', 'D座(靠窗)', 'E座(靠窗)'],
@@ -86,8 +86,8 @@
 		},
 		methods: {
 			change1(e) {
-				this.date = e.year + '-' + e.month + '-' + e.day + ' ' + e.hour + ':' + e.minute
-				console.log(e.year + '-' + e.month + '-' + e.day + ' ' + e.hour + ':' + e.minute)
+				this.date = e.year + '-' + e.month + '-' + e.day + ' ' + e.hour
+				console.log(e.year + '-' + e.month + '-' + e.day + ' ' + e.hour)
 			},
 			backs(){
 				uni.navigateBack({

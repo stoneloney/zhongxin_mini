@@ -1,0 +1,8 @@
+{
+  "navigationBarBackgroundColor": "#2765F2",
+  "navigationBarTitleText": "乘客信息",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "footers": "/compontents/footers/footers"
+  }
+}

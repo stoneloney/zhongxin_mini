@@ -4,43 +4,69 @@
 			<view :style="{'height':statusBarHeight+'px'}"></view>
 			<view class="child" :style="{height: navBarHeight+'px'}">
 				<image src="../../static/logo.png" mode="widthFix"></image>
+				<image src="../../static/logo2.png" mode="widthFix"></image>
 			</view>
 		</view>
-		<image src="https://qietu.ahqian.com/xiaot/5.12/banner.png" class="banner" mode="aspectFill"></image>
+		
+		 <view class="banner" v-if="videoShow">
+			<video id="myVideo" src="https://boatfun.oss-cn-shenzhen.aliyuncs.com/20220524/hhsh.mp4" controls="false" autoplay="true" loop="true" enable-progress-gesture="false" show-center-play-btn="false" show-fullscreen-btn="false" show-play-btn object-fit="fill"></video>
+		 </view>
+		 
+		 <view class="banner" v-if="bannerShow">
+			 <u-swiper
+						:list="banners"
+						keyName="image"
+						showTitle
+						:autoplay="true"
+						circular
+						:height="600"
+				></u-swiper>
+		</view>
 		<view class="navbar">
 			<view @click="link('/pages/list/list')">
 				<image src="../../static/home12.png" mode="widthFix"></image>
 				<text>空中游览</text>
 			</view>
-			<view @click="link('/pages/Booking/Booking2')">
+			<view @click="link('/pages/wait/wait')">
 				<image src="../../static/home6.png" mode="widthFix"></image>
 				<text>包机预定</text>
 			</view>
 			<view @click="link('/pages/date/date')">
 				<image src="../../static/home7.png" mode="widthFix"></image>
-				<text>城际摆渡</text>
+				<text>长途游览</text>
 			</view>
 			<view @click="link('/pages/exchange/exchange')">
 				<image src="../../static/home8.png" mode="widthFix"></image>
 				<text>兑换礼券</text>
 			</view>
-			<view>
+			<view @click="link('/pages/wait/wait')">
 				<image src="../../static/home10.png" mode="widthFix"></image>
 				<text>空中120</text>
 			</view>
-			<view>
+			<view @click="link('/pages/wait/wait')">
 				<image src="../../static/home9.png" mode="widthFix"></image>
 				<text>中信优选</text>
 			</view>
 		</view>
 		<view class="main_item">
+			<text class="title">最新<text>资讯</text></text>
+			<scroll-view scroll-x="true" :scroll-with-animation='true'>
+				<view class="label" v-for="(item, index) in articles" @tap.click="articleLink(item.id)">
+					<view class="pic">
+						<image :src="item.image"></image>
+					</view>
+					<text>{{ item.title }}</text>
+				</view> 
+			</scroll-view>
+		</view>
+		<view class="main_item">
 			<text class="title">中信<text>优选</text></text>
-			<scroll-view scroll-x="true" @click="link('/pages/list/info')">
+			<scroll-view scroll-x="true" @click="link('/pages/wait/wait')">
 				<view class="label">
 					<view class="pic">
-						<image src="https://qietu.ahqian.com/xiaot/5.12/home1.png" mode="aspectFill"></image>
+						<image src="http://img.chinaboatfun.com/zhongxin/5faed9aeae4b6581ad0e9b0a701c8dd8.jpeg" mode="aspectFill"></image>
 					</view>
-					<text>中信金沙湾公寓</text>
+					<text>中信金沙湾水世界</text>
 				</view>
 				<view class="label">
 					<view class="pic">
@@ -52,30 +78,7 @@
 					<view class="pic">
 						<image src="https://qietu.ahqian.com/xiaot/5.12/home3.png" mode="aspectFill"></image>
 					</view>
-					<text>中信金沙湾公寓</text>
-				</view>
-			</scroll-view>
-		</view>
-		<view class="main_item">
-			<text class="title">最新<text>资讯</text></text>
-			<scroll-view scroll-x="true" :scroll-with-animation='true'>
-				<view class="label">
-					<view class="pic">
-						<image src="https://qietu.ahqian.com/xiaot/5.12/home5.png" mode="aspectFill"></image>
-					</view>
-					<text>空客H135试飞成功</text>
-				</view>
-				<view class="label">
-					<view class="pic">
-						<image src="https://qietu.ahqian.com/xiaot/5.12/home2.png" mode="aspectFill"></image>
-					</view>
-					<text>开通金沙湾空中游...</text>
-				</view>
-				<view class="label">
-					<view class="pic">
-						<image src="https://qietu.ahqian.com/xiaot/5.12/home4.png" mode="aspectFill"></image>
-					</view>
-					<text>开通城际摆渡</text>
+					<text>中信金沙湾海滩</text>
 				</view>
 			</scroll-view>
 		</view>
@@ -84,6 +87,7 @@
 </template>
 
 <script>
+	import {mapState, mapGetters, mapMutations} from 'vuex'
 	import footers from '@/compontents/footers/footers.vue'
 	import { mainInfo } from '@/api/index.js'
 	export default {
@@ -98,15 +102,58 @@
 				//状态栏的高度
 				statusBarHeight: 0,
 				//导航栏的高度
-				navBarHeight: 0
+				navBarHeight: 0,
+				/*
+				list2: [{
+				                    image: 'https://cdn.uviewui.com/uview/swiper/swiper2.png',
+				                    title: '昨夜星辰昨夜风，画楼西畔桂堂东',
+				                },{
+				                    image: 'https://cdn.uviewui.com/uview/swiper/swiper1.png',
+				                    title: '身无彩凤双飞翼，心有灵犀一点通'
+				                },{
+				                    image: 'https://cdn.uviewui.com/uview/swiper/swiper3.png',
+				                    title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
+				                }],
+				*/
+			    banners: [],
+				articles:[],
+				share: {
+					title: '',
+					path: '',
+					imageUrl: '',
+					desc: '',
+					content: ''
+				},
+				videoShow: true,
+				bannerShow: false,
 			}
+		},
+		computed: {
+			...mapState(['openid','token']),	
 		},
 		mounted() {
 			this.getheight()
 		},
+		onLoad() {
+			var that = this
+			setTimeout(function() {
+				that.videoShow = false
+				that.bannerShow = true
+			}, 10000)
+		},
 		created() {
+			var that = this
 			mainInfo((res) => {
-				console.log(res)
+				if (res.code !== 0) {
+					uni.showModal({
+						title: '错误提示',
+						content: '网络异常，请稍后重试',
+						showCancel: false
+					})
+					return
+				}
+				that.banners = res.data.banners
+				that.articles = res.data.articles
 			})
 		},
 		methods: { 
@@ -140,6 +187,11 @@
 					}).exec()
 				},10)
 			},
+			articleLink(id) {
+				uni.navigateTo({
+					url: '/pages/article/detail?id=' + id
+				})
+			}
 		}
 	}
 </script>
@@ -164,14 +216,15 @@
 				align-items: center;
 				padding-left: 28rpx;
 				image {
-					width: 195rpx;
-				}
+					width: 155rpx;
+					padding-left: 10px;
+				} 
 			
 			}
 		}
 		.banner{
 			width: 100%;
-			height: 801rpx;
+			height: 601rpx;
 		}
 		.main_item{
 			width: 100%;
@@ -253,6 +306,13 @@
 					text-align: center;
 				}
 			}
+		}
+		#myVideo {
+		  width: 100%;
+		  height: 800rpx;
+		  position: absolute;
+		  top: 0;
+		  left: 0;
 		}
 	}
 </style>

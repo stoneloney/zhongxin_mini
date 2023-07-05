@@ -2,5 +2,7 @@
   "navigationBarBackgroundColor": "#2765F2",
   "navigationBarTitleText": "登录",
   "navigationBarTextStyle": "white",
-  "usingComponents": {}
+  "usingComponents": {
+    "weixin-user-info-modal": "/uni_modules/tuniaoui-wx-user-info/components/tuniaoui-wx-user-info/tuniaoui-wx-user-info"
+  }
 }

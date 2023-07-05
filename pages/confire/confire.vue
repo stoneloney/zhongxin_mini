@@ -5,36 +5,28 @@
 			<view class="label">
 				<text class="f">飞机型号：</text>
 				<view class="change">
-					<text>空客H135   </text>
+					<text> {{ reserve.plane.name }}   </text>
 				</view>
 			</view>
 			<view class="label">
 				<text class="f">座位数：</text>
 				<view class="change">
-					<text>A座 (靠窗)</text>
+					<text> {{ reserve.plane.number }}座</text>
+					<!--
 					<image src="../../static/confire2.png" mode="widthFix"></image>
+					 -->
 				</view>
 			</view>
 		</view>
 		<view class="userinfo">
-			<text class="title">已选：1成人</text>
-			<view class="label on">
+			<text class="title" v-if="selectIds.length > 0">已选：{{ selectIds.length }}人</text>
+			<view class="label" :class="{ on:selectIds.indexOf(item.id) > -1 }" v-for="(item, index) in reserve.passenger" @click="addSelect(item.id)">
 				<view class="check"></view>
 				<view class="grow">
-					<text class="name">李小童</text>
-					<text class="id">身份证：320323199902035623</text>
+					<text class="name">{{ item.name }}</text>
+					<text class="id">身份证：{{ item.id_number }}</text>
 				</view>
-				<view class="edit">
-					<image src="../../static/confire.png" mode="widthFix"></image>
-				</view>
-			</view>
-			<view class="label">
-				<view class="check"></view>
-				<view class="grow">
-					<text class="name">赵孟族</text>
-					<text class="id">身份证：320323199902035623</text>
-				</view>
-				<view class="edit">
+				<view class="edit" @click="edit(item.id)">
 					<image src="../../static/confire.png" mode="widthFix"></image>
 				</view>
 			</view>
@@ -54,21 +46,93 @@
 			</view>
 		</view>
 		<view class="footer">
-			<text class="price">￥<text>1599</text></text>
-			<view class="btn">立即支付</view>
+			<text class="price">￥<text>{{ totalPrice }} </text></text>
+			<view class="btn" @click="PrePay()">立即支付</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import { MemberTicketReserve, IsLogin, MemberPassengerInfo } from "@/api/member"
+	import { PrePay, Pay } from "@/api/weixin"
 	export default {
 		data() {
 			return {
-				
+				reserve: {},
+				selectIds: [],
+				totalPrice: 0,
+				from: '',
+				id: '',
+				number: 0,
+				pageParams: {}
 			}
 		},
-		onLoad() {
-
+		computed: {
+			//...mapGetters(['isLogin'])
+		},
+		onShow() {
+			var that = this
+		   let pages = getCurrentPages();
+		   let currPage = pages[pages.length-1];
+		   if (currPage.data.isDoRefresh == true){
+		     currPage.data.isDoRefresh = false;
+		     MemberTicketReserve({
+		     	'from': this.pageParams.from,
+		     	'id': this.pageParams.id,
+		     	'number': this.pageParams.number
+		     }, (res) => {
+		     	if (res.code !== 0) {
+		     		uni.showModal({
+		     			title: '错误提示',
+		     			content: '网络异常，请稍后重试',
+		     			showCancel: false
+		     		})
+		     		return
+		     	}
+				that.reserve = res.data
+		     	if (that.from == "tour") {
+		     		that.totalPrice = that.number * that.reserve.price
+		     	}
+		     	console.log(that.reserve)
+		     })
+		   }
+		},
+ 		onLoad(params) {
+			/* 
+			if (!IsLogin()) {
+				console.log('not login, to login page')
+				uni.navigateTo({
+					url: '/pages/login/login'
+				})
+				return
+			}
+			*/
+		    console.log("params.selectDate:" + params.selectDate)
+		    var that = this
+			that.from = params.from
+			that.id = params.id
+			that.number = params.number
+			that.pageParams = params
+		    MemberTicketReserve({
+				'from': params.from,
+				'id': params.id,
+				'number': params.number,
+				'select_date': params.selectDate
+			}, (res) => {
+				if (res.code !== 0) {
+					uni.showModal({
+						title: '错误提示',
+						content: '网络异常，请稍后重试',
+						showCancel: false
+					})
+					return
+				}
+				that.reserve = res.data
+				if (that.from == "tour") {
+					that.totalPrice = that.number * that.reserve.price
+				}
+				console.log(that.reserve)
+			})
 		},
 		methods: {
 			link(url){
@@ -76,11 +140,68 @@
 					url,
 				})
 			},
-			links(url){
-				uni.switchTab({
-					url,
+			addSelect:function(id) {
+				let selectIndex = this.selectIds.indexOf(id)
+				console.log(selectIndex)
+				if (selectIndex < 0) {
+					this.selectIds.push(id)
+				} else {
+					this.selectIds.splice(selectIndex, 1)
+				}
+				if (this.from == 'ferry') {
+					this.totalPrice = this.selectIds.length * this.reserve.price
+				}		
+			},
+			// 修改乘客信息
+			edit:function(id) {
+				uni.navigateTo({
+					url: '/pages/add_people/add_people?id='+id
 				})
 			},
+			// 支付
+			PrePay: function() {
+				PrePay({
+					'id': this.id,
+					'from': this.from
+				}, (res) => {
+					if (res.code !== 0) {
+						uni.showModal({
+							title: '错误提示',
+							content: '网络异常，请稍后重试',
+							showCancel: false
+						})
+						return
+					}
+					wx.requestPayment
+					(
+						{
+							"timeStamp": res.data.timeStamp,
+							"nonceStr": res.data.nonceStr,
+							"package": res.data.package,
+							"signType": res.data.signType,
+							"paySign": res.data.paySign,
+							"success":function(res){
+							     // 跳转个人中心
+							     uni.navigateTo({
+							     	url: '/pages/user/user'
+							     })
+							},
+							"fail":function(res){
+								uni.showModal({
+									title: '提示',
+									content: '已取消支付',
+									showCancel: false
+								})
+								return
+							},
+							"complete":function(res2){
+								console.log("complete:"+res)
+							}
+						}
+					)
+					 
+				})
+			}
 		}
 	}
 </script>

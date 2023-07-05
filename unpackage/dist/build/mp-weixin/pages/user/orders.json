@@ -1,0 +1,8 @@
+{
+  "navigationBarBackgroundColor": "#2765F2",
+  "navigationBarTitleText": "我的订单",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "footers": "/compontents/footers/footers"
+  }
+}

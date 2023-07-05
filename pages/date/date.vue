@@ -7,138 +7,43 @@
 		</view> -->
 		<view class="date">
 			<scroll-view scroll-x="true">
-				<view>
-					<text class="day">5-15</text>
-					<text class="des">今天</text>
-					<text class="price">￥1999</text>
-				</view>
-				<view>
-					<text class="day">5-16</text>
-					<text class="des">明天</text>
-					<text class="price">￥1999</text>
-				</view>
-				<view>
-					<text class="day">5-17</text>
-					<text class="des">后天</text>
-					<text class="price">￥1999</text>
-				</view>
-				<view>
-					<text class="day">5-18</text>
-					<text class="des">周四</text>
-					<text class="price">￥1999</text>
-				</view>
-				<view>
-					<text class="day">5-19</text>
-					<text class="des">周五</text>
-					<text class="price">￥1999</text>
-				</view>
-				<view>
-					<text class="day">5-20</text>
-					<text class="des">周六</text>
-					<text class="price">￥1999</text>
-				</view>
-				<view>
-					<text class="day">5-21</text>
-					<text class="des">周日</text>
-					<text class="price">￥1999</text>
-				</view>
-				<view>
-					<text class="day">5-22</text>
-					<text class="des">周一</text>
-					<text class="price">￥1999</text>
+				<view v-for="(item, index) in dates" @click="selectDate(item.date_timestamp)" :class="{ active:item.date_simple==dateSelectSimple }">
+					<text class="day">{{ item.date_simple }}</text>
+					<text class="des">{{ item.week_day }}</text>
+					<text class="price">￥{{ item.price }}</text>
 				</view>
 			</scroll-view>
 			<view class="icon" @click="link('/pages/Booking/Booking1')">
-				<image src="../../static/citys3.png" mode="widthFix"></image>
+				<image src="../../static/citys3.png" mode="widthFix"></image> 
 			</view>
 		</view>
-		<view class="list" @click="link('/pages/confire/confire')">
-			<view class="label">
+		<view class="list">
+			<view class="label" v-for="(item, index) in freeys" @click="buy(item.id)">
 				<view class="top">
 					<view class="vi">
-						<text class="time">10:10</text>
-						<text class="name">深圳南头直升机场</text>
+						<text class="time">{{ item.start_date }}</text>
+						<text class="name">{{ item.start_area }}</text>
 					</view>
 					<view class="mid">
 						<image src="../../static/citys1.png" mode="widthFix" class="f"></image>
 						<image src="../../static/book6.png" mode="widthFix" class="l"></image>
 						<view>
 							<image src="../../static/citys.png" mode="widthFix"></image>
-							<text>30分钟</text>
+							<text>{{ item.times }}分</text>
 						</view>
 					</view>
 					<view class="vi">
-						<text class="time">12:30</text>
-						<text class="name">中信金沙湾</text>
+						<text class="time">{{ item.end_date }}</text>
+						<text class="name">{{ item.end_area }}</text>
 					</view>
 				</view>
 				<view class="bot">
 					<view class="icon">
 						<image src="../../static/citys1.png" mode="widthFix"></image>
-						<text>空客H135</text>
+						<text>{{ item.plane_name }}</text>
 					</view>
 					<view class="price">
-						<text class="f">￥<text>1999</text></text>
-						<!-- <text class="des">税 ￥110</text> -->
-					</view>
-				</view>
-			</view>
-			<view class="label">
-				<view class="top">
-					<view class="vi">
-						<text class="time">10:10</text>
-						<text class="name">中信金沙湾</text>
-					</view>
-					<view class="mid">
-						<image src="../../static/citys1.png" mode="widthFix" class="f"></image>
-						<image src="../../static/book6.png" mode="widthFix" class="l"></image>
-						<view>
-							<image src="../../static/citys.png" mode="widthFix"></image>
-							<text>30分钟</text>
-						</view>
-					</view>
-					<view class="vi">
-						<text class="time">12:30</text>
-						<text class="name">深圳南头直升机场</text>
-					</view>
-				</view>
-				<view class="bot">
-					<view class="icon">
-						<image src="../../static/citys1.png" mode="widthFix"></image>
-						<text>空客H135</text>
-					</view>
-					<view class="price">
-						<text class="f">￥<text>1999</text></text>
-						<!-- <text class="des">税 ￥110</text> -->
-					</view>
-				</view>
-			</view>
-			<view class="label">
-				<view class="top">
-					<view class="vi">
-						<text class="time">10:10</text>
-						<text class="name">深圳南头直升机场</text>
-					</view>
-					<view class="mid">
-						<image src="../../static/citys1.png" mode="widthFix" class="f"></image>
-						<image src="../../static/book6.png" mode="widthFix" class="l"></image>
-						<view>
-							<image src="../../static/citys.png" mode="widthFix"></image>
-							<text>30分钟</text>
-						</view>
-					</view>
-					<view class="vi">
-						<text class="time">12:30</text>
-						<text class="name">黄埔穗港澳直升机场 (静待开通)</text>
-					</view>
-				</view>
-				<view class="bot">
-					<view class="icon">
-						<image src="../../static/citys1.png" mode="widthFix"></image>
-						<text>空客H135</text>
-					</view>
-					<view class="price">
-						<text class="f">￥<text>1999</text></text>
+						<text class="f">￥<text>{{ item.price }}</text></text>
 						<!-- <text class="des">税 ￥110</text> -->
 					</view>
 				</view>
@@ -148,14 +53,30 @@
 </template>
 
 <script>
+	import { FreeyList } from "@/api/freey"
 	export default {
 		data() {
 			return {
-				
+				dates: [],
+				freeys: [],
+				dateSelectSimple: ''
 			}
 		},
 		onLoad() {
-
+			var that = this
+			FreeyList({}, (res) => {
+				if (res.code !== 0) {
+					uni.showModal({
+						title: '错误提示',
+						content: '网络异常，请稍后重试',
+						showCancel: false
+					})
+					return
+				}
+				that.dates = res.data.dates
+				that.freeys = res.data.freeys
+				that.dateSelectSimple = res.data.selectDate
+			})
 		},
 		methods: {
 			link(url){
@@ -168,6 +89,29 @@
 					url,
 				})
 			},
+			buy: function(id) { 
+				uni.navigateTo({
+					url: '/pages/confire/confire?id='+id+'&number=1&from=ferry'
+				})
+			},
+			selectDate: function(timestamp) {
+				var that = this
+				FreeyList({
+					'date': timestamp
+				}, (res) => {
+					if (res.code !== 0) {
+						uni.showModal({
+							title: '错误提示',
+							content: '网络异常，请稍后重试',
+							showCancel: false
+						})
+						return
+					}
+					that.dates = res.data.dates
+					that.freeys = res.data.freeys
+					that.dateSelectSimple = res.data.selectDate
+				})
+			}
 		}
 	}
 </script>
@@ -417,6 +361,8 @@
 			top: 0;
 			background: linear-gradient(#2765F2, #F7F7F7);
 		}
-		
+		.active {
+			background: #60b1f1;
+		}
 	}
 </style>

@@ -1,0 +1,1 @@
+<view class="content"><view class="main_info"><rich-text class="font" nodes="{{content}}"></rich-text></view><footers vue-id="291a4eec-1" currentx="{{1}}" bind:__l="__l"></footers></view>

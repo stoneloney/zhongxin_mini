@@ -1,0 +1,79 @@
+view, text, textarea, input {
+  box-sizing: border-box;
+}
+image {
+  display: block;
+  height: auto;
+  background-size: 100% 100%;
+}
+input {
+  background: none;
+}
+page {
+  background: #F7F7F7;
+}
+.content {
+  width: 100%;
+  min-height: 100vh;
+  padding-bottom: 40rpx;
+}
+.content .main_info {
+  overflow: hidden;
+  background: #fff;
+  margin-top: 14rpx;
+  padding: 28rpx 30rpx;
+}
+.content .main_info view {
+  display: flex;
+  align-items: center;
+}
+.content .main_info view image {
+  width: 5rpx;
+}
+.content .main_info view text {
+  font-size: 26rpx;
+  margin-left: 12rpx;
+  color: #333333;
+}
+.content .main_info .font {
+  display: block;
+  font-size: 30rpx;
+  margin-top: 30rpx;
+  color: #333333;
+  line-height: 40rpx;
+  opacity: 0.8;
+}
+.content .info {
+  overflow: hidden;
+  padding: 24rpx;
+  background: #fff;
+}
+.content .info .name {
+  display: block;
+  font-size: 32rpx;
+  color: #333333;
+  line-height: 40rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  justify-content: center;
+}
+.content .info view {
+  display: flex;
+  align-items: center;
+  margin-top: 16rpx;
+  justify-content: space-between;
+}
+.content .info view .price {
+  display: block;
+  font-size: 28rpx;
+  color: #E06400;
+}
+.content .info view .num {
+  display: block;
+  font-size: 24rpx;
+  color: #333333;
+  opacity: 0.5;
+}
+

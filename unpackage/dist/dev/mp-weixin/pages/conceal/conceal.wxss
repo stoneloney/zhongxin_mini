@@ -1,0 +1,13 @@
+
+.hed{
+    padding: 0 10rpx;
+    font-size: 28rpx;
+    color: #000;
+}
+.heds{
+    font-size: 38rpx;
+    color: #000;
+    text-align: center;
+    padding: 30rpx 0 20rpx 0;
+}
+

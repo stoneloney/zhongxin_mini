@@ -1,34 +1,34 @@
 <template>
 	<view class="content">
 		<view class="banner">
-			<image src="https://qietu.ahqian.com/xiaot/5.12/list1.png" mode="aspectFill"></image>
+			<image :src="detail.image" mode="aspectFill"></image>
 		</view>
 		<view class="info">
-			<text class="name">[市区观光]直升机观光旅程，以绝佳角度观赏深圳！</text>
+			<text class="name">{{ detail.title }}</text>
 			<view>
-				<text class="price">￥1599</text>
-				<text class="num">已售642</text>
+				<text class="price">￥{{ detail.price }}</text>
+				<text class="num">已售 {{ detail.sell }}</text>
 			</view>
 		</view>
 		<view class="address">
 			<view class="icon">
 				<image src="../../static/info.png" mode="widthFix"></image>
-				<text>广东省深圳市南头直升机场</text>
+				<text>{{ detail.area_name }}</text>
 			</view>
 			<view class="btn" @click="maps">地图/导航</view>
 		</view>
 		<view class="list">
-			<view class="label">
+			<view class="label" @click="dateShow = true">
 				<view class="icon">
 					<view class="f"><text>日期</text><image src="../../static/info3.png" mode="widthFix"></image></view>
-					<text class="des">预定前请先选择日期(可以直接线上购买套餐)</text>
+					<text class="des">{{ selectDate }}</text>
 				</view>
 				<image src="../../static/info2.png" mode="widthFix"></image>
 			</view>
-			<view class="label">
+			<view class="label"> 
 				<view class="icon">
 					<view class="f"><text>规格</text><image src="../../static/info3.png" mode="widthFix"></image></view>
-					<text class="des">1次</text>
+					<text class="des">{{ detail.number }}</text>
 				</view>
 				<image src="../../static/info2.png" mode="widthFix"></image>
 			</view>
@@ -37,7 +37,7 @@
 					<view class="f"><text>数量</text><image src="../../static/info3.png" mode="widthFix"></image></view>
 					<view class="change">
 						<view @click="rem"><image src="../../static/info4.png" mode="widthFix"></image></view>
-						<input type="text" v-model="value">
+						<input type="text" v-model="value" disabled="disabled">
 						<view @click="add"><image src="../../static/info5.png" mode="widthFix"></image></view>
 					</view>
 				</view>
@@ -48,31 +48,64 @@
 				<image src="../../static/info6.png" mode="widthFix"></image>
 				<text>商品详情</text>
 			</view>
-			<text class="font">月色沉淀，烛火摇曳的夜晚，有时可能听见自己慢慢老去的声音。在杯茗余烟里看见更真实的自己。日子在软绵绵的温柔，父母还算健康，有三五知心好友可与推杯换盏，有一良人可与倾心挂念。有目标，有事做，兜里恰好有一包玉溪的烟钱。虽然自己笨拙疏庸，偶尔偷偷小懒，偶尔小小泄气，但一直在不急不缓的慢慢向前，一分幼稚，一分可爱，七分成熟交于世态，还有一分吧，藏起来，等你来猜。</text>
+			<rich-text class="font" :nodes="detail.content"></rich-text>
 		</view>
-		<view class="button" @click="link('/pages/confire/confire')">立即购买</view>
+		<view class="button" @click="buy()">立即购买</view>
+		<u-picker mode="time" title='出发日期' @confirm='dataSelect' v-model="dateShow" :params="params"></u-picker>
 	</view>
 </template>
 
 <script>
+	import { TourDetail } from "@/api/tour.js"
+	import {mapState, mapGetters, mapMutations} from 'vuex'
 	export default {
 		data() {
 			return {
-				value: 1
+				id: '',
+				value: 1,
+				dateShow: false,
+				selectDate: '预定前请先选择日期',
+				detail: {},
+				params: {
+					year: true,
+					month: true,
+					day: true,
+					hour: false,
+					minute: false,
+					second: false
+				},
 			}
 		},
-		onLoad() {
-
+		computed: {
+			...mapGetters(['isLogin'])
+		},
+		onLoad(params) {
+			TourDetail(params.id, (res) => {
+				if (res.code !== 0) {
+					uni.showModal({
+						title: '错误提示',
+						content: '网络异常，请稍后重试',
+						showCancel: false
+					})
+					return
+				}
+				console.log(res.data)
+				this.id = res.data.id
+				this.detail = res.data
+			})
 		},
 		methods: {
 			maps(){
 				uni.openLocation({
-							latitude: 22.562549,
-							longitude: 113.93678,
-							success: function () {
-								console.log('success');
-							}
-						});
+					latitude: parseFloat(this.detail.latitude),
+					longitude: parseFloat(this.detail.longitude), 
+					success: function () {
+						console.log('success');
+					},
+					fail:function(res) {
+						console.log(res)
+					}
+				});
 			},
 			add(){
 				this.value+=1
@@ -82,16 +115,23 @@
 					this.value-=1
 				}
 			},
-			link(url){
+			buy() {
+				/*
+				if (!this.isLogin) {
+					console.log('not login, to login page')
+					uni.navigateTo({
+						url: '/pages/login/login'
+					})
+					return
+				}
+				*/
 				uni.navigateTo({
-					url,
+					url: '/pages/confire/confire?id='+this.id+'&number='+this.value+'&from=tour&selectDate='+this.selectDate
 				})
 			},
-			links(url){
-				uni.switchTab({
-					url,
-				})
-			},
+			dataSelect(e) {
+				this.selectDate = e.year + '-' + e.month + '-' + e.day
+			}
 		}
 	}
 </script>

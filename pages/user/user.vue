@@ -2,7 +2,7 @@
 	<view class="content">
 		<view class="userbox">
 			<view class="userinfo">
-				<image src="../../static/user1.png" mode=""></image>
+				<image :src="isLogin ? member.avatar : '../../static/user1.png'" mode=""></image>
 				<view>
 					<text class="name">{{ isLogin ? member.nickname : "游客"}}</text>
 					<text class="des" @tap="login">{{ isLogin ? "您好" : "欢迎登录"}}</text>
@@ -15,12 +15,12 @@
 					<image src="../../static/user2.png" mode="widthFix"></image>
 					<text>我的积分</text>
 				</view>
-				<view class="right">
-					<text>326</text>
+				<view class="right" @click="link('/pages/user/integral')">
+					<text>{{ integral }}</text>
 					<image src="../../static/user3.png" mode="widthFix"></image>
 				</view>
 			</view>
-			<view class="label">
+			<view class="label" @click="link('/pages/user/orders')">
 				<view class="icon">
 					<image src="../../static/user7.png" mode="widthFix"></image>
 					<text>我的订单</text>
@@ -29,7 +29,7 @@
 					<image src="../../static/user3.png" mode="widthFix"></image>
 				</view>
 			</view>
-			<view class="label">
+			<view class="label" @click="link('/pages/user/ticket')">
 				<view class="icon">
 					<image src="../../static/user5.png" mode="widthFix"></image>
 					<text>我的礼券</text>
@@ -38,7 +38,7 @@
 					<image src="../../static/user3.png" mode="widthFix"></image>
 				</view>
 			</view>
-			<view class="label">
+			<view class="label" @click="link('/pages/user/address')">
 				<view class="icon">
 					<image src="../../static/user.png" mode="widthFix"></image>
 					<text>地址管理</text>
@@ -47,10 +47,10 @@
 					<image src="../../static/user3.png" mode="widthFix"></image>
 				</view>
 			</view>
-			<view class="label">
+			<view class="label" @click="link('/pages/user/info')">
 				<view class="icon">
 					<image src="../../static/user6.png" mode="widthFix"></image>
-					<text>个人信息</text>
+					<text>乘客信息</text>
 				</view>
 				<view class="right">
 					<image src="../../static/user3.png" mode="widthFix"></image>
@@ -74,6 +74,7 @@
 
 <script>
     import {mapState, mapGetters, mapMutations} from 'vuex'
+	import { IsLogin, MemberInfo, MemberDetail } from '@/api/member'
 	import footers from '@/compontents/footers/footers.vue'
 	export default {
 		components:{
@@ -81,20 +82,37 @@
 		},
 		data() {
 			return {
-				
+				isLogin: false,
+				integral: 0,
+				member: {}
 			}
 		},
 		computed: {
-			...mapState(['member']),
-			...mapGetters(['isLogin'])
+			//...mapState(['member']),
+			//...mapGetters(['isLogin'])
 		},
-		onLoad() {
-
+		created() {
+			var that = this
+			this.isLogin = IsLogin() ? true : false
+			this.member = MemberInfo()
+			if (this.isLogin) {
+				MemberDetail({}, (res) => {
+					if (res.code !== 0) {
+						uni.showModal({
+							title: '错误提示',
+							content: '网络异常，请稍后重试',
+							showCancel: false
+						})
+						return 
+					}
+					that.integral = res.data.integral 
+					console.log(that.integral)
+				})
+			}
 		},
 		methods: {
-			...mapMutations(['RESET_STATE']),
 			login() {
-				if (!this.isLogin) {
+				if (!IsLogin()) {
 					console.log('not login, to login page')
 					uni.navigateTo({
 						url: '/pages/login/login'
@@ -104,11 +122,15 @@
 				return 
 			},
 			logout() {
-				this.CLEAR_MEMBER()
+				uni.clearStorageSync()
 				uni.navigateTo({
 					url: '/pages/user/user'
 				})
-				
+			},
+			link(url) {
+				uni.navigateTo({
+					url,
+				})
 			}
 		}
 	}

@@ -34,13 +34,13 @@
 					src: '../../static/footericon3.png',
 					src1: '../../static/footericon4.png',
 					name: '品牌',
-					url: '../../pages/index/index'
+					url: '../../pages/wait/wait2'
 				}],
 				nav1:[{
 					src: '../../static/footericon5.png',
 					src1: '../../static/footericon55.png',
 					name: '资讯',
-					url: '../../pages/index/index'
+					url: '../../pages/article/list'
 				},{
 					src: '../../static/footericon7.png',
 					src1: '../../static/footericon6.png',

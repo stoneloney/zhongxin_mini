@@ -11,13 +11,13 @@
 			<view class="label">
 				<text class="name">姓名</text>
 				<view class="change">
-					<input type="text" placeholder="与乘机人证件一致" placeholder-class="s">
+					<input type="text" v-model="name" placeholder="与乘机人证件一致" placeholder-class="s">
 				</view>
 			</view>
 			<view class="label">
 				<text class="name">证件号码</text>
 				<view class="change">
-					<input type="text" placeholder="与乘机人证件一致" placeholder-class="s">
+					<input type="text" v-model="id_number" placeholder="与乘机人证件一致" placeholder-class="s">
 				</view>
 			</view>
 			<view class="label">
@@ -27,7 +27,7 @@
 						<text>{{selector1[index1]}}</text>
 						<image src="../../static/downs.png" mode="widthFix"></image>
 					</view>
-					<input type="text" placeholder="用于接受航变信息" placeholder-class="s">
+					<input type="text" v-model="phone" placeholder="用于接受航变信息" placeholder-class="s">
 				</view>
 			</view>
 		</view>
@@ -40,7 +40,7 @@
 			<text
 				class="des">请您根据航空公司要求，购买机票需提交乘机人身份证件信息，并在乘机时出具对应身份证件用于验证，请确保录入信息真实有效。将通过加密等方式保护您录入的身份证件信息，且在具体订票过程中授权提供给您提供服务的产品供应商、承运人、机票分销系统服务商。</text>
 		</view>
-		<view class="button">保存</view>
+		<view class="button" @click="save">保存</view>
 		<u-picker mode="selector" @confirm='change' v-model="show" :default-selector="[0]" :range="selector"></u-picker>
 		<u-picker mode="selector" @confirm='change1' v-model="show1" :default-selector="[0]"
 			:range="selector1"></u-picker>
@@ -48,21 +48,108 @@
 </template>
 
 <script>
+	//import {mapState, mapGetters, mapMutations} from 'vuex'
+	import {MemberPassengerCreate, MemberPassengerUpdate, MemberPassengerInfo} from '@/api/member'
 	export default {
 		data() {
 			return {
+				id: '',
+				isEdit: false,
 				show: false,
-				selector: ['身份证', '户口本'],
+				selector: ['身份证', '护照', '回乡证'],
 				index: 0,
 				show1: false,
 				selector1: ['+86', '+241'],
-				index1: 0
+				index1: 0,
+				name: '',   // 用户名
+				id_number: '',
+				phone: '',
 			}
 		},
-		onLoad() {
-
+		computed: {
+			//...mapGetters(['isLogin','openid','token'])
+		},
+		onLoad(params) {
+			var that = this
+			if (params.id > 0) {
+				this.isEdit = true
+				this.id = params.id
+				
+				// 获取信息填充
+				MemberPassengerInfo({
+					id: parseInt(params.id)
+				}, (res) => {
+					if (res.code !== 0) {
+						uni.showModal({
+							title: '错误提示',
+							content: '网络异常，请稍后重试',
+							showCancel: false
+						})
+						return 
+					}
+					that.name = res.data.name
+					that.phone = res.data.phone
+					that.id_number = res.data.id_number
+				})
+			}
 		},
 		methods: {
+			save: function() {
+				if (this.isEdit) {
+					MemberPassengerUpdate({
+						id: parseInt(this.id),
+						name: this.name,
+						phone: this.phone,
+						id_number: this.id_number
+					}, (res) => {
+						if (res.code !== 0) {
+							uni.showModal({
+								title: '错误提示',
+								content: '网络异常，请稍后重试',
+								showCancel: false
+							})
+							return
+						}
+						
+						// 修改完成 返回上页
+						uni.navigateBack()
+					})
+				} else {
+					MemberPassengerCreate({
+						'name': this.name,
+						'phone': this.phone,
+						'id_number': this.id_number
+					}, (res) => {
+						if (res.code !== 0) {
+							uni.showModal({
+								title: '错误提示',
+								content: '网络异常，请稍后重试',
+								showCancel: false
+							})
+							return
+						}
+						/*
+						uni.redirectTo({
+							url: '/pages/confire/confire'
+						})
+						*/
+					   //uni.navigateBack()
+					   uni.showToast({
+					        title:'添加成功',
+							success:function() {
+								var pages = getCurrentPages();
+								var currPage = pages[pages.length - 1]; //当前页面
+								var prevPage = pages[pages.length - 2]; //上一个页面
+								prevPage.setData({
+									 isDoRefresh:true
+								})
+								uni.navigateBack();
+							}
+					   })
+						  
+					})
+				}
+			},
 			switch1Change: function(e) {
 				console.log('switch1 发生 change 事件，携带值为', e.detail.value)
 			},

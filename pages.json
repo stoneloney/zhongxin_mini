@@ -98,10 +98,98 @@
 			}
 		},
 		{
+			"path": "pages/user/orders",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "我的订单",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/user/integral",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "我的积分",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/user/ticket",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "我的礼券",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/user/address",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "地址管理",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/user/edit_address",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "地址管理",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/user/info",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "乘客信息",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
 			"path": "pages/login/login",
 			"style": {
 				"navigationBarBackgroundColor": "#2765F2",
 				"navigationBarTitleText": "登录",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/wait/wait",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "资讯",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/wait/wait2",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "资讯",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/article/list",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "资讯",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/article/detail",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "资讯详情",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/conceal/conceal",
+			"style": {
+				"navigationBarBackgroundColor": "#2765F2",
+				"navigationBarTitleText": "隐私协议",
 				"navigationBarTextStyle": "white"
 			}
 		}

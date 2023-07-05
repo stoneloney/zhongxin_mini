@@ -1,0 +1,1 @@
+<view class="content"><view class="info"><text class="name">{{detail.title}}</text><view><text class="price">{{detail.author}}</text><text class="num">{{detail.create_date}}</text></view></view><view class="main_info"><rich-text class="font" nodes="{{detail.content}}" space="nbsp"></rich-text></view><footers vue-id="58187223-1" currentx="{{3}}" bind:__l="__l"></footers></view>

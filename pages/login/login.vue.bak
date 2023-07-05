@@ -1,0 +1,161 @@
+<template>
+
+		 <!--
+		 <button open-type="getUserProfile" lang="zh_CN">微信一键登录</button>
+		 -->
+		 <!--
+		 <button @click="login">微信一键登录</button>
+		 -->
+		 <view data-weui-theme="light">
+		   <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+		     <image class="avatar" :src="avatarUrl"></image>
+		   </button> 
+		   <mp-form>
+		     <mp-cells>
+		       <mp-cell title="昵称">
+		         <input type="nickname" class="weui-input" placeholder="请输入昵称"/>
+		       </mp-cell>
+		     </mp-cells>
+		   </mp-form>
+		 </view>
+</template>
+
+<script>
+	import { MemberInfoUpdate, Member } from '@/api/member'
+	import { WeixinCode } from '@/api/weixin'
+	import { mapMutations } from 'vuex'
+	
+	export default {
+		data() {
+			return {
+				openid: '',
+				avatarUrl: '',
+				 theme: wx.getSystemInfoSync().theme,
+			}
+		},
+		methods: {
+			...mapMutations(['SET_MEMBER','SET_OPENID','SET_TOKEN']),
+			login() {
+				var that = this
+				uni.login({
+				  provider: 'weixin', //使用微信登录
+				  onlyAuthorize: true,
+				  success: function (res) {
+				    if (res.errMsg != "login:ok") {
+						uni.showModal({
+							title: 'title',
+							content: '您取消了授权登录，请重新授权',
+							showCancel: false
+						})
+						return
+					} else {
+						console.log(res)
+						WeixinCode(res.code, (res) => {
+							if (res.code !== 0) {
+								uni.showModal({
+									title: 'title',
+									content: '授权失败，请重新授权(1001)',
+									showCancel: false
+								})
+								return
+							}
+							// 设置openid, token
+							that.SET_OPENID(res.data.openid)
+							that.SET_TOKEN(res.data.salt)
+							that.openid = res.data.openid
+							uni.setStorageSync('openid', res.data.openid)
+							uni.setStorageSync('token', res.data.salt)
+							
+							// 获取用户基本数据
+							wx.getUserInfo({
+								success: function(res) {
+								   if (res.errMsg != "getUserInfo:ok") {
+								   	uni.showModal({
+								   		title: 'title',
+								   		content: '您取消了授权登录，请重新授权(1003)',
+								   		showCancel: false
+								   	})
+								   	return
+								   } else {
+								   	const {avatarUrl:avatar, city, country, gender, nickName:nickname, province} = res.userInfo
+									// 更新用户数据
+									MemberInfoUpdate({
+										"avatar": avatar,
+										"nickname": nickname,
+										"gender": gender,
+										"country": country,
+										"province": province,
+									    "city": city,
+										"openid": that.openid		  
+									}, (res) => {
+										if (res.code !== 0) {
+											uni.showModal({
+												title: 'title',
+												content: '授权失败，请重新授权(1004)',
+												showCancel: false
+											})
+											return
+										}
+										/*
+										that.SET_MEMBER({
+											"avatar": avatar,
+											"nickname": nickname,
+											"gender": gender,
+											"country": country,
+											"province": province,
+											"city": city,	  
+									    })
+										*/
+									    uni.setStorageSync('memberInfo', {
+											"avatar": avatar,
+											"nickname": nickname,
+											"gender": gender,
+											"country": country,
+											"province": province,
+											"city": city	  
+										})
+										// 跳转个人中心
+										uni.navigateTo({
+											url: '/pages/user/user'
+										})
+									})
+								   }
+								},
+								fail: function(e) {
+									uni.showModal({
+										title: 'title',
+										content: '授权失败，请重新授权(1002)',
+										showCancel: false
+									})
+									return
+								}
+							})
+						})
+					}
+				  }
+				});
+			}
+		}
+	}
+	
+</script>
+
+<style>
+	.avatar-wrapper {
+	  padding: 0;
+	  width: 56px !important;
+	  border-radius: 8px;
+	  margin-top: 40px;
+	  margin-bottom: 40px;
+	}
+	
+	.avatar {
+	  display: block;
+	  width: 56px;
+	  height: 56px;
+	}
+	
+	.container {
+	  display: flex;
+	}
+</style>

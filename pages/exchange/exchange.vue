@@ -2,6 +2,7 @@
 	<view class="content">
 		<view class="box">
 			<view class="tabbar">
+				<!--
 				<view :class="current == 0?'on':''" @click="current = 0">
 					<text>中信银行 </text>
 					<text>VIP客户礼券兑换</text>
@@ -10,29 +11,70 @@
 					<text>中信银行 </text>
 					<text>信用卡礼券兑换</text>
 				</view>
+				-->
+				<view :class="atype == item.id?'on':''" @click="atype = item.id" v-for="(item, index) in types">
+					<text>中信银行 </text>
+					<text>{{ item.title }}</text>
+				</view>
 			</view>
 			<view class="change">
 				<image src="../../static/phones.png" mode="widthFix"></image>
-				<input type="text" placeholder="请输入礼券兑换码" placeholder-class="s">
+				<input type="text" placeholder="请输入礼券兑换码" placeholder-class="s" v-model="number">
 			</view>
-			<view class="button">确认兑换</view>
+			<view class="button" @click="exchange">确认兑换</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import { VoucherTypes, VoucherExchange } from "@/api/voucher"
+	import { IsLogin } from "@/api/member"
 	export default {
 		data() {
 			return {
-				current:0
+				atype:0,
+				number: '',
+				types: []
 			}
 		},
 		onLoad(options) {
-			
+			var that = this
+			VoucherTypes({}, (res) => {
+				if (res.code !== 0 ) {
+					uni.showModal({
+						title: '错误提示',
+						content: '网络异常，请稍后重试',
+						showCancel: false
+					})
+					return
+				}
+				that.types = res.data
+				if (res.data.length > 0) {
+					that.atype = res.data[0].id
+				}
+			})
 		},
 
 		methods: {
-			
+			exchange: function() {
+				VoucherExchange({
+					'atype': this.atype,
+					'number': this.number
+				}, (res) => {
+					if (res.code !== 0) {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none',
+							duration: 2000
+						})
+					} else {
+						uni.showToast({
+							title: '兑换成功',
+							duration: 2000
+						})
+					}
+				})
+			}
 		}
 	}
 </script>

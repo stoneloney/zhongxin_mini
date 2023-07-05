@@ -256,4 +256,7 @@ page {
   top: 0;
   background: linear-gradient(#2765F2, #F7F7F7);
 }
+.content .active {
+  background: #60b1f1;
+}
 

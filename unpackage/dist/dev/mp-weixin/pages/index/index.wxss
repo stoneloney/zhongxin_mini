@@ -31,11 +31,12 @@ page {
   padding-left: 28rpx;
 }
 .content .navbara .child image {
-  width: 195rpx;
+  width: 155rpx;
+  padding-left: 10px;
 }
 .content .banner {
   width: 100%;
-  height: 801rpx;
+  height: 601rpx;
 }
 .content .main_item {
   width: 100%;
@@ -117,5 +118,12 @@ page {
   font-size: 28rpx;
   color: #6C768D;
   text-align: center;
+}
+.content #myVideo {
+  width: 100%;
+  height: 800rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 

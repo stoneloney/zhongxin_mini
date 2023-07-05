@@ -1,0 +1,24 @@
+
+.login-page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+  /* 授权按钮 */
+.submit-btn {
+    width: 100%;
+    background-color: #05C160;
+    color: #FFFFFF;
+    margin-top: 60rpx;
+    border-radius: 10rpx;
+    padding: 25rpx;
+    font-size: 32rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30rpx;
+}
+
