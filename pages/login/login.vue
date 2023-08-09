@@ -127,6 +127,7 @@
 		  							"country": country,
 		  							"province": province,
 		  						    "city": city,
+									"phone": that.phone,
 		  							"openid": that.openid		  
 		  						}, (res) => {
 		  							if (res.code !== 0) {
@@ -143,6 +144,7 @@
 		  								"gender": gender,
 		  								"country": country,
 		  								"province": province,
+										"phone": that.phone,
 		  								"city": city	  
 		  							})
 		  							// 跳转个人中心

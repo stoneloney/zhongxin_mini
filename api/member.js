@@ -52,7 +52,6 @@ export function MemberDetail(data, callback) {
 	return PostReq(apiUrl, data, callback)
 }
 
-
 // 判断是否登陆
 export function IsLogin() {
 	let openid = uni.getStorageSync('openid')

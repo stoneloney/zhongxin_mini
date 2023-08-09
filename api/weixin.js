@@ -17,6 +17,11 @@ export function PrePay(data, callback) {
 	return PostReq(apiUrl, data, callback)
 }
 
+export function AgainPrePay(data, callback) {
+	let apiUrl = "/wx/again_prepay"
+	return PostReq(apiUrl, data, callback)
+}
+
 export function WeixinPhone(code, callback) {
 	let apiUrl = "/wx/phone"
 	return PostReq(apiUrl, { 

@@ -102,6 +102,22 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.orders, function (item, index) {
+    var $orig = _vm.__get_orig(item)
+    var m0 = _vm.OrderStatusStr(item.status)
+    return {
+      $orig: $orig,
+      m0: m0,
+    }
+  })
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0,
+      },
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -171,9 +187,10 @@ var _orders = __webpack_require__(/*! @/api/orders */ 174);
 //
 //
 //
+//
 var footers = function footers() {
   __webpack_require__.e(/*! require.ensure | compontents/footers/footers */ "compontents/footers/footers").then((function () {
-    return resolve(__webpack_require__(/*! @/compontents/footers/footers.vue */ 253));
+    return resolve(__webpack_require__(/*! @/compontents/footers/footers.vue */ 255));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {
@@ -183,14 +200,20 @@ var _default = {
   data: function data() {
     return {
       isLogin: false,
-      orders: []
+      orders: [],
+      hasMore: true,
+      page: 1,
+      limit: 20
     };
   },
   created: function created() {
     var that = this;
     this.isLogin = (0, _member.IsLogin)() ? true : false;
     if (this.isLogin) {
-      (0, _orders.orderList)({}, function (res) {
+      (0, _orders.orderList)({
+        'page': this.page,
+        'limit': this.limit
+      }, function (res) {
         if (res.code !== 0) {
           uni.showModal({
             title: '错误提示',
@@ -208,26 +231,39 @@ var _default = {
       return;
     }
   },
-  methods: {
-    login: function login() {
-      if (!(0, _member.IsLogin)()) {
-        console.log('not login, to login page');
-        uni.navigateTo({
-          url: '/pages/login/login'
+  // 页面触底加载数据
+  onReachBottom: function onReachBottom() {
+    console.log('onReachBottom');
+    var that = this;
+    if (!this.hasMore) {
+      return;
+    }
+    this.page += 1;
+    (0, _orders.orderList)(this.page, this.limit, function (res) {
+      if (res.code !== 0) {
+        uni.showModal({
+          title: '错误提示',
+          content: '网络异常，请稍后重试',
+          showCancel: false
         });
         return;
       }
-      return;
-    },
-    logout: function logout() {
-      uni.clearStorageSync();
-      uni.navigateTo({
-        url: '/pages/user/user'
-      });
-    },
+      if (res.data.list.length < that.limit) {
+        that.hasMore = false;
+      }
+      that.orders = that.orders.concat(res.data.list);
+    });
+  },
+  methods: {
+    OrderStatusStr: _orders.OrderStatusStr,
     link: function link(url) {
       uni.navigateTo({
         url: url
+      });
+    },
+    detail: function detail(orderId) {
+      uni.navigateTo({
+        url: '/pages/order_completion/order_completion?id=' + orderId
       });
     }
   }

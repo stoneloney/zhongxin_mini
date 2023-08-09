@@ -2,16 +2,17 @@
 	<view class="indent">
 	  <view class="indent_a">
 	   <view hover-class="none" v-for="(item, index) in orders">
-		 <view class="chanpin">
+		 <view class="chanpin" @click="detail(item.order_id)">
 			  <view class="fl"><image :src="item.timage"></image></view>
 				<view class="fr">
 				  <view>{{ item.ttitle}}</view>
 				</view>
 	      </view>  
 	      <view class="mone">
-	           <view class="fr_a">
-	               <text>共1件商品 </text>
-	           <text>共计 : ¥{{ item.price }} </text>
+	        <view class="fr_a">
+			   <text class="status">{{ OrderStatusStr(item.status) }} </text>
+	           <text class="goods_total"> 共1件商品 </text>
+	           <text> 共计: ¥{{ item.price }} </text>
 	        </view>
 	      </view>
 	    </view> 
@@ -28,7 +29,7 @@
 
 <script>
 	import { IsLogin } from '@/api/member'
-	import { orderList } from '@/api/orders'
+	import { orderList, OrderStatusStr } from '@/api/orders'
 	import footers from '@/compontents/footers/footers.vue'
 	export default {
 		components:{
@@ -37,7 +38,10 @@
 		data() {
 			return {
 				isLogin: false,
-				orders: []
+				orders: [],
+				hasMore: true,
+				page: 1,
+				limit: 20,
 			}
 		},
 		created() {
@@ -45,7 +49,7 @@
 			this.isLogin = IsLogin() ? true : false
 			
 			if (this.isLogin) {
-				orderList({}, (res) => {
+				orderList({'page': this.page, 'limit': this.limit}, (res) => {
 					if (res.code !== 0) {
 						uni.showModal({
 							title: '错误提示',
@@ -63,26 +67,39 @@
 				return
 			}
 		},
-		methods: {
-			login() {
-				if (!IsLogin()) {
-					console.log('not login, to login page')
-					uni.navigateTo({
-						url: '/pages/login/login'
+		// 页面触底加载数据
+		onReachBottom() {
+			console.log('onReachBottom')
+			var that = this
+			if (!this.hasMore) {
+				return
+			}
+			this.page += 1
+			orderList(this.page, this.limit, (res) => {
+				if (res.code !== 0) {
+					uni.showModal({
+						title: '错误提示',
+						content: '网络异常，请稍后重试',
+						showCancel: false
 					})
 					return
 				}
-				return 
-			},
-			logout() {
-				uni.clearStorageSync()
-				uni.navigateTo({
-					url: '/pages/user/user'
-				})
-			},
+				if (res.data.list.length < that.limit) {
+					that.hasMore = false
+				}
+				that.orders = that.orders.concat(res.data.list)
+			})
+		},
+		methods: {
+			OrderStatusStr,
 			link(url) {
 				uni.navigateTo({
 					url,
+				})
+			},
+			detail(orderId) {
+				uni.navigateTo({
+					url: '/pages/order_completion/order_completion?id=' + orderId
 				})
 			}
 		}
@@ -160,7 +177,7 @@
 	}
 	
 	.fr_a text:nth-child(1) {
-	  margin-left: 339rpx;
+	  margin-left: 309rpx;
 	  display: inline-block;
 	}
 	
@@ -225,5 +242,12 @@
 	 line-height: 100rpx;
 	 text-align: center;
 	   background-image: linear-gradient(to right, #0055ff , #8dd2fe);
+	}
+	.status {
+		float: left;
+		color: indianred;
+	}
+	.goods_total {
+		margin-right: 5px;
 	}
 </style>

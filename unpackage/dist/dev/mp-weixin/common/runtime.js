@@ -105,11 +105,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"compontents/footers/footers":1,"uview-ui/components/u-swiper/u-swiper":1,"uview-ui/components/u-picker/u-picker":1,"uview-ui/components/u-popup/u-popup":1,"uni_modules/tuniaoui-wx-user-info/components/tuniaoui-wx-user-info/tuniaoui-wx-user-info":1,"uview-ui/components/u-icon/u-icon":1,"uview-ui/components/u-mask/u-mask":1};
+/******/ 		var cssChunks = {"compontents/footers/footers":1,"uview-ui/components/u-swiper/u-swiper":1,"uview-ui/components/u-picker/u-picker":1,"uview-ui/components/u-popup/u-popup":1,"uni_modules/tuniaoui-wx-user-info/components/tuniaoui-wx-user-info/tuniaoui-wx-user-info":1,"compontents/ay-qrcode/ay-qrcode":1,"uview-ui/components/u-icon/u-icon":1,"uview-ui/components/u-mask/u-mask":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"compontents/footers/footers":"compontents/footers/footers","uview-ui/components/u-swiper/u-swiper":"uview-ui/components/u-swiper/u-swiper","uview-ui/components/u-picker/u-picker":"uview-ui/components/u-picker/u-picker","uview-ui/components/u-popup/u-popup":"uview-ui/components/u-popup/u-popup","uni_modules/tuniaoui-wx-user-info/components/tuniaoui-wx-user-info/tuniaoui-wx-user-info":"uni_modules/tuniaoui-wx-user-info/components/tuniaoui-wx-user-info/tuniaoui-wx-user-info","uview-ui/components/u-icon/u-icon":"uview-ui/components/u-icon/u-icon","uview-ui/components/u-mask/u-mask":"uview-ui/components/u-mask/u-mask"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"compontents/footers/footers":"compontents/footers/footers","uview-ui/components/u-swiper/u-swiper":"uview-ui/components/u-swiper/u-swiper","uview-ui/components/u-picker/u-picker":"uview-ui/components/u-picker/u-picker","uview-ui/components/u-popup/u-popup":"uview-ui/components/u-popup/u-popup","uni_modules/tuniaoui-wx-user-info/components/tuniaoui-wx-user-info/tuniaoui-wx-user-info":"uni_modules/tuniaoui-wx-user-info/components/tuniaoui-wx-user-info/tuniaoui-wx-user-info","compontents/ay-qrcode/ay-qrcode":"compontents/ay-qrcode/ay-qrcode","uview-ui/components/u-icon/u-icon":"uview-ui/components/u-icon/u-icon","uview-ui/components/u-mask/u-mask":"uview-ui/components/u-mask/u-mask"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

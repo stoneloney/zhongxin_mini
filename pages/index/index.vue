@@ -31,6 +31,12 @@
 				<image src="../../static/home6.png" mode="widthFix"></image>
 				<text>包机预定</text>
 			</view>
+			<!--
+			<view @click="link('/pages/order_completion/order_check?id=1687858295077166')">
+				<image src="../../static/home6.png" mode="widthFix"></image>
+				<text>包机预定</text>
+			</view>
+			-->
 			<view @click="link('/pages/date/date')">
 				<image src="../../static/home7.png" mode="widthFix"></image>
 				<text>长途游览</text>

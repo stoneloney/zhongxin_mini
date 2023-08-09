@@ -23,7 +23,9 @@
     "pages/wait/wait2",
     "pages/article/list",
     "pages/article/detail",
-    "pages/conceal/conceal"
+    "pages/conceal/conceal",
+    "pages/order_completion/order_completion",
+    "pages/order_completion/order_check"
   ],
   "subPackages": [],
   "window": {

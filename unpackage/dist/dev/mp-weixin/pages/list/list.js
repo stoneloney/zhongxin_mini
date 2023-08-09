@@ -161,7 +161,7 @@ var _tour = __webpack_require__(/*! @/api/tour.js */ 149);
 //
 var footers = function footers() {
   __webpack_require__.e(/*! require.ensure | compontents/footers/footers */ "compontents/footers/footers").then((function () {
-    return resolve(__webpack_require__(/*! @/compontents/footers/footers.vue */ 253));
+    return resolve(__webpack_require__(/*! @/compontents/footers/footers.vue */ 255));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {
@@ -172,7 +172,8 @@ var _default = {
     return {
       tours: [],
       page: 1,
-      limit: 20
+      limit: 20,
+      hasMore: true
     };
   },
   created: function created() {
@@ -184,8 +185,32 @@ var _default = {
           content: '网络异常，请稍后重试',
           showCancel: false
         });
+        return;
       }
       _this.tours = res.data.list;
+    });
+  },
+  // 页面触底加载数据
+  onReachBottom: function onReachBottom() {
+    console.log('onReachBottom');
+    var that = this;
+    if (!this.hasMore) {
+      return;
+    }
+    this.page += 1;
+    (0, _tour.TourList)(this.page, this.limit, function (res) {
+      if (res.code !== 0) {
+        uni.showModal({
+          title: '错误提示',
+          content: '网络异常，请稍后重试',
+          showCancel: false
+        });
+        return;
+      }
+      if (res.data.list.length < that.limit) {
+        that.hasMore = false;
+      }
+      that.tours = that.tours.concat(res.data.list);
     });
   },
   methods: {

@@ -187,7 +187,7 @@ var _member = __webpack_require__(/*! @/api/member */ 82);
 //
 var footers = function footers() {
   __webpack_require__.e(/*! require.ensure | compontents/footers/footers */ "compontents/footers/footers").then((function () {
-    return resolve(__webpack_require__(/*! @/compontents/footers/footers.vue */ 253));
+    return resolve(__webpack_require__(/*! @/compontents/footers/footers.vue */ 255));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {

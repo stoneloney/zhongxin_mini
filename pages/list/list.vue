@@ -27,6 +27,7 @@
 				tours: [],
 				page: 1,
 				limit: 20,
+				hasMore: true,
 			}
 		},
 		created() {
@@ -37,8 +38,32 @@
 						content: '网络异常，请稍后重试',
 						showCancel: false
 					})
+					return
 				}
 				this.tours = res.data.list
+			})
+		},
+		// 页面触底加载数据
+		onReachBottom() {
+			console.log('onReachBottom')
+			var that = this
+			if (!this.hasMore) {
+				return
+			}
+			this.page += 1
+			TourList(this.page, this.limit, (res) => {
+				if (res.code !== 0) {
+					uni.showModal({
+						title: '错误提示',
+						content: '网络异常，请稍后重试',
+						showCancel: false
+					})
+					return
+				}
+				if (res.data.list.length < that.limit) {
+					that.hasMore = false
+				}
+				that.tours = that.tours.concat(res.data.list)
 			})
 		},
 		methods: {

@@ -217,9 +217,19 @@ var _member = __webpack_require__(/*! @/api/member */ 82);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var footers = function footers() {
   __webpack_require__.e(/*! require.ensure | compontents/footers/footers */ "compontents/footers/footers").then((function () {
-    return resolve(__webpack_require__(/*! @/compontents/footers/footers.vue */ 253));
+    return resolve(__webpack_require__(/*! @/compontents/footers/footers.vue */ 255));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {
@@ -230,7 +240,9 @@ var _default = {
     return {
       isLogin: false,
       integral: 0,
-      member: {}
+      member: {},
+      isSuper: false,
+      toBeUsed: 0
     };
   },
   computed: {
@@ -252,6 +264,8 @@ var _default = {
           return;
         }
         that.integral = res.data.integral;
+        that.isSuper = res.data.is_super ? true : false;
+        that.toBeUsed = res.data.to_be_used;
         console.log(that.integral);
       });
     }
@@ -277,6 +291,54 @@ var _default = {
       uni.navigateTo({
         url: url
       });
+    },
+    scanCode: function scanCode() {
+      var that = this;
+      uni.scanCode({
+        onlyFromCamera: true,
+        success: function success(res) {
+          console.log('条码类型：' + res.scanType);
+          console.log('条码内容：' + res.result);
+          if (res.scanType != "QR_CODE") {
+            uni.showModal({
+              title: '错误提示',
+              content: '不能识别的二维码',
+              showCancel: false
+            });
+            return;
+          }
+          var orderId = that.getQueryVariable(res.result, 'id');
+          if (orderId == '') {
+            uni.showModal({
+              title: '错误提示',
+              content: '二维码解析有误',
+              showCancel: false
+            });
+            return;
+          }
+          uni.navigateTo({
+            url: '/pages/order_completion/order_check?id=' + orderId
+          });
+        },
+        fail: function fail() {
+          uni.showModal({
+            title: '错误提示',
+            content: '扫码错误',
+            showCancel: false
+          });
+          return;
+        }
+      });
+    },
+    getQueryVariable: function getQueryVariable(url, name) {
+      var vars = url.split("?")[1].split("&");
+      for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == name) {
+          return pair[1];
+        }
+      }
+      return '';
     }
   }
 };

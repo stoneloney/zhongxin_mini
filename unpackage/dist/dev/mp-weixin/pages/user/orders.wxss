@@ -58,7 +58,7 @@ page{
   border-bottom: 1rpx solid #dee3f0;
 }
 .fr_a text:nth-child(1) {
-  margin-left: 339rpx;
+  margin-left: 309rpx;
   display: inline-block;
 }
 .fr_a text:nth-child(2) {
@@ -119,5 +119,12 @@ text-align: center;
  line-height: 100rpx;
  text-align: center;
    background-image: linear-gradient(to right, #0055ff , #8dd2fe);
+}
+.status {
+	float: left;
+	color: indianred;
+}
+.goods_total {
+	margin-right: 5px;
 }
 

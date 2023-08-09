@@ -34,7 +34,10 @@
               <image class="image" :src="userInfo.avatar" mode="aspectFill"></image>
             </view>
             <view v-else class="avatar__empty">
+			 <!--
               <image class="image" src="https://cdn.nlark.com/yuque/0/2022/jpeg/280373/1668928062708-assets/web-upload/764843cf-055a-4cb6-b5d3-dca528b33fd4.jpeg" mode="aspectFill"></image>
+			  -->
+			  <image class="image" src="../../../../static/user1.png" mode="aspectFill"></image>
             </view>
             <view class="avatar--icon">
               <view class="tn-icon-camera-fill"></view>

@@ -24,6 +24,7 @@
 				articles: [],
 				page: 1,
 				limit: 20,
+				hasMore: true,
 			}
 		},
 		created() {
@@ -36,6 +37,29 @@
 					})
 				}
 				this.articles = res.data
+			})
+		},
+		// 页面触底加载数据
+		onReachBottom() {
+			console.log('onReachBottom')
+			var that = this
+			if (!this.hasMore) {
+				return
+			}
+			this.page += 1
+			ArticleList(this.page, this.limit, (res) => {
+				if (res.code !== 0) {
+					uni.showModal({
+						title: '错误提示',
+						content: '网络异常，请稍后重试',
+						showCancel: false
+					})
+					return
+				}
+				if (res.data.length < that.limit) {
+					that.hasMore = false
+				}
+				that.articles = that.articles.concat(res.data)
 			})
 		},
 		methods: {

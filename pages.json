@@ -192,6 +192,28 @@
 				"navigationBarTitleText": "隐私协议",
 				"navigationBarTextStyle": "white"
 			}
+		},
+		{
+			"path": "pages/order_completion/order_completion",
+			"style": {
+				"navigationBarTitleText": "订单详情",
+				"enablePullDownRefresh": true,
+				"backgroundTextStyle": "dark",
+				"app-plus": {
+					"titleView": false
+				}
+			}
+		},
+		{
+			"path": "pages/order_completion/order_check",
+			"style": {
+				"navigationBarTitleText": "订单销核",
+				"enablePullDownRefresh": true,
+				"backgroundTextStyle": "dark",
+				"app-plus": {
+					"titleView": false
+				}
+			}
 		}
 	],
 	"globalStyle": {

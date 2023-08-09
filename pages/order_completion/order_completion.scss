@@ -1,0 +1,633 @@
+//本页面由uniapp切片工具生成，uni-app切片-可视化设计工具(一套代码编译到7个平台iOS、Android、H5、小程序)，软件下载地址：http://www.ymznkf.com/new_view_669.htm
+html,body,#app {
+	height: 100%;
+	width: 100%;
+}
+
+.YmContent {
+	height: 100%;
+	width: 100%;
+}
+
+uni-page-body,#app {
+	height: 100%;
+}
+
+button::after {
+	border: none;
+	width: auto;
+}
+
+input {
+	outline: none;
+	border: none;
+	list-style: none;
+	width: auto;
+}
+
+.list_item {
+	float: left;
+}
+
+.ym_hide {
+	display: none;
+}
+
+.ym_show {
+	display: block;
+}
+
+.slide-image {
+	width: 100%;
+	height: 100%;
+}
+
+.list_horizontal {
+	width: auto;
+	display: inline-block;
+}
+
+.order_completion_72 {
+	white-space: normal;
+	width: 749upx;
+	height: 100%;
+	padding: 0upx;
+	clear: both;
+	float: left;
+	background-color: #f0f0f0;
+	border-radius: 0upx;
+	font-size: 8upx;
+}
+
+.order_completion_72 .order_completion_70 {
+	white-space: normal;
+	width: 749upx;
+	height: 702upx;
+	padding: 0upx;
+	clear: both;
+	margin-top: 0upx;
+	margin-left: 0upx;
+	float: left;
+	background-color: #ffffff;
+	border-radius: 0upx;
+	font-size: 8upx;
+}
+
+.order_completion_72 .order_completion_70 .order_completion_18 {
+	white-space: normal;
+	width: 170upx;
+	height: 25upx;
+	padding: 0upx;
+	clear: both;
+	margin-top: 43upx;
+	margin-left: 270upx;
+	float: left;
+	text-align: center;
+	justify-content: center;
+	border-radius: 0upx;
+	color: #c8c8c8;
+	font-size: 23upx;
+	line-height: 25upx;
+}
+
+.order_completion_72 .order_completion_70 .num {
+	white-space: normal;
+	width: 180upx;
+	height: 180upx;
+	padding: 0upx;
+	clear: both;
+	margin-top: 50upx;
+	margin-left: 205upx;
+	float: left;
+	text-align: center;
+	justify-content: center;
+	color: #ffffff;
+	font-size: 55upx;
+	line-height: 198upx;
+}
+
+.order_completion_72 .order_completion_70 .order_completion_20 {
+	white-space: normal;
+	width: 213upx;
+	height: 36upx;
+	padding: 0upx;
+	clear: both;
+	margin-top: 185upx;
+	margin-left: 185upx;
+	float: left;
+	border-radius: 0upx;
+	font-size: 35upx;
+	line-height: 36upx;
+}
+
+.order_completion_72 .order_completion_70 .order_completion_20 .order_completion_21 {
+	white-space: normal;
+	width: 397upx;
+	height: 36upx;
+	padding: 0upx;
+	margin-top: 0upx;
+	margin-left: 6upx;
+	float: left;
+	text-align: center;
+	justify-content: center;
+	border-radius: 0upx;
+	//color: #2765F2;
+	font-size: 30upx;
+	line-height: 36upx;
+}
+
+.order_completion_72 .order_completion_70 .order_completion_20 .order_completion_22 {
+	white-space: normal;
+	width: 15upx;
+	height: 27upx;
+	padding: 0upx;
+	margin-top: 5upx;
+	margin-left: 2upx;
+	float: left;
+	border-radius: 0upx;
+	font-size: 25upx;
+	line-height: 27upx;
+}
+
+.order_completion_72 .order_completion_70 .order_completion_23 {
+	white-space: normal;
+	width: 302upx;
+	height: 27upx;
+	padding: 0upx;
+	clear: both;
+	margin-top: 36upx;
+	margin-left: 214upx;
+	float: left;
+	text-align: center;
+	justify-content: center;
+	border-radius: 0upx;
+	color: #646464;
+	font-size: 26upx;
+	line-height: 27upx;
+}
+
+.order_completion_72 .order_completion_69 {
+	white-space: normal;
+	width: 749upx;
+	min-height: 277upx;
+	padding: 0upx;
+	clear: both;
+	margin-top: 18upx;
+	margin-left: 0upx;
+	float: left;
+	background-color: #ffffff;
+	border-radius: 0upx;
+	font-size: 8upx;
+}
+
+.order_completion_72 .order_completion_69 .order_completion_74 {
+	white-space: normal;
+	width: 749upx;
+	height: 98upx;
+	padding: 0upx;
+	clear: both;
+	margin-top: 0upx;
+	margin-left: 0upx;
+	float: left;
+	border-bottom-color: #f0f0f0;
+	border-bottom-width: 1upx;
+	border-bottom-style: solid;
+	border-radius: 0upx;
+	font-size: 8upx;
+}
+
+.order_completion_72 .order_completion_69 .order_completion_74 .order_completion_26 {
+	white-space: normal;
+	width: 694upx;
+	height: 27upx;
+	padding: 0upx;
+	margin-top: 26upx;
+	margin-left: 29upx;
+	float: left;
+	border-radius: 0upx;
+	font-size: 25upx;
+	line-height: 27upx;
+}
+
+.order_completion_72 .order_completion_69 .order_completion_74 .order_completion_26 .order_completion_27 {
+	white-space: normal;
+	width: 126upx;
+	height: 27upx;
+	padding: 0upx;
+	margin-top: 0upx;
+	margin-left: 0upx;
+	float: left;
+	border-radius: 0upx;
+	color: #000000;
+	font-size: 24upx;
+	line-height: 27upx;
+}
+
+.order_completion_72 .order_completion_69 .order_completion_74 .order_completion_26 .order_completion_28 {
+	white-space: normal;
+	width: 65upx;
+	height: 23upx;
+	padding: 0upx;
+	margin-top: 2upx;
+	margin-left: 476upx;
+	float: left;
+	text-align: right;
+	border-radius: 0upx;
+	color: #E06400;
+	font-size: 20upx;
+	line-height: 23upx;
+}
+
+.order_completion_72 .order_completion_69 .order_completion_74 .order_completion_26 .order_completion_29 {
+	white-space: normal;
+	width: 25upx;
+	height: 16upx;
+	padding: 0upx;
+	margin-top: 8upx;
+	margin-left: 0upx;
+	float: left;
+	border-radius: 0upx;
+	font-size: 15upx;
+	line-height: 16upx;
+}
+
+.order_completion_72 .order_completion_69 .goods {
+	white-space: normal;
+	width: 749upx;
+	min-height: 116upx;
+	padding: 0upx;
+	clear: both;
+	margin-top: 0upx;
+	margin-left: 0upx;
+	float: left;
+	border-radius: 0upx;
+	font-size: 8upx;
+}
+
+.order_completion_72 .order_completion_69 .goods .row {
+	white-space: normal;
+	width: 749upx;
+	height: 158upx;
+	padding: 0upx;
+	margin-top: 0upx;
+	margin-left: 0upx;
+	float: left;
+	border-bottom-color: #e1e1e1;
+	border-bottom-width: 1upx;
+	border-bottom-style: solid;
+	border-radius: 0upx;
+	font-size: 8upx;
+}
+
+.order_completion_72 .order_completion_69 .goods .row .order_completion_32 {
+	white-space: normal;
+	width: 681upx;
+	height: 33upx;
+	padding: 0upx;
+	margin-top: 34upx;
+	margin-left: 43upx;
+	float: left;
+	border-radius: 0upx;
+	font-size: 31upx;
+	line-height: 33upx;
+}
+
+.order_completion_72 .order_completion_69 .goods .row .order_completion_32 .icon {
+	white-space: normal;
+	width: 80upx;
+	height: 80upx;
+	padding: 0upx;
+	margin-top: 0upx;
+	margin-left: 0upx;
+	float: left;
+	border-radius: 0upx;
+	font-size: 31upx;
+	line-height: 33upx;
+}
+
+.order_completion_72 .order_completion_69 .goods .row .order_completion_32 .order_completion_76 {
+	white-space: normal;
+	width: 425upx;
+	height: 33upx;
+	padding: 0upx;
+	margin-top: 0upx;
+	margin-left: 29upx;
+	float: left;
+	border-radius: 0upx;
+	font-size: 31upx;
+	line-height: 33upx;
+}
+
+.order_completion_72 .order_completion_69 .goods .row .order_completion_32 .order_completion_76 .subject {
+	white-space: normal;
+	width: auto;
+	height: 29upx;
+	padding: 0upx;
+	margin-top: 2upx;
+	margin-left: 2upx;
+	float: left;
+	border-radius: 0upx;
+	color: #000000;
+	font-size: 27upx;
+	line-height: 29upx;
+}
+
+.order_completion_72 .order_completion_69 .goods .row .order_completion_32 .order_completion_76 .go {
+	white-space: normal;
+	width: auto;
+	height: 24upx;
+	padding: 0upx;
+	margin-top: 5upx;
+	margin-left: 5upx;
+	float: left;
+	border-radius: 0upx;
+	color: #c8c8c8;
+	font-size: 20upx;
+	line-height: 24upx;
+}
+
+.order_completion_72 .order_completion_69 .goods .row .order_completion_32 .price {
+	white-space: normal;
+	width: 43upx;
+	height: 23upx;
+	padding: 0upx;
+	margin-top: 4upx;
+	margin-left: 24upx;
+	float: left;
+	text-align: right;
+	border-radius: 0upx;
+	color: #000000;
+	font-size: 25upx;
+	line-height: 23upx;
+}
+
+.order_completion_72 .order_completion_69 .goods .row .order_completion_32 .num {
+	white-space: normal;
+	width: 47upx;
+	height: 23upx;
+	padding: 0upx;
+	margin-top: 4upx;
+	margin-left: 20upx;
+	float: left;
+	text-align: right;
+	border-radius: 0upx;
+	color: #646464;
+	font-size: 20upx;
+	line-height: 23upx;
+}
+
+.order_completion_72 .order_completion_69 .total_money {
+	white-space: normal;
+	width: 255upx;
+	height: 26upx;
+	padding: 0upx;
+	clear: both;
+	margin-top: 18upx;
+	margin-left: 467upx;
+	float: left;
+	text-align: right;
+	border-radius: 0upx;
+	color: #E06400;
+	font-size: 30upx;
+	line-height: 26upx;
+}
+
+.order_completion_72 .order_completion_68 {
+	white-space: normal;
+	width: 749upx;
+	height: 118upx;
+	padding: 0upx;
+	clear: both;
+	margin-top: 18upx;
+	margin-left: 0upx;
+	float: left;
+	background-color: #ffffff;
+	border-radius: 0upx;
+	font-size: 8upx;
+}
+
+.order_completion_72 .order_completion_68 .order_completion_43 {
+	white-space: normal;
+	width: 118upx;
+	height: 27upx;
+	padding: 0upx;
+	margin-top: 26upx;
+	margin-left: 28upx;
+	float: left;
+	border-radius: 0upx;
+	color: #000000;
+	font-size: 24upx;
+	line-height: 27upx;
+}
+
+.order_completion_72 .order_completion_66 {
+	white-space: normal;
+	width: 749upx;
+	height: 379upx;
+	padding: 0upx;
+	clear: both;
+	margin-top: 17upx;
+	margin-left: 0upx;
+	float: left;
+	background-color: #ffffff;
+	border-radius: 0upx;
+	font-size: 8upx;
+}
+
+.order_completion_72 .order_completion_66 .order_completion_48 {
+	white-space: normal;
+	width: 118upx;
+	height: 27upx;
+	padding: 0upx;
+	clear: both;
+	margin-top: 27upx;
+	margin-left: 28upx;
+	float: left;
+	border-radius: 0upx;
+	color: #000000;
+	font-size: 24upx;
+	line-height: 27upx;
+}
+
+.order_completion_72 .order_completion_66 .order_completion_67 {
+	white-space: normal;
+	width: 749upx;
+	padding: 0upx;
+	clear: both;
+	margin-top: 29upx;
+	margin-left: 0upx;
+	float: left;
+	border-bottom-color: #e1e1e1;
+	border-bottom-width: 1upx;
+	border-bottom-style: solid;
+	border-top-color: #e1e1e1;
+	border-top-width: 1upx;
+	border-top-style: solid;
+	border-radius: 0upx;
+	font-size: 8upx;
+}
+
+.order_completion_72 .order_completion_66 .order_completion_67 .order_completion_51 {
+	white-space: normal;
+	width: 705upx;
+	height: 69upx;
+	padding: 0upx;
+	clear: both;
+	margin-top: 27upx;
+	margin-left: 22upx;
+	float: left;
+	border-radius: 0upx;
+	font-size: 8upx;
+}
+
+.order_completion_72 .order_completion_66 .order_completion_67 .order_completion_51 .order_completion_52 {
+	white-space: normal;
+	width: 127upx;
+	height: 28upx;
+	padding: 0upx;
+	margin-top: 18upx;
+	margin-left: 0upx;
+	float: left;
+	border-radius: 0upx;
+	color: #646464;
+	font-size: 25upx;
+	line-height: 28upx;
+}
+
+.order_completion_72 .order_completion_66 .order_completion_67 .order_completion_51 .address {
+	white-space: normal;
+	width: 443upx;
+	height: 69upx;
+	padding: 0upx;
+	margin-top: 0upx;
+	margin-left: 134upx;
+	float: left;
+	border-radius: 0upx;
+	color: #646464;
+	font-size: 29upx;
+}
+
+.order_completion_72 .order_completion_66 .order_completion_67 .order_completion_56 {
+	white-space: normal;
+	width: 705upx;
+	height: 28upx;
+	padding: 0upx;
+	clear: both;
+	margin-top: 49upx;
+	margin-left: 22upx;
+	float: left;
+	border-radius: 0upx;
+	font-size: 27upx;
+	line-height: 28upx;
+}
+
+.order_completion_72 .order_completion_66 .order_completion_67 .order_completion_56 .order_completion_57 {
+	white-space: normal;
+	width: 127upx;
+	height: 28upx;
+	padding: 0upx;
+	margin-top: 0upx;
+	margin-left: 0upx;
+	float: left;
+	border-radius: 0upx;
+	color: #646464;
+	font-size: 24upx;
+	line-height: 28upx;
+}
+
+.order_completion_72 .order_completion_66 .order_completion_67 .order_completion_56 .position {
+	white-space: normal;
+	width: 443upx;
+	height: 28upx;
+	padding: 0upx;
+	margin-top: 0upx;
+	margin-left: 134upx;
+	float: left;
+	text-align: right;
+	border-radius: 0upx;
+	color: #646464;
+	font-size: 25upx;
+	line-height: 27upx;
+}
+
+.order_completion_72 .order_completion_66 .order_completion_60 {
+	white-space: normal;
+	width: 545upx;
+	height: 68upx;
+	padding: 0upx;
+	clear: both;
+	margin-top: 16upx;
+	margin-left: 120upx;
+	float: left;
+	border-radius: 0upx;
+	font-size: 67upx;
+	line-height: 68upx;
+}
+
+.order_completion_72 .order_completion_66 .order_completion_60 .order_completion_61 {
+	white-space: normal;
+	width: 40upx;
+	height: 37upx;
+	padding: 0upx;
+	margin-top: 17upx;
+	margin-left: 0upx;
+	float: left;
+	border-radius: 0upx;
+	font-size: 36upx;
+	line-height: 37upx;
+}
+
+.order_completion_72 .order_completion_66 .order_completion_60 .btFaPiao {
+	white-space: normal;
+	width: 103upx;
+	height: 27upx;
+	padding: 0upx;
+	margin-top: 20upx;
+	margin-left: 20upx;
+	float: left;
+	border-radius: 0upx;
+	color: #646464;
+	font-size: 24upx;
+	line-height: 27upx;
+}
+
+.order_completion_72 .order_completion_66 .order_completion_60 .order_completion_63 {
+	white-space: normal;
+	width: 1upx;
+	height: 68upx;
+	padding: 0upx;
+	margin-top: 0upx;
+	margin-left: 90upx;
+	float: left;
+	background-color: #e1e1e1;
+	border-radius: 0upx;
+	font-size: 67upx;
+	line-height: 68upx;
+}
+
+.order_completion_72 .order_completion_66 .order_completion_60 .order_completion_64 {
+	white-space: normal;
+	width: 43upx;
+	height: 34upx;
+	padding: 0upx;
+	margin-top: 17upx;
+	margin-left: 104upx;
+	float: left;
+	border-radius: 0upx;
+	font-size: 33upx;
+	line-height: 34upx;
+}
+
+.order_completion_72 .order_completion_66 .order_completion_60 .btService {
+	white-space: normal;
+	width: 120upx;
+	height: 27upx;
+	padding: 0upx;
+	margin-top: 20upx;
+	margin-left: 15upx;
+	float: left;
+	border-radius: 0upx;
+	color: #646464;
+	font-size: 25upx;
+	line-height: 27upx;
+}

@@ -57,7 +57,6 @@
 
 <script>
 	import { TourDetail } from "@/api/tour.js"
-	import {mapState, mapGetters, mapMutations} from 'vuex'
 	export default {
 		data() {
 			return {
@@ -75,9 +74,6 @@
 					second: false
 				},
 			}
-		},
-		computed: {
-			...mapGetters(['isLogin'])
 		},
 		onLoad(params) {
 			TourDetail(params.id, (res) => {
