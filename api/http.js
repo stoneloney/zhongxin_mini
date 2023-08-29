@@ -1,6 +1,6 @@
-const BaseUrl = "http://127.0.0.1:9805/zhongxin/api"
+//const BaseUrl = "http://127.0.0.1:9805/zhongxin/api"
 //const BaseUrl = "http://118.25.191.234:9805/zhongxin/api"
-//const BaseUrl = "https://hzthxcx.cohc.citic/zhongxin/api"
+const BaseUrl = "https://hzthxcx.cohc.citic/zhongxin/api"
 // post请求
 export function PostReq(reqUrl, data, callback) {
 	console.log('openid:'+uni.getStorageSync('openid')+',token:'+uni.getStorageSync('token'))
