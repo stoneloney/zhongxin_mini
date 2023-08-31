@@ -48,7 +48,127 @@
 					</view>
 				</view>
 			</view>
+			
+			<view class="label" v-for="(item, index) in freeys" @click="buy(item.id)">
+				<view class="top">
+					<view class="vi">
+						<text class="time">{{ item.start_date }}</text>
+						<text class="name">{{ item.start_area }}</text>
+					</view>
+					<view class="mid">
+						<image src="../../static/citys1.png" mode="widthFix" class="f"></image>
+						<image src="../../static/book6.png" mode="widthFix" class="l"></image>
+						<view>
+							<image src="../../static/citys.png" mode="widthFix"></image>
+							<text>{{ item.times }}分</text>
+						</view>
+					</view>
+					<view class="vi">
+						<text class="time">{{ item.end_date }}</text>
+						<text class="name">{{ item.end_area }}</text>
+					</view>
+				</view>
+				<view class="bot">
+					<view class="icon">
+						<image src="../../static/citys1.png" mode="widthFix"></image>
+						<text>{{ item.plane_name }}</text>
+					</view>
+					<view class="price">
+						<text class="f">￥<text>{{ item.price }}</text></text>
+						<!-- <text class="des">税 ￥110</text> -->
+					</view>
+				</view>
+			</view>
+			
+			<view class="label" v-for="(item, index) in freeys" @click="buy(item.id)">
+				<view class="top">
+					<view class="vi">
+						<text class="time">{{ item.start_date }}</text>
+						<text class="name">{{ item.start_area }}</text>
+					</view>
+					<view class="mid">
+						<image src="../../static/citys1.png" mode="widthFix" class="f"></image>
+						<image src="../../static/book6.png" mode="widthFix" class="l"></image>
+						<view>
+							<image src="../../static/citys.png" mode="widthFix"></image>
+							<text>{{ item.times }}分</text>
+						</view>
+					</view>
+					<view class="vi">
+						<text class="time">{{ item.end_date }}</text>
+						<text class="name">{{ item.end_area }}</text>
+					</view>
+				</view>
+				<view class="bot">
+					<view class="icon">
+						<image src="../../static/citys1.png" mode="widthFix"></image>
+						<text>{{ item.plane_name }}</text>
+					</view>
+					<view class="price">
+						<text class="f">￥<text>{{ item.price }}</text></text>
+						<!-- <text class="des">税 ￥110</text> -->
+					</view>
+				</view>
+			</view>
+			
 		</view>
+		<view class="navbar">
+			<view @click="showIntroduce('goupiao')">
+				<image src="../../static/home12.png" mode="widthFix"></image>
+				<text>购票须知</text>
+			</view>
+			<view @click="showIntroduce('anquan')">
+				<image src="../../static/home6.png" mode="widthFix"></image>
+				<text>安全须知</text>
+			</view>
+			<view @click="showIntroduce('dengji')">
+				<image src="../../static/home7.png" mode="widthFix"></image>
+				<text>登机流程</text>
+			</view>
+			<view @click="showIntroduce('chengke')">
+				<image src="../../static/home8.png" mode="widthFix"></image>
+				<text>乘客要求</text>
+			</view>
+			<view @click="showIntroduce('tuipiao')">
+				<image src="../../static/home10.png" mode="widthFix"></image>
+				<text>退票说明</text>
+			</view>
+			<view @click="showIntroduce('lvke')">
+				<image src="../../static/home9.png" mode="widthFix"></image>
+				<text>致旅客信</text>
+			</view>
+			<view @click="showIntroduce('fuwu')">
+				<image src="../../static/home8.png" mode="widthFix"></image>
+				<text>售后服务</text>
+			</view>
+			<view @click="showIntroduce('yuyue')">
+				<image src="../../static/home10.png" mode="widthFix"></image>
+				<text>预约机票</text>
+			</view>
+			<view @click="showIntroduce('/pages/wait/wait')">
+				<image src="../../static/home9.png" mode="widthFix"></image>
+				<text>中转飞行</text>
+			</view>
+		</view>
+		
+		<u-popup v-model="popShow" mode='bottom'>
+			<view class="fade_aircraft">
+				<image src="../../static/close.png" mode="widthFix" class="close" @click="popShow = false"></image>
+				<text class="title">购票须知</text>
+				<scroll-view scroll-y="true" style="height: 65vh;margin-top: 20rpx;">
+				<view class="label" v-show="showType === 'buy'">
+					<view class="slide">
+						<text class="des">   价值七千万的空客轻型双发3吨级H135型直升机，性能优异、高可靠度、低噪音、多用途、高性价比。
+						</text>
+						<text class="des">
+							H135直升机机身全长12.16米，机高2.67米，最大巡航速度为253公里/小时，最大航程可以达到750公里。最新款机型，定制化VIP舱内构型，空调、观景窗一应俱全。</text>
+					</view>
+				</view>
+				</scroll-view>
+				<view class="buttons" @click="popShow = false">确定</view>
+			</view>
+		</u-popup>
+		
 	</view>
 </template>
 
@@ -59,7 +179,9 @@
 			return {
 				dates: [],
 				freeys: [],
-				dateSelectSimple: ''
+				dateSelectSimple: '',
+				popShow: true,
+				showType: '',
 			}
 		},
 		onLoad() {
@@ -111,6 +233,9 @@
 					that.freeys = res.data.freeys
 					that.dateSelectSimple = res.data.selectDate
 				})
+			},
+			showIntroduce: function(page) {
+				
 			}
 		}
 	}
@@ -199,27 +324,6 @@
 						text{
 							font-size: 24rpx;
 							color: #444A58;
-						}
-					}
-					.price{
-						display: flex;
-						align-items: flex-end;
-						.des{
-							font-size: 20rpx;
-							margin-left: 11rpx;
-							color: #444A58;
-						}
-						.f{
-							display: flex;
-							align-items: flex-end;
-							font-size: 22rpx;
-							font-weight: bold;
-							color: #D30101;
-							text{
-								font-size: 34rpx;
-								line-height: 1;
-								display: inline-block;
-							}
 						}
 					}
 				}
@@ -337,7 +441,7 @@
 					.des{
 						display: block;
 						text-align: center;
-						font-size: 22rpx;
+						font-size: 30rpx;
 						color: #000000;
 						line-height: 39rpx;
 						opacity: 0.5;
@@ -364,5 +468,185 @@
 		.active {
 			background: #60b1f1;
 		}
+		.navbar{
+			overflow: hidden;
+			width: 702rpx;
+			margin: 0 auto;
+			background: #fff;
+			position: absolute;
+			margin-top: 70rpx;
+			//border-radius: 20rpx;
+			box-shadow: 0rpx 0rpx 29rpx 0rpx rgba(19,108,242,0.35);
+			padding: 54rpx 0 9rpx 0;
+			display: flex;
+			margin-bottom: 43rpx;
+			flex-wrap: wrap;
+			view{
+				width: 33.33%;
+				overflow: hidden;
+				margin-bottom: 48rpx;
+				image{
+					display: block;
+					margin: 0 auto;
+					width: 98rpx;
+					//margin-bottom: 25rpx;
+				}
+				text{
+					display: block;
+					font-size: 28rpx;
+					color: #6C768D;
+					text-align: center;
+				}
+			}
+		}
 	}
+	
+	.fade_aircraft {
+		overflow: hidden;
+		width: 100%;
+		border-radius: 20rpx 20rpx 0 0;
+		background: #fff;
+		position: relative;
+		padding: 80rpx 35rpx;
+	
+		.buttons {
+			width: 100%;
+			height: 97rpx;
+			background: #2765F2;
+			border-radius: 20rpx;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 28rpx;
+			margin-top: 35rpx;
+			color: #FFFFFF;
+		}
+	
+		.label {
+			width: 100%;
+	
+			.slide {
+				overflow: hidden;
+				width: 100%;
+				background: #EEEEEE;
+				border-radius: 10rpx;
+				padding: 28rpx;
+	
+				.pic {
+					display: flex;
+					justify-content: space-between;
+					flex-wrap: wrap;
+	
+					image {
+						width: 306rpx;
+						border-radius: 10rpx;
+						margin-top: 40rpx;
+					}
+				}
+	
+				.titles {
+					display: block;
+					font-size: 30rpx;
+					font-weight: bold;
+					letter-spacing: 1rpx;
+					color: #444A58;
+					margin-bottom: 30rpx;
+				}
+	
+				.des {
+					display: block;
+					font-size: 30rpx;
+					color: #444A58;
+					line-height: 45rpx;
+					//text-indent: 30rpx;
+				}
+			}
+	
+			.line {
+				width: 100%;
+				height: 91rpx;
+				border-bottom: 1px solid #EEEEEE;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+	
+				&.on {
+					.icon {
+						view {
+							background-image: url('../../static/confire4.png');
+						}
+					}
+	
+					.down image {
+						transform: rotate(180deg);
+					}
+				}
+	
+				&.on1 {
+					.down image {
+						transform: rotate(180deg);
+					}
+				}
+	
+				.down {
+					display: flex;
+					align-items: center;
+	
+					text {
+						font-size: 26rpx;
+						opacity: 0.5;
+						margin-right: 22rpx;
+						color: #444A58;
+					}
+	
+					image {
+						width: 23rpx;
+						transition: all .2s;
+					}
+				}
+	
+				.price {
+					font-size: 30rpx;
+					color: #FF4200;
+				}
+	
+				.icon {
+					height: 100%;
+					display: flex;
+					align-items: center;
+	
+					view {
+						width: 29rpx;
+						height: 29rpx;
+						background-image: url('../../static/confire3.png');
+						background-size: 100% 100%;
+						margin-right: 26rpx;
+					}
+	
+					text {
+						font-size: 26rpx;
+						color: #444A58;
+					}
+				}
+			}
+		}
+	}
+	
+	.close {
+		width: 36rpx;
+		position: absolute;
+		right: 45rpx;
+		top: 27rpx;
+		z-index: 999;
+	}
+	
+	.title {
+		display: block;
+		font-size: 35rpx;
+		font-weight: bold;
+		letter-spacing: 1rpx;
+		color: #444A58;
+		text-align: center;
+	}
+	
 </style>
