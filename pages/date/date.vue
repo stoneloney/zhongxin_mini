@@ -114,39 +114,39 @@
 		</view>
 		<view class="navbar">
 			<view @click="showIntroduce('goupiao')">
-				<image src="../../static/home12.png" mode="widthFix"></image>
+				<image src="../../static/s-goupiao.png" mode="widthFix"></image>
 				<text>购票须知</text>
 			</view>
 			<view @click="showIntroduce('anquan')">
-				<image src="../../static/home6.png" mode="widthFix"></image>
+				<image src="../../static/s-anquan.png" mode="widthFix"></image>
 				<text>安全须知</text>
 			</view>
 			<view @click="showIntroduce('dengji')">
-				<image src="../../static/home7.png" mode="widthFix"></image>
+				<image src="../../static/s-dengji.png" mode="widthFix"></image>
 				<text>登机流程</text>
 			</view>
 			<view @click="showIntroduce('chengke')">
-				<image src="../../static/home8.png" mode="widthFix"></image>
+				<image src="../../static/s-chengke.png" mode="widthFix"></image>
 				<text>乘客要求</text>
 			</view>
 			<view @click="showIntroduce('tuipiao')">
-				<image src="../../static/home10.png" mode="widthFix"></image>
+				<image src="../../static/s-tuipiao.png" mode="widthFix"></image>
 				<text>退票说明</text>
 			</view>
 			<view @click="showIntroduce('lvke')">
-				<image src="../../static/home9.png" mode="widthFix"></image>
+				<image src="../../static/s-xin.png" mode="widthFix"></image>
 				<text>致旅客信</text>
 			</view>
-			<view @click="showIntroduce('fuwu')">
-				<image src="../../static/home8.png" mode="widthFix"></image>
+			<view @click="showIntroduce('shouhou')">
+				<image src="../../static/s-shouhou.png" mode="widthFix"></image>
 				<text>售后服务</text>
 			</view>
 			<view @click="showIntroduce('yuyue')">
-				<image src="../../static/home10.png" mode="widthFix"></image>
+				<image src="../../static/s-yuyue.png" mode="widthFix"></image>
 				<text>预约机票</text>
 			</view>
-			<view @click="showIntroduce('/pages/wait/wait')">
-				<image src="../../static/home9.png" mode="widthFix"></image>
+			<view @click="showIntroduce('zhongzhuan')">
+				<image src="../../static/s-zhongzhuan.png" mode="widthFix"></image>
 				<text>中转飞行</text>
 			</view>
 		</view>
@@ -154,16 +154,88 @@
 		<u-popup v-model="popShow" mode='bottom'>
 			<view class="fade_aircraft">
 				<image src="../../static/close.png" mode="widthFix" class="close" @click="popShow = false"></image>
-				<text class="title">购票须知</text>
+				<!-- 标题展示 -->
+				<text class="title" v-if="showType=='goupiao'">购票须知</text>
+				<text class="title" v-if="showType=='anquan'">安全提示</text>
+				<text class="title" v-if="showType=='dengji'">登机流程</text>
+				<text class="title" v-if="showType=='chengke'">乘客要求</text>
+				<text class="title" v-if="showType=='tuipiao'">退票说明</text>
+				<text class="title" v-if="showType=='lvke'">致旅客信</text>
+				<text class="title" v-if="showType=='shouhou'">售后服务</text>
+				<text class="title" v-if="showType=='yuyue'">预约机票</text>
+				<text class="title" v-if="showType=='zhongzhuan'">中转飞行</text>
+				
 				<scroll-view scroll-y="true" style="height: 65vh;margin-top: 20rpx;">
-				<view class="label" v-show="showType === 'buy'">
+				<view class="label" v-if="showType === 'goupiao'">
 					<view class="slide">
-						<text class="des">   价值七千万的空客轻型双发3吨级H135型直升机，性能优异、高可靠度、低噪音、多用途、高性价比。
-						</text>
-						<text class="des">
-							H135直升机机身全长12.16米，机高2.67米，最大巡航速度为253公里/小时，最大航程可以达到750公里。最新款机型，定制化VIP舱内构型，空调、观景窗一应俱全。</text>
+						<text class="des">购票须知</text>
+						<text class="des">购票须知购票须知购票须知购票须知</text>
 					</view>
 				</view>
+				
+				<view class="label" v-if="showType == 'anquan'">
+					<view class="slide">
+						<text class="des">安全提示</text>
+						<text class="des">安全提示安全提示安全提示安全提示</text>
+					</view>
+				</view>
+				
+				<view class="label" v-if="showType == 'anquan'">
+					<view class="slide">
+						<text class="des">安全提示</text>
+						<text class="des">安全提示安全提示安全提示安全提示</text>
+					</view>
+				</view>
+				
+				<view class="label" v-if="showType == 'dengji'">
+					<view class="slide">
+						<text class="des">登机流程</text>
+						<text class="des">登机流程登机流程</text>
+					</view>
+				</view>
+				
+				<view class="label" v-if="showType == 'chengke'">
+					<view class="slide">
+						<text class="des">乘客要求</text>
+						<text class="des">乘客要求</text>
+					</view>
+				</view>
+				
+				<view class="label" v-if="showType == 'tuipiao'">
+					<view class="slide">
+						<text class="des">退票说明</text>
+						<text class="des">退票说明退票说明</text>
+					</view>
+				</view>
+				
+				<view class="label" v-if="showType == 'lvke'">
+					<view class="slide">
+						<text class="des">致旅客信</text>
+						<text class="des">致旅客信致旅客信</text>
+					</view>
+				</view>
+				
+				<view class="label" v-if="showType == 'shouhou'">
+					<view class="slide">
+						<text class="des">售后服务</text>
+						<text class="des">安全提示安全提示安全提示安全提示</text>
+					</view>
+				</view>
+				
+				<view class="label" v-if="showType == 'yuyue'">
+					<view class="slide">
+						<text class="des">预约机票</text>
+						<text class="des">1111</text>
+					</view>
+				</view>
+				
+				<view class="label" v-if="showType == 'zhongzhuan'">
+					<view class="slide">
+						<text class="des">中转飞行</text>
+						<text class="des">2222</text>
+					</view>
+				</view>
+				
 				</scroll-view>
 				<view class="buttons" @click="popShow = false">确定</view>
 			</view>
@@ -180,7 +252,7 @@
 				dates: [],
 				freeys: [],
 				dateSelectSimple: '',
-				popShow: true,
+				popShow: false,
 				showType: '',
 			}
 		},
@@ -235,7 +307,9 @@
 				})
 			},
 			showIntroduce: function(page) {
-				
+				console.log(page)
+				this.popShow = true
+				this.showType = page
 			}
 		}
 	}
@@ -489,7 +563,9 @@
 					display: block;
 					margin: 0 auto;
 					width: 98rpx;
-					//margin-bottom: 25rpx;
+					margin-bottom: 5rpx;
+					height: 40rpx;
+					width: 40rpx;
 				}
 				text{
 					display: block;
@@ -539,7 +615,6 @@
 	
 					image {
 						width: 306rpx;
-						border-radius: 10rpx;
 						margin-top: 40rpx;
 					}
 				}
@@ -603,11 +678,6 @@
 						width: 23rpx;
 						transition: all .2s;
 					}
-				}
-	
-				.price {
-					font-size: 30rpx;
-					color: #FF4200;
 				}
 	
 				.icon {

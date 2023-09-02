@@ -15,12 +15,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var objectKeys = ['qy', 'env', 'error', 'version', 'lanDebug', 'cloud', 'serviceMarket', 'router', 'worklet'];
+var singlePageDisableKey = ['lanDebug', 'router', 'worklet'];
 var target = typeof globalThis !== 'undefined' ? globalThis : function () {
   return this;
 }();
 var key = ['w', 'x'].join('');
 var oldWx = target[key];
+var launchOption = oldWx.getLaunchOptionsSync ? oldWx.getLaunchOptionsSync() : null;
 function isWxKey(key) {
+  if (launchOption && launchOption.scene === 1154 && singlePageDisableKey.includes(key)) {
+    return false;
+  }
   return objectKeys.indexOf(key) > -1 || typeof oldWx[key] === 'function';
 }
 function initWx() {
@@ -139,9 +144,9 @@ module.exports = _toPrimitive, module.exports.__esModule = true, module.exports[
 /***/ }),
 
 /***/ 140:
-/*!****************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/api/weixin.js ***!
-  \****************************************************/
+/*!*******************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/weixin.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -185,9 +190,9 @@ function WeixinPhone(code, callback) {
 /***/ }),
 
 /***/ 149:
-/*!**************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/api/tour.js ***!
-  \**************************************************/
+/*!*****************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/tour.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -285,9 +290,9 @@ module.exports = _isNativeReflectConstruct, module.exports.__esModule = true, mo
 /***/ }),
 
 /***/ 174:
-/*!****************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/api/orders.js ***!
-  \****************************************************/
+/*!*******************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/orders.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -374,9 +379,9 @@ module.exports = _arrayWithoutHoles, module.exports.__esModule = true, module.ex
 /***/ }),
 
 /***/ 197:
-/*!*****************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/api/address.js ***!
-  \*****************************************************/
+/*!********************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/address.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -605,22 +610,22 @@ function removeInterceptor(method, option) {
     removeInterceptorHook(globalInterceptors, method);
   }
 }
-function wrapperHook(hook) {
+function wrapperHook(hook, params) {
   return function (data) {
-    return hook(data) || data;
+    return hook(data, params) || data;
   };
 }
 function isPromise(obj) {
   return !!obj && ((0, _typeof2.default)(obj) === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
 }
-function queue(hooks, data) {
+function queue(hooks, data, params) {
   var promise = false;
   for (var i = 0; i < hooks.length; i++) {
     var hook = hooks[i];
     if (promise) {
-      promise = Promise.resolve(wrapperHook(hook));
+      promise = Promise.resolve(wrapperHook(hook, params));
     } else {
-      var res = hook(data);
+      var res = hook(data, params);
       if (isPromise(res)) {
         promise = Promise.resolve(res);
       }
@@ -643,7 +648,7 @@ function wrapperOptions(interceptor) {
     if (Array.isArray(interceptor[name])) {
       var oldCallback = options[name];
       options[name] = function callbackInterceptor(res) {
-        queue(interceptor[name], res).then(function (res) {
+        queue(interceptor[name], res, options).then(function (res) {
           /* eslint-disable no-mixed-operators */
           return isFn(oldCallback) && oldCallback(res) || res;
         });
@@ -692,7 +697,8 @@ function invokeApi(method, api, options) {
     if (Array.isArray(interceptor.invoke)) {
       var res = queue(interceptor.invoke, options);
       return res.then(function (options) {
-        return api.apply(void 0, [wrapperOptions(interceptor, options)].concat(params));
+        // 重新访问 getApiInterceptorHooks, 允许 invoke 中再次调用 addInterceptor,removeInterceptor
+        return api.apply(void 0, [wrapperOptions(getApiInterceptorHooks(method), options)].concat(params));
       });
     } else {
       return api.apply(void 0, [wrapperOptions(interceptor, options)].concat(params));
@@ -716,7 +722,7 @@ var promiseInterceptor = {
     });
   }
 };
-var SYNC_API_RE = /^\$|Window$|WindowStyle$|sendHostEvent|sendNativeEvent|restoreGlobal|requireGlobal|getCurrentSubNVue|getMenuButtonBoundingClientRect|^report|interceptors|Interceptor$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64|getLocale|setLocale|invokePushCallback|getWindowInfo|getDeviceInfo|getAppBaseInfo|getSystemSetting|getAppAuthorizeSetting/;
+var SYNC_API_RE = /^\$|Window$|WindowStyle$|sendHostEvent|sendNativeEvent|restoreGlobal|requireGlobal|getCurrentSubNVue|getMenuButtonBoundingClientRect|^report|interceptors|Interceptor$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64|getLocale|setLocale|invokePushCallback|getWindowInfo|getDeviceInfo|getAppBaseInfo|getSystemSetting|getAppAuthorizeSetting|initUTS|requireUTS|registerUTS/;
 var CONTEXT_API_RE = /^create|Manager$/;
 
 // Context例外情况
@@ -1096,6 +1102,8 @@ function populateParameters(result) {
     deviceOrientation = result.deviceOrientation;
   // const isQuickApp = "mp-weixin".indexOf('quickapp-webview') !== -1
 
+  var extraParam = {};
+
   // osName osVersion
   var osName = '';
   var osVersion = '';
@@ -1134,8 +1142,8 @@ function populateParameters(result) {
     appVersion: "1.0.0",
     appVersionCode: "100",
     appLanguage: getAppLanguage(hostLanguage),
-    uniCompileVersion: "3.6.18",
-    uniRuntimeVersion: "3.6.18",
+    uniCompileVersion: "3.8.4",
+    uniRuntimeVersion: "3.8.4",
     uniPlatform: undefined || "mp-weixin",
     deviceBrand: deviceBrand,
     deviceModel: model,
@@ -1160,7 +1168,7 @@ function populateParameters(result) {
     browserName: undefined,
     browserVersion: undefined
   };
-  Object.assign(result, parameters);
+  Object.assign(result, parameters, extraParam);
 }
 function getGetDeviceType(result, model) {
   var deviceType = result.deviceType || 'phone';
@@ -1279,6 +1287,17 @@ var getAppAuthorizeSetting = {
 
 // import navigateTo from 'uni-helpers/navigate-to'
 
+var compressImage = {
+  args: function args(fromArgs) {
+    // https://developers.weixin.qq.com/community/develop/doc/000c08940c865011298e0a43256800?highLine=compressHeight
+    if (fromArgs.compressedHeight && !fromArgs.compressHeight) {
+      fromArgs.compressHeight = fromArgs.compressedHeight;
+    }
+    if (fromArgs.compressedWidth && !fromArgs.compressWidth) {
+      fromArgs.compressWidth = fromArgs.compressedWidth;
+    }
+  }
+};
 var protocols = {
   redirectTo: redirectTo,
   // navigateTo,  // 由于在微信开发者工具的页面参数，会显示__id__参数，因此暂时关闭mp-weixin对于navigateTo的AOP
@@ -1289,7 +1308,8 @@ var protocols = {
   getAppBaseInfo: getAppBaseInfo,
   getDeviceInfo: getDeviceInfo,
   getWindowInfo: getWindowInfo,
-  getAppAuthorizeSetting: getAppAuthorizeSetting
+  getAppAuthorizeSetting: getAppAuthorizeSetting,
+  compressImage: compressImage
 };
 var todos = ['vibrate', 'preloadPage', 'unPreloadPage', 'loadSubPackage'];
 var canIUses = [];
@@ -1721,6 +1741,19 @@ function toSkip(obj) {
     });
   }
   return obj;
+}
+var WORKLET_RE = /_(.*)_worklet_factory_/;
+function initWorkletMethods(mpMethods, vueMethods) {
+  if (vueMethods) {
+    Object.keys(vueMethods).forEach(function (name) {
+      var matches = name.match(WORKLET_RE);
+      if (matches) {
+        var workletName = matches[1];
+        mpMethods[name] = vueMethods[name];
+        mpMethods[workletName] = vueMethods[workletName];
+      }
+    });
+  }
 }
 var MPPage = Page;
 var MPComponent = Component;
@@ -2312,38 +2345,54 @@ function initEventChannel() {
 function initScopedSlotsParams() {
   var center = {};
   var parents = {};
-  _vue.default.prototype.$hasScopedSlotsParams = function (vueId) {
-    var has = center[vueId];
-    if (!has) {
-      parents[vueId] = this;
-      this.$on('hook:destroyed', function () {
-        delete parents[vueId];
-      });
-    }
-    return has;
-  };
-  _vue.default.prototype.$getScopedSlotsParams = function (vueId, name, key) {
-    var data = center[vueId];
-    if (data) {
-      var object = data[name] || {};
-      return key ? object[key] : object;
-    } else {
-      parents[vueId] = this;
-      this.$on('hook:destroyed', function () {
-        delete parents[vueId];
-      });
-    }
-  };
-  _vue.default.prototype.$setScopedSlotsParams = function (name, value) {
+  function currentId(fn) {
     var vueIds = this.$options.propsData.vueId;
     if (vueIds) {
       var vueId = vueIds.split(',')[0];
-      var object = center[vueId] = center[vueId] || {};
-      object[name] = value;
+      fn(vueId);
+    }
+  }
+  _vue.default.prototype.$hasSSP = function (vueId) {
+    var slot = center[vueId];
+    if (!slot) {
+      parents[vueId] = this;
+      this.$on('hook:destroyed', function () {
+        delete parents[vueId];
+      });
+    }
+    return slot;
+  };
+  _vue.default.prototype.$getSSP = function (vueId, name, needAll) {
+    var slot = center[vueId];
+    if (slot) {
+      var params = slot[name] || [];
+      if (needAll) {
+        return params;
+      }
+      return params[0];
+    }
+  };
+  _vue.default.prototype.$setSSP = function (name, value) {
+    var index = 0;
+    currentId.call(this, function (vueId) {
+      var slot = center[vueId];
+      var params = slot[name] = slot[name] || [];
+      params.push(value);
+      index = params.length - 1;
+    });
+    return index;
+  };
+  _vue.default.prototype.$initSSP = function () {
+    currentId.call(this, function (vueId) {
+      center[vueId] = {};
+    });
+  };
+  _vue.default.prototype.$callSSP = function () {
+    currentId.call(this, function (vueId) {
       if (parents[vueId]) {
         parents[vueId].$forceUpdate();
       }
-    }
+    });
   };
   _vue.default.mixin({
     destroyed: function destroyed() {
@@ -2495,6 +2544,7 @@ function parseBaseComponent(vueComponentOptions) {
     vueOptions = _initVueComponent2[1];
   var options = _objectSpread({
     multipleSlots: true,
+    // styleIsolation: 'apply-shared',
     addGlobalClass: true
   }, vueOptions.options || {});
   {
@@ -2607,6 +2657,9 @@ function parseBasePage(vuePageOptions) {
   };
   {
     initUnknownHooks(pageOptions.methods, vuePageOptions, ['onReady']);
+  }
+  {
+    initWorkletMethods(pageOptions.methods, vueOptions.methods);
   }
   return pageOptions;
 }
@@ -2819,7 +2872,6 @@ var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runt
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
-var isArray = Array.isArray;
 var isObject = function isObject(val) {
   return val !== null && (0, _typeof2.default)(val) === 'object';
 };
@@ -2898,7 +2950,7 @@ function parse(format, _ref) {
 function compile(tokens, values) {
   var compiled = [];
   var index = 0;
-  var mode = isArray(values) ? 'list' : isObject(values) ? 'named' : 'unknown';
+  var mode = Array.isArray(values) ? 'list' : isObject(values) ? 'named' : 'unknown';
   if (mode === 'unknown') {
     return compiled;
   }
@@ -2964,6 +3016,10 @@ function normalizeLocale(locale, messages) {
     return locale;
   }
   locale = locale.toLowerCase();
+  if (locale === 'chinese') {
+    // 支付宝
+    return LOCALE_ZH_HANS;
+  }
   if (locale.indexOf('zh') === 0) {
     if (locale.indexOf('-hans') > -1) {
       return LOCALE_ZH_HANS;
@@ -2976,7 +3032,11 @@ function normalizeLocale(locale, messages) {
     }
     return LOCALE_ZH_HANS;
   }
-  var lang = startsWith(locale, [LOCALE_EN, LOCALE_FR, LOCALE_ES]);
+  var locales = [LOCALE_EN, LOCALE_FR, LOCALE_ES];
+  if (messages && Object.keys(messages).length > 0) {
+    locales = Object.keys(messages);
+  }
+  var lang = startsWith(locale, locales);
   if (lang) {
     return lang;
   }
@@ -3283,7 +3343,7 @@ function compileJsonObj(jsonObj, localeValues, delimiters) {
   return jsonObj;
 }
 function walkJsonObj(jsonObj, walk) {
-  if (isArray(jsonObj)) {
+  if (Array.isArray(jsonObj)) {
     for (var i = 0; i < jsonObj.length; i++) {
       if (walk(jsonObj, i)) {
         return true;
@@ -3339,9 +3399,9 @@ module.exports = _classCallCheck, module.exports.__esModule = true, module.expor
 /***/ }),
 
 /***/ 230:
-/*!*****************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/api/article.js ***!
-  \*****************************************************/
+/*!********************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/article.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3410,7 +3470,7 @@ module.exports = _createClass, module.exports.__esModule = true, module.exports[
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(global) {/*!
  * Vue.js v2.6.11
- * (c) 2014-2022 Evan You
+ * (c) 2014-2023 Evan You
  * Released under the MIT License.
  */
 /*  */
@@ -9420,12 +9480,13 @@ var LIFECYCLE_HOOKS$1 = [
     'onNavigationBarSearchInputChanged',
     'onNavigationBarSearchInputConfirmed',
     'onNavigationBarSearchInputClicked',
+    'onUploadDouyinVideo',
+    'onNFCReadMessage',
     //Component
     // 'onReady', // 兼容旧版本，应该移除该事件
     'onPageShow',
     'onPageHide',
-    'onPageResize',
-    'onUploadDouyinVideo'
+    'onPageResize'
 ];
 function lifecycleMixin$1(Vue) {
 
@@ -9481,9 +9542,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 26:
-/*!*************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/pages.json ***!
-  \*************************************************/
+/*!****************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/pages.json ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9523,9 +9584,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 309:
-/*!*********************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/util/province.js ***!
-  \*********************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/util/province.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9645,9 +9706,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 310:
-/*!*****************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/util/city.js ***!
-  \*****************************************************************/
+/*!********************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/util/city.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10766,9 +10827,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 311:
-/*!*****************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/util/area.js ***!
-  \*****************************************************************/
+/*!********************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/util/area.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19931,6 +19992,9 @@ function normalizeComponent (
   }
   // fixed by xxxxxx renderjs
   if (renderjs) {
+    if(typeof renderjs.beforeCreate === 'function'){
+			renderjs.beforeCreate = [renderjs.beforeCreate]
+		}
     (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
       this[renderjs.__module] = this
     });
@@ -20014,9 +20078,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 326:
-/*!*************************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/compontents/ay-qrcode/qrcode_wx.js ***!
-  \*************************************************************************/
+/*!****************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/compontents/ay-qrcode/qrcode_wx.js ***!
+  \****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20757,9 +20821,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 327:
-/*!****************************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/compontents/ay-qrcode/weapp-qrcode.js ***!
-  \****************************************************************************/
+/*!*******************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/compontents/ay-qrcode/weapp-qrcode.js ***!
+  \*******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21597,9 +21661,9 @@ module.exports = QRCode;
 /***/ }),
 
 /***/ 33:
-/*!********************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/index.js ***!
-  \********************************************************/
+/*!***********************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/index.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21732,9 +21796,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 34:
-/*!*******************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/mixin/mixin.js ***!
-  \*******************************************************************/
+/*!**********************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/mixin/mixin.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21808,9 +21872,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 35:
-/*!*********************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/request/index.js ***!
-  \*********************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/request/index.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22020,9 +22084,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 36:
-/*!**************************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/deepMerge.js ***!
-  \**************************************************************************/
+/*!*****************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/deepMerge.js ***!
+  \*****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22070,9 +22134,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 37:
-/*!**************************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/deepClone.js ***!
-  \**************************************************************************/
+/*!*****************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/deepClone.js ***!
+  \*****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22112,9 +22176,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 38:
-/*!*********************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/test.js ***!
-  \*********************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/test.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22361,9 +22425,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 39:
-/*!****************************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/queryParams.js ***!
-  \****************************************************************************/
+/*!*******************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/queryParams.js ***!
+  \*******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22459,9 +22523,9 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
 /***/ }),
 
 /***/ 40:
-/*!**********************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/route.js ***!
-  \**********************************************************************/
+/*!*************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/route.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23018,9 +23082,9 @@ module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exp
 /***/ }),
 
 /***/ 44:
-/*!***************************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/timeFormat.js ***!
-  \***************************************************************************/
+/*!******************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/timeFormat.js ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23095,9 +23159,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 45:
-/*!*************************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/timeFrom.js ***!
-  \*************************************************************************/
+/*!****************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/timeFrom.js ***!
+  \****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23160,9 +23224,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 46:
-/*!******************************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/colorGradient.js ***!
-  \******************************************************************************/
+/*!*********************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/colorGradient.js ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23314,9 +23378,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 47:
-/*!*********************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/guid.js ***!
-  \*********************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/guid.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23375,9 +23439,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 48:
-/*!**********************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/color.js ***!
-  \**********************************************************************/
+/*!*************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/color.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23424,9 +23488,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 49:
-/*!**************************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/type2icon.js ***!
-  \**************************************************************************/
+/*!*****************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/type2icon.js ***!
+  \*****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23496,9 +23560,9 @@ module.exports = _slicedToArray, module.exports.__esModule = true, module.export
 /***/ }),
 
 /***/ 50:
-/*!****************************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/randomArray.js ***!
-  \****************************************************************************/
+/*!*******************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/randomArray.js ***!
+  \*******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23523,9 +23587,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 51:
-/*!************************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/addUnit.js ***!
-  \************************************************************************/
+/*!***************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/addUnit.js ***!
+  \***************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23550,9 +23614,9 @@ function addUnit() {
 /***/ }),
 
 /***/ 52:
-/*!***********************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/random.js ***!
-  \***********************************************************************/
+/*!**************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/random.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23577,9 +23641,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 53:
-/*!*********************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/trim.js ***!
-  \*********************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/trim.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23610,9 +23674,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 54:
-/*!**********************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/toast.js ***!
-  \**********************************************************************/
+/*!*************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/toast.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23638,9 +23702,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 55:
-/*!**************************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/getParent.js ***!
-  \**************************************************************************/
+/*!*****************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/getParent.js ***!
+  \*****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23708,9 +23772,9 @@ function getParent(name, keys) {
 /***/ }),
 
 /***/ 56:
-/*!************************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/$parent.js ***!
-  \************************************************************************/
+/*!***************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/$parent.js ***!
+  \***************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23744,9 +23808,9 @@ function $parent() {
 /***/ }),
 
 /***/ 57:
-/*!********************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/sys.js ***!
-  \********************************************************************/
+/*!***********************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/sys.js ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23770,9 +23834,9 @@ function sys() {
 /***/ }),
 
 /***/ 58:
-/*!*************************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/debounce.js ***!
-  \*************************************************************************/
+/*!****************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/debounce.js ***!
+  \****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23818,9 +23882,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 59:
-/*!*************************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/function/throttle.js ***!
-  \*************************************************************************/
+/*!****************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/throttle.js ***!
+  \****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23884,9 +23948,9 @@ module.exports = _arrayWithHoles, module.exports.__esModule = true, module.expor
 /***/ }),
 
 /***/ 60:
-/*!*********************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/config/config.js ***!
-  \*********************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/config/config.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23910,9 +23974,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 61:
-/*!*********************************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/config/zIndex.js ***!
-  \*********************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/config/zIndex.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23947,9 +24011,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 62:
-/*!*****************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/store/index.js ***!
-  \*****************************************************/
+/*!********************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/store/index.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25266,9 +25330,9 @@ module.exports = index_cjs;
 /***/ }),
 
 /***/ 64:
-/*!***************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/api/share.js ***!
-  \***************************************************/
+/*!******************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/share.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25360,9 +25424,9 @@ module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module
 /***/ }),
 
 /***/ 71:
-/*!***************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/api/index.js ***!
-  \***************************************************/
+/*!******************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/index.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25382,9 +25446,9 @@ function mainInfo(callback) {
 /***/ }),
 
 /***/ 72:
-/*!**************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/api/http.js ***!
-  \**************************************************/
+/*!*****************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/http.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25475,9 +25539,9 @@ module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, 
 /***/ }),
 
 /***/ 81:
-/*!*****************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/api/voucher.js ***!
-  \*****************************************************/
+/*!********************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/voucher.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25502,9 +25566,9 @@ function VoucherTypes(data, callback) {
 /***/ }),
 
 /***/ 82:
-/*!****************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/api/member.js ***!
-  \****************************************************/
+/*!*******************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/member.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25614,9 +25678,9 @@ module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exp
 /***/ }),
 
 /***/ 91:
-/*!***************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/api/freey.js ***!
-  \***************************************************/
+/*!******************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/freey.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
