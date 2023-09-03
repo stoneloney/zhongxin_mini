@@ -71,7 +71,7 @@
 			//...mapGetters(['isLogin'])
 		},
 		onShow() {
-			var that = this
+		   var that = this
 		   let pages = getCurrentPages();
 		   let currPage = pages[pages.length-1];
 		   if (currPage.data.isDoRefresh == true){
@@ -160,6 +160,14 @@
 			},
 			// 支付
 			PrePay: function() {
+				if (this.selectIds.length === 0) {
+					uni.showToast({
+						title: '乘机人不能为空',
+						icon: 'none',
+						duration: 2000
+					})
+					return
+				}
 				PrePay({
 					'id': this.id,
 					'from': this.from

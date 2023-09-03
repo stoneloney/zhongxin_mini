@@ -95,6 +95,13 @@
 		},
 		methods: {
 			save: function() {
+				if (this.name.length === 0) {
+					uni.showToast({
+						title: '乘机人不能为空',
+						icon: 'none',
+						duration: 2000
+					})
+				}
 				if (this.isEdit) {
 					MemberPassengerUpdate({
 						id: parseInt(this.id),

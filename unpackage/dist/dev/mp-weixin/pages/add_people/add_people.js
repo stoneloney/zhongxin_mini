@@ -269,6 +269,13 @@ var _default = {
   },
   methods: {
     save: function save() {
+      if (this.name.length === 0) {
+        uni.showToast({
+          title: '乘机人不能为空',
+          icon: 'none',
+          duration: 2000
+        });
+      }
       if (this.isEdit) {
         (0, _member.MemberPassengerUpdate)({
           id: parseInt(this.id),

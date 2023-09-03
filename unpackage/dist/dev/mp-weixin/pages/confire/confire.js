@@ -322,6 +322,14 @@ var _default = {
     },
     // 支付
     PrePay: function PrePay() {
+      if (this.selectIds.length === 0) {
+        uni.showToast({
+          title: '乘机人不能为空',
+          icon: 'none',
+          duration: 2000
+        });
+        return;
+      }
       (0, _weixin.PrePay)({
         'id': this.id,
         'from': this.from
