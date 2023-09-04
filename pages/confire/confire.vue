@@ -40,7 +40,7 @@
 					<text>+86</text>
 				</view>
 				<view class="fs">
-					<input type="text" placeholder="请输入" placeholder-class="s">
+					<input type="text" placeholder="请输入" placeholder-class="s" v-model="msg_phone">
 					<text>订单信息发送到此手机号</text>
 				</view>
 			</view>
@@ -64,6 +64,7 @@
 				from: '',
 				id: '',
 				number: 0,
+				msg_phone: '',  // 信息接受人
 				pageParams: {}
 			}
 		},
@@ -162,7 +163,15 @@
 			PrePay: function() {
 				if (this.selectIds.length === 0) {
 					uni.showToast({
-						title: '乘机人不能为空',
+						title: '请选择乘机人',
+						icon: 'none',
+						duration: 2000
+					})
+					return
+				}
+				if (this.msg_phone.length === 0) {
+					uni.showToast({
+						title: '请填写联系人号码',
 						icon: 'none',
 						duration: 2000
 					})
@@ -170,7 +179,9 @@
 				}
 				PrePay({
 					'id': this.id,
-					'from': this.from
+					'from': this.from,
+					'select_ids': this.selectIds,   // 选择乘机人
+					'number': this.number,          // 购买数量
 				}, (res) => {
 					if (res.code !== 0) {
 						uni.showModal({
