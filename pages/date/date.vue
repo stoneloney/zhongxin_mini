@@ -48,69 +48,6 @@
 					</view>
 				</view>
 			</view>
-			
-			<view class="label" v-for="(item, index) in freeys" @click="buy(item.id)">
-				<view class="top">
-					<view class="vi">
-						<text class="time">{{ item.start_date }}</text>
-						<text class="name">{{ item.start_area }}</text>
-					</view>
-					<view class="mid">
-						<image src="../../static/citys1.png" mode="widthFix" class="f"></image>
-						<image src="../../static/book6.png" mode="widthFix" class="l"></image>
-						<view>
-							<image src="../../static/citys.png" mode="widthFix"></image>
-							<text>{{ item.times }}分</text>
-						</view>
-					</view>
-					<view class="vi">
-						<text class="time">{{ item.end_date }}</text>
-						<text class="name">{{ item.end_area }}</text>
-					</view>
-				</view>
-				<view class="bot">
-					<view class="icon">
-						<image src="../../static/citys1.png" mode="widthFix"></image>
-						<text>{{ item.plane_name }}</text>
-					</view>
-					<view class="price">
-						<text class="f">￥<text>{{ item.price }}</text></text>
-						<!-- <text class="des">税 ￥110</text> -->
-					</view>
-				</view>
-			</view>
-			
-			<view class="label" v-for="(item, index) in freeys" @click="buy(item.id)">
-				<view class="top">
-					<view class="vi">
-						<text class="time">{{ item.start_date }}</text>
-						<text class="name">{{ item.start_area }}</text>
-					</view>
-					<view class="mid">
-						<image src="../../static/citys1.png" mode="widthFix" class="f"></image>
-						<image src="../../static/book6.png" mode="widthFix" class="l"></image>
-						<view>
-							<image src="../../static/citys.png" mode="widthFix"></image>
-							<text>{{ item.times }}分</text>
-						</view>
-					</view>
-					<view class="vi">
-						<text class="time">{{ item.end_date }}</text>
-						<text class="name">{{ item.end_area }}</text>
-					</view>
-				</view>
-				<view class="bot">
-					<view class="icon">
-						<image src="../../static/citys1.png" mode="widthFix"></image>
-						<text>{{ item.plane_name }}</text>
-					</view>
-					<view class="price">
-						<text class="f">￥<text>{{ item.price }}</text></text>
-						<!-- <text class="des">税 ￥110</text> -->
-					</view>
-				</view>
-			</view>
-			
 		</view>
 		<view class="navbar">
 			<view @click="showIntroduce('goupiao')">
@@ -555,6 +492,7 @@
 			display: flex;
 			margin-bottom: 43rpx;
 			flex-wrap: wrap;
+			z-index:9999;
 			view{
 				width: 33.33%;
 				overflow: hidden;
