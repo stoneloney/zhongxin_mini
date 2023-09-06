@@ -250,6 +250,7 @@ page {
   display: flex;
   margin-bottom: 43rpx;
   flex-wrap: wrap;
+  z-index: 9999;
 }
 .content .navbar view {
   width: 33.33%;

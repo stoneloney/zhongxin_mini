@@ -275,6 +275,23 @@ var _default = {
           icon: 'none',
           duration: 2000
         });
+        return;
+      }
+      if (this.id_number.length === 0) {
+        uni.showToast({
+          title: '证件号不能为空',
+          icon: 'none',
+          duration: 2000
+        });
+        return;
+      }
+      if (this.phone.length === 0) {
+        uni.showToast({
+          title: '手机号不能为空',
+          icon: 'none',
+          duration: 2000
+        });
+        return;
       }
       if (this.isEdit) {
         (0, _member.MemberPassengerUpdate)({

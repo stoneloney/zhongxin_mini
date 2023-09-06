@@ -226,6 +226,8 @@ var _default = {
       from: '',
       id: '',
       number: 0,
+      msg_phone: '',
+      // 信息接受人
       pageParams: {}
     };
   },
@@ -324,7 +326,15 @@ var _default = {
     PrePay: function PrePay() {
       if (this.selectIds.length === 0) {
         uni.showToast({
-          title: '乘机人不能为空',
+          title: '请选择乘机人',
+          icon: 'none',
+          duration: 2000
+        });
+        return;
+      }
+      if (this.msg_phone.length === 0) {
+        uni.showToast({
+          title: '请填写联系人号码',
           icon: 'none',
           duration: 2000
         });
@@ -332,7 +342,10 @@ var _default = {
       }
       (0, _weixin.PrePay)({
         'id': this.id,
-        'from': this.from
+        'from': this.from,
+        'select_ids': this.selectIds,
+        // 选择乘机人
+        'number': this.number // 购买数量
       }, function (res) {
         if (res.code !== 0) {
           uni.showModal({
