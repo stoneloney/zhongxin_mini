@@ -18,7 +18,7 @@
         }
     },
     "compileType": "miniprogram",
-    "libVersion": "2.32.2",
+    "libVersion": "3.0.1",
     "appid": "wxf674984c94dd9a0e",
     "projectname": "zhongxin",
     "condition": {},

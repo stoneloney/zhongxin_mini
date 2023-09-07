@@ -25460,8 +25460,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.GetReq = GetReq;
 exports.PostReq = PostReq;
-var BaseUrl = "http://127.0.0.1:9805/zhongxin/api";
-//const BaseUrl = "http://118.25.191.234:9805/zhongxin/api"
+//const BaseUrl = "http://127.0.0.1:9805/zhongxin/api"
+var BaseUrl = "http://118.25.191.234:9805/zhongxin/api";
 //const BaseUrl = "https://hzthxcx.cohc.citic/zhongxin/api"
 // post请求
 function PostReq(reqUrl, data, callback) {

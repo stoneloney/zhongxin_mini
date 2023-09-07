@@ -182,6 +182,7 @@
 					'from': this.from,
 					'select_ids': this.selectIds,   // 选择乘机人
 					'number': this.number,          // 购买数量
+					'msg_phone': this.msg_phone     // 联系人
 				}, (res) => {
 					if (res.code !== 0) {
 						uni.showModal({

@@ -2,5 +2,7 @@
   "navigationBarBackgroundColor": "#2765F2",
   "navigationBarTitleText": "城市摆渡",
   "navigationBarTextStyle": "white",
-  "usingComponents": {}
+  "usingComponents": {
+    "u-popup": "/uview-ui/components/u-popup/u-popup"
+  }
 }
