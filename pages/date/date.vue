@@ -227,22 +227,19 @@
 				
 				<view class="label" v-if="showType == 'shouhou'">
 					<view class="slide">
-						<text class="des">售后服务</text>
-						<text class="des">安全提示安全提示安全提示安全提示</text>
+						<text class="des">售后电话：17520470847</text>
 					</view>
 				</view>
 				
 				<view class="label" v-if="showType == 'yuyue'">
 					<view class="slide">
-						<text class="des">预约机票</text>
-						<text class="des">1111</text>
+						<text class="des">预约电话：17520470847</text>
 					</view>
 				</view>
 				
 				<view class="label" v-if="showType == 'zhongzhuan'">
 					<view class="slide">
-						<text class="des">中转飞行</text>
-						<text class="des">2222</text>
+						<text class="des"></text>
 					</view>
 				</view>
 				
