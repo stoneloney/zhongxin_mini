@@ -28,11 +28,11 @@
 									<text decode="true" class="subject">{{ detail.goods.name }}</text>
 								</view>
 								<text decode="true" class="price">¥{{ detail.pay_order.price }}</text>
-								<text decode="true" class="num">x 1</text>
+								<text decode="true" class="num">x {{ detail.pay_order.number }}</text>
 							</view>
 						</view>
 					</view>
-					<text decode="true" class="total_money">总价: ¥{{ detail.pay_order.price }}</text>
+					<text decode="true" class="total_money">总价: ¥{{ detail.pay_order.total_price }}</text>
 					<text decode="true" class="order-button" @click="againBuy(detail.pay_order.from, detail.pay_order.goods_id)" v-if="detail.pay_order.status_int == 1">再来一单</text>
 					<text decode="true" class="del-button" @click="cancelOrder(detail.pay_order.order_id)" v-if="detail.pay_order.status_int == 1">申请退款</text>
 					<text decode="true" class="order-button" @click="againPrePay(detail.pay_order.order_id)" v-if="detail.pay_order.status_int == 0">继续支付</text>
