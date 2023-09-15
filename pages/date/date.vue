@@ -110,8 +110,8 @@
 						<text class="des">3、购票人应严格遵守政府主管部门对乘坐通航班机所需有效证件的规定，保证乘机人证件合法性和有效性， 如因证件与姓名不符或证件失效等问题产生的后果均由购票人负责。</text>
 						<text class="des">4、购票人在网上订票时，必须如实填写乘机人的相关个人资料和联系方法，因资料不清或不详造成购票后的一系列经济损失由购票人承担。</text>
 						<text class="des">5、购票人必须在预订座位后的15分钟内完成出票手续（即网上支付），系统产生购票信息后即为支付成功，请购票人在订单“待出行”中予以确认。逾时支付将被视作支付不成功，该次订座自动取消。</text>
-						<text class="des">6、所有航班于起飞前45分钟停止值机。</text>
-						<text class="des">7、如遇天气原因导致航班延误2小时以上，旅客可选择全额退款；如因航空管制等其他不可抗力因素（除天气原因）导致航班延误，旅客若选择退票则收取100%的手续费；若由于天气、突发事件、空中管制等不可抗力因素导致航班取消，仅全额原路退返机票费用；旅客所产生的餐食、住宿、交通等费用由旅客自理，我司不承担此费用。</text>
+						<text class="des">6、所有航班于起飞前10分钟停止值机。</text>
+						<text class="des">7、如遇不利于安全飞行的天气，例如：台风、雷暴、大雨、大雾等，以及部队演习，航空管制等情况，公司将根据情况取消航班或延迟航班起飞时间并通知旅客。旅客可免费改签或退票。</text>
 						<text class="des">8、当航班行程显示“已完成”时，可提供发票开具服务。请购票人务必确认开票信息无误后提出开票需求，系统将在7个工作日内将电子发票发送至填写的邮箱中。若因开票信息不符而造成未收到发票或无法进行报销的，系统不予二次开票，后果均有购票人负责。</text>
 
 					</view>
@@ -141,8 +141,7 @@
 						<text class="des">（18）上下飞机时，请注意地面，以防滑倒摔倒。 </text>
 						<text class="des">（19）请自觉维护机舱内的卫生，不得乱扔垃圾。 </text>
 						<text class="des">（20）因不可抗力原因（天气、自然灾、战区空中管制等），致使飞行任务无法按照原计划执行，已起飞中途返场的，我公司不承担票务返还及任何经济赔偿，未执行飞行的航班，我公司会全额退还机票费用。 </text>
-						<text class="des">（21）飞行全程保持拍摄设备关机，不得进行空中拍摄。 </text>
-						<text class="des">（22）乘机人应在乘机前认真阅读安全须知，并在乘机过程中严格遵守相关规定。如乘客未按我公司相关乘机要求和舱内操作规范执行，所导致的个人乘机人人身伤害，我公司不承担任何责任。 </text>
+						<text class="des">（21）乘机人应在乘机前认真阅读安全须知，并在乘机过程中严格遵守相关规定。如乘客未按我公司相关乘机要求和舱内操作规范执行，所导致的个人乘机人人身伤害，我公司不承担任何责任。 </text>
 						<text class="des">本人已阅读上述注意事项及安全提示，并对自己的人身及财物安全负责。 </text>
 					</view>
 				</view>
@@ -151,7 +150,7 @@
 					<view class="slide">
 						<text class="des">一、旅客抵达时间</text>
 						<text class="des">1、深圳南头直升机场：旅客至少在航班起飞前30分钟抵达机场候机;</text>
-						<text class="des">2、珠海九洲机场：旅客至少在航班起飞前30分钟抵达机场候机；</text>
+						<text class="des">2、珠海长隆景区：旅客至少在航班起飞前30分钟抵达候机厅乘机；</text>
 						<text class="des">二、安检流程</text>
 						<text class="des">1、旅客自行安排直接抵达机场，在机场候机厅完成安检后值机；</text>
 						<text class="des">2、禁止携带违禁品，如：易燃易爆品、压力罐体、枪支弹药、打火机、管制刀具、放射性物品、宠物、有毒物品等；电脑充电宝等提早拿出待检；手机与充电宝等随人登机，其他物品货仓托运。</text>
@@ -195,18 +194,16 @@
 				
 				<view class="label" v-if="showType == 'tuipiao'">
 					<view class="slide">
-						<text class="des">[免费行李规定]</text>
-						<text class="des">行程中所有行李一律全部托运，单件托运行李尺寸不超过76cm×51cm×32cm，每人免费托运总重为10KG。</text>
-						<text class="des">[退订收费说明]</text>
-						<text class="des">起飞前24小时之前，收取40%；起飞前24小时（含）至起飞后收取100%。</text>
-						<text class="des">[改签收费说明]</text>
-						<text class="des">此航班一律不得改签。</text>
-						<text class="des">[特别说明]</text>
-						<text class="des">如遇天气原因导致航班延误2小时以上，旅客可选择全额退款；</text>
-						<text class="des">如因航空管制等其他不可抗力因素（除天气原因）导致航班延误，旅客若选择退票则收取100%的手续费；</text>
-						<text class="des">若由于天气、突发事件、空中管制等不可抗力因素导致航班取消，仅全额原路退返机票费用，旅客所产生的餐食、住宿、交通等费用由旅客自理，我司不承担此费用。</text>
-						<text class="des">[其他说明]</text>
-						<text class="des">预订提供航班信息均为计划信息，以实际乘坐航班为准。</text>
+						<text class="des">[改签规则]</text>
+						<text class="des">飞行前7天及以上，可免费改签。</text>
+						<text class="des">飞行前5天-7天以内，扣款10%重新改签。</text>
+						<text class="des">飞行前1天-5天以内，扣款20%重新改签。</text>
+						<text class="des">飞行前1天及以内，不可改签。</text>
+						<text class="des">[退票规则]</text>
+						<text class="des">飞行前7天及以上，可100%全额退票。</text>
+						<text class="des">飞行前5天-7天以内，扣20%退票费，剩余80%票款退回。</text>
+						<text class="des">飞行前1天-5天以内，扣50%退票费，剩余50%票款退回。</text>
+						<text class="des">飞行前1天及以内，扣100%退票费。</text>
 					</view>
 				</view>
 				
@@ -215,12 +212,7 @@
 						<text class="des">亲爱的旅客：</text>
 						<text class="des">您好！</text>
 						<text class="des">为了能够予您一段美妙的旅途时光，我们将努力为广大旅客提供安全畅通、便捷高效、和谐舒适的优质服务。</text>
-						<text class="des">考虑到很多乘客是初次乘坐直升机，不了解通航与民航间的区别，现将通航运营期间可能会遇到的问题提前告知于您：</text>
-						<text class="des">1.直升机不同于普通飞机，易受天气、航空管制等因素影响，导致航班延误或取消的情况实属正常；</text>
-						<text class="des">2.由于直升机航线运行轨迹途径军事区域，故乘机后旅客一律不得对窗外的景色进行拍摄；</text>
-						<text class="des">3.机场办理安检手续的二号道口6月以前处于施工维修状态，旅客需要绕道而行，故增加不少脚程。</text>
-						<text class="des">因此，我们为以上或许会给您造成的困扰与不便致上深深的歉意，并希望您能谅解!请您认真阅读本告知书，合理安排行程后再行购票。同时，我们也会全面提升应急事件的处置能力和服务保障水平，若遇到航班延误及取消，我们将会提前通知，极力规避不佳的状况出现。</text>
-						<text class="des">最后，衷心祝愿您身体健康、阖家幸福！</text>
+						<text class="des">衷心祝愿您身体健康、阖家幸福！</text>
 						<text class="des">祝您旅途愉快~</text>
 					</view>
 				</view>
@@ -725,6 +717,28 @@
 		letter-spacing: 1rpx;
 		color: #444A58;
 		text-align: center;
+	}
+	
+	.content .list .label .bot .price {
+	  display: flex;
+	  align-items: flex-end;
+	}
+	.content .list .label .bot .price .des {
+	  font-size: 20rpx;
+	  margin-left: 11rpx;
+	  color: #444A58;
+	}
+	.content .list .label .bot .price .f {
+	  display: flex;
+	  align-items: flex-end;
+	  font-size: 22rpx;
+	  font-weight: bold;
+	  color: #D30101;
+	}
+	.content .list .label .bot .price .f text {
+	  font-size: 34rpx;
+	  line-height: 1;
+	  display: inline-block;
 	}
 	
 </style>

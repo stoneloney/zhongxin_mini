@@ -388,4 +388,25 @@ page {
   color: #444A58;
   text-align: center;
 }
+.content .list .label .bot .price {
+  display: flex;
+  align-items: flex-end;
+}
+.content .list .label .bot .price .des {
+  font-size: 20rpx;
+  margin-left: 11rpx;
+  color: #444A58;
+}
+.content .list .label .bot .price .f {
+  display: flex;
+  align-items: flex-end;
+  font-size: 22rpx;
+  font-weight: bold;
+  color: #D30101;
+}
+.content .list .label .bot .price .f text {
+  font-size: 34rpx;
+  line-height: 1;
+  display: inline-block;
+}
 

@@ -7,9 +7,9 @@
 			<view class="list">
 				<scroll-view scroll-y="true">
 					<view class="label" @click="change(item, index)"
-						:class="current == index?'on':'' || item.flag?'':'dis'" v-for="(item, index) in list">
+						:class="current == index?'on':'' || item.use===1?'':'dis'" v-for="(item, index) in list">
 						<view></view>
-						<text>{{item.name}}</text>
+						<text>{{item.title}}</text>
 					</view>
 				</scroll-view>
 			</view>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+	import { LandPlaceList } from "@/api/land_place.js"
 	export default {
 		data() {
 			return {
@@ -27,6 +28,9 @@
 				title: 'map',
 				latitude: 22.5615,
 				longitude: 113.93678,
+				list: [],
+				covers: [],
+				/*
 				covers: [{
 					id: 0,
 					width: 25,
@@ -44,52 +48,79 @@
 				}],
 				list: [{
 					name: '深圳南头直升机场',
-					flag: true,
+					use: true,
 					latitude: 22.5615,
 					longitude: 113.93678,
 				}, {
 					name: '金沙湾起降点',
-					flag: true,
+					use: true,
 					latitude: 31.3375,
 					longitude: 121.632692,
 				}, {
 					name: '北京大学深圳医院',
-					flag: true,
+					use: true,
 					latitude: 22.5615,
 					longitude: 113.93678,
 				}, {
 					name: '香港大学深圳医院',
-					flag: true,
+					use: true,
 					latitude: 31.3375,
 					longitude: 121.632692,
 				}, {
 					name: '鸿荣源前海中心',
-					flag: true,
+					use: true,
 					latitude: 22.5615,
 					longitude: 113.93678,
 				}, {
 					name: '广州南沙游轮码头',
-					flag: true,
+					use: true,
 					latitude: 31.3375,
 					longitude: 121.632692,
 				}, {
 					name: '黄浦穗港澳直升机场',
-					flag: true,
+					use: true,
 					latitude: 31.3375,
 					longitude: 121.632692,
 				},  {
 					name: '珠海（静待开通）',
-					flag: false
+					use: false
 				}, {
 					name: '潮汕（静待开通）',
-					flag: false
+					use: false
 				}, {
 					name: '湛江（静待开通）',
-					flag: false
+					use: false
 				}],
+				*/
 				current: 0,
 				type: 1
 			}
+		},
+		created() {
+			var that = this
+			LandPlaceList('', (res) => {
+				if (res.code !== 0) {
+					uni.showModal({
+						title: '错误提示',
+						content: '网络异常，请稍后重试',
+						showCancel: false
+					})
+					return
+				}
+				// 创建 covers
+				res.data.list.forEach(function(item, i) {
+					 let t = {
+						 id: i,
+						 width: 25,
+						 height: 25,
+						 latitude: item.latitude,
+						 longitude: item.longitude,
+						 iconPath: '/static/dws.png'
+					 }
+					 that.covers.push(t)
+				}) 
+				this.list = res.data.list
+			})
 		},
 		onLoad(options) {
 			this.type = options.type
@@ -108,7 +139,7 @@
 				})
 			},
 			change(item, index) {
-				if (item.flag) {
+				if (item.use) {
 					this.current = index
 					this.latitude = item.latitude
 					this.longitude = item.longitude
