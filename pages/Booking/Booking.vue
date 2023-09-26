@@ -162,9 +162,9 @@
 		},
 		onShow() {
 			if(uni.getStorageSync('infotype') == 1){
-				this.stars = uni.getStorageSync('info').name
+				this.stars = uni.getStorageSync('info').title
 			}else{
-				this.ends = uni.getStorageSync('info').name
+				this.ends = uni.getStorageSync('info').title
 			}
 			uni.removeStorageSync('infotype')
 			uni.removeStorageSync('info')

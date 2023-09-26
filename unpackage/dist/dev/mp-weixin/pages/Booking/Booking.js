@@ -130,10 +130,10 @@ var components
 try {
   components = {
     uPopup: function () {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-popup/u-popup */ "uview-ui/components/u-popup/u-popup").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-popup/u-popup.vue */ 297))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-popup/u-popup */ "uview-ui/components/u-popup/u-popup").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-popup/u-popup.vue */ 298))
     },
     uPicker: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-picker/u-picker.vue */ 304))
+      return Promise.all(/*! import() | uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-picker/u-picker.vue */ 305))
     },
   }
 } catch (e) {
@@ -393,9 +393,9 @@ var _default = {
   onLoad: function onLoad() {},
   onShow: function onShow() {
     if (uni.getStorageSync('infotype') == 1) {
-      this.stars = uni.getStorageSync('info').name;
+      this.stars = uni.getStorageSync('info').title;
     } else {
-      this.ends = uni.getStorageSync('info').name;
+      this.ends = uni.getStorageSync('info').title;
     }
     uni.removeStorageSync('infotype');
     uni.removeStorageSync('info');

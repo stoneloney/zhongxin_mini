@@ -27,16 +27,16 @@
 				<image src="../../static/home12.png" mode="widthFix"></image>
 				<text>空中游览</text>
 			</view>
-			<!--
 			<view @click="link('/pages/wait/wait')">
 				<image src="../../static/home6.png" mode="widthFix"></image>
 				<text>包机预定</text>
 			</view>
-			-->
+			<!--
 			<view @click="link('/pages/Booking/Booking')">
 				<image src="../../static/home6.png" mode="widthFix"></image>
 				<text>包机预定</text>
 			</view>
+			-->
 			<view @click="link('/pages/date/date')">
 				<image src="../../static/home7.png" mode="widthFix"></image>
 				<text>长途游览</text>

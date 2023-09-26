@@ -96,6 +96,28 @@ module.exports = _toPropertyKey, module.exports.__esModule = true, module.export
 
 /***/ }),
 
+/***/ 124:
+/*!********************************************************!*\
+  !*** /Users/stone/vue/zhongxin_mini/api/land_place.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LandPlaceList = LandPlaceList;
+var _http = __webpack_require__(/*! @/api/http.js */ 72);
+function LandPlaceList(data, callback) {
+  var apiUrl = "/land_place/list";
+  return (0, _http.PostReq)(apiUrl, data, callback);
+}
+
+/***/ }),
+
 /***/ 13:
 /*!*******************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
@@ -138,7 +160,7 @@ module.exports = _toPrimitive, module.exports.__esModule = true, module.exports[
 
 /***/ }),
 
-/***/ 140:
+/***/ 141:
 /*!****************************************************!*\
   !*** /Users/stone/vue/zhongxin_mini/api/weixin.js ***!
   \****************************************************/
@@ -184,7 +206,35 @@ function WeixinPhone(code, callback) {
 
 /***/ }),
 
-/***/ 149:
+/***/ 15:
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/construct.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf.js */ 16);
+var isNativeReflectConstruct = __webpack_require__(/*! ./isNativeReflectConstruct.js */ 17);
+function _construct(Parent, args, Class) {
+  if (isNativeReflectConstruct()) {
+    module.exports = _construct = Reflect.construct.bind(), module.exports.__esModule = true, module.exports["default"] = module.exports;
+  } else {
+    module.exports = _construct = function _construct(Parent, args, Class) {
+      var a = [null];
+      a.push.apply(a, args);
+      var Constructor = Function.bind.apply(Parent, a);
+      var instance = new Constructor();
+      if (Class) setPrototypeOf(instance, Class.prototype);
+      return instance;
+    }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+  }
+  return _construct.apply(null, arguments);
+}
+module.exports = _construct, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 150:
 /*!**************************************************!*\
   !*** /Users/stone/vue/zhongxin_mini/api/tour.js ***!
   \**************************************************/
@@ -213,34 +263,6 @@ function TourDetail(id, callback) {
     id: id
   }, callback);
 }
-
-/***/ }),
-
-/***/ 15:
-/*!**********************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/construct.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf.js */ 16);
-var isNativeReflectConstruct = __webpack_require__(/*! ./isNativeReflectConstruct.js */ 17);
-function _construct(Parent, args, Class) {
-  if (isNativeReflectConstruct()) {
-    module.exports = _construct = Reflect.construct.bind(), module.exports.__esModule = true, module.exports["default"] = module.exports;
-  } else {
-    module.exports = _construct = function _construct(Parent, args, Class) {
-      var a = [null];
-      a.push.apply(a, args);
-      var Constructor = Function.bind.apply(Parent, a);
-      var instance = new Constructor();
-      if (Class) setPrototypeOf(instance, Class.prototype);
-      return instance;
-    }, module.exports.__esModule = true, module.exports["default"] = module.exports;
-  }
-  return _construct.apply(null, arguments);
-}
-module.exports = _construct, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 
@@ -284,7 +306,7 @@ module.exports = _isNativeReflectConstruct, module.exports.__esModule = true, mo
 
 /***/ }),
 
-/***/ 174:
+/***/ 175:
 /*!****************************************************!*\
   !*** /Users/stone/vue/zhongxin_mini/api/orders.js ***!
   \****************************************************/
@@ -373,7 +395,7 @@ module.exports = _arrayWithoutHoles, module.exports.__esModule = true, module.ex
 
 /***/ }),
 
-/***/ 197:
+/***/ 198:
 /*!*****************************************************!*\
   !*** /Users/stone/vue/zhongxin_mini/api/address.js ***!
   \*****************************************************/
@@ -3338,7 +3360,7 @@ module.exports = _classCallCheck, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
-/***/ 230:
+/***/ 231:
 /*!*****************************************************!*\
   !*** /Users/stone/vue/zhongxin_mini/api/article.js ***!
   \*****************************************************/
@@ -9522,7 +9544,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 309:
+/***/ 310:
 /*!*********************************************************************!*\
   !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/util/province.js ***!
   \*********************************************************************/
@@ -9644,7 +9666,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 310:
+/***/ 311:
 /*!*****************************************************************!*\
   !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/util/city.js ***!
   \*****************************************************************/
@@ -10765,7 +10787,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 311:
+/***/ 312:
 /*!*****************************************************************!*\
   !*** /Users/stone/vue/zhongxin_mini/uview-ui/libs/util/area.js ***!
   \*****************************************************************/
@@ -20013,7 +20035,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 326:
+/***/ 327:
 /*!*************************************************************************!*\
   !*** /Users/stone/vue/zhongxin_mini/compontents/ay-qrcode/qrcode_wx.js ***!
   \*************************************************************************/
@@ -20756,7 +20778,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 327:
+/***/ 328:
 /*!****************************************************************************!*\
   !*** /Users/stone/vue/zhongxin_mini/compontents/ay-qrcode/weapp-qrcode.js ***!
   \****************************************************************************/
@@ -22108,28 +22130,6 @@ function deepClone(obj) {
 }
 var _default = deepClone;
 exports.default = _default;
-
-/***/ }),
-
-/***/ 379:
-/*!********************************************************!*\
-  !*** /Users/stone/vue/zhongxin_mini/api/land_place.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.LandPlaceList = LandPlaceList;
-var _http = __webpack_require__(/*! @/api/http.js */ 72);
-function LandPlaceList(data, callback) {
-  var apiUrl = "/land_place/list";
-  return (0, _http.PostReq)(apiUrl, data, callback);
-}
 
 /***/ }),
 
