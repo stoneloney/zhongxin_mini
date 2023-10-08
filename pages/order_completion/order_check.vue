@@ -14,7 +14,7 @@
 						</view>
 						<view class="order_completion_51">
 							<text decode="true" class="order_completion_52">价格</text>
-							<text decode="true" class="address">¥{{ detail.pay_order.price }}</text>
+							<text decode="true" class="address">¥{{ detail.pay_order.price }} x {{ detail.pay_order.number }} </text>
 						</view>
 						<view class="order_completion_51">
 							<text decode="true" class="order_completion_52">订单时间</text>
