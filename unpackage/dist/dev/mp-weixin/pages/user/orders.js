@@ -102,14 +102,16 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l0 = _vm.__map(_vm.orders, function (item, index) {
-    var $orig = _vm.__get_orig(item)
-    var m0 = _vm.OrderStatusStr(item.status)
-    return {
-      $orig: $orig,
-      m0: m0,
-    }
-  })
+  var l0 = _vm.hasOrder
+    ? _vm.__map(_vm.orders, function (item, index) {
+        var $orig = _vm.__get_orig(item)
+        var m0 = _vm.OrderStatusStr(item.status)
+        return {
+          $orig: $orig,
+          m0: m0,
+        }
+      })
+    : null
   _vm.$mp.data = Object.assign(
     {},
     {
@@ -188,6 +190,15 @@ var _orders = __webpack_require__(/*! @/api/orders */ 175);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var footers = function footers() {
   __webpack_require__.e(/*! require.ensure | compontents/footers/footers */ "compontents/footers/footers").then((function () {
     return resolve(__webpack_require__(/*! @/compontents/footers/footers.vue */ 256));
@@ -203,7 +214,8 @@ var _default = {
       orders: [],
       hasMore: true,
       page: 1,
-      limit: 20
+      limit: 20,
+      hasOrder: true
     };
   },
   created: function created() {
@@ -221,6 +233,9 @@ var _default = {
             showCancel: false
           });
           return;
+        }
+        if (res.data.list.length <= 0) {
+          that.hasOrder = false;
         }
         that.orders = res.data.list;
       });
@@ -265,6 +280,9 @@ var _default = {
       uni.navigateTo({
         url: '/pages/order_completion/order_completion?id=' + orderId
       });
+    },
+    imgError: function imgError(index) {
+      this.$set(this.orders, index, '/static/ws1.png');
     }
   }
 };

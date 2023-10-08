@@ -1,11 +1,11 @@
 <template>
 	<view class="indent">
-	  <view class="indent_a">
+	  <view class="indent_a" v-if="hasOrder">
 	   <view hover-class="none" v-for="(item, index) in orders">
 		 <view class="chanpin" @click="detail(item.order_id)">
 			  <view class="fl"><image :src="item.timage"></image></view>
 				<view class="fr">
-				  <view>{{ item.ttitle}}</view>
+				  <view>{{ item.ttitle }}</view>
 				</view>
 	      </view>  
 	      <view class="mone">
@@ -24,7 +24,16 @@
 		  </view>
 		  -->
 	   </view>
+	   
+	   <view class="address" v-if="!hasOrder">
+	     <view class="address_a">
+	   	  <view class="img" style="background-image: url('http://m.qpic.cn/psb?/V13t2G4i0uprYL/uYo8U.oo0vWONsW93wC*ppXK6ZFdHOgOlSEiEbXukxY!/b/dFIBAAAAAAAA&bo=OQKmAQAAAAADB74!&rf=viewer_4'); width: 569rpx;height: 422rpx;"></view>
+	   	  <view class="img2">暂无订单</view>
+	     </view>
+	   </view>
+	   
 	</view> 
+	
 </template>
 
 <script>
@@ -42,6 +51,7 @@
 				hasMore: true,
 				page: 1,
 				limit: 20,
+				hasOrder: true,
 			}
 		},
 		created() {
@@ -57,6 +67,9 @@
 							showCancel: false
 						})
 						return 
+					}
+					if(res.data.list.length <= 0) {
+						that.hasOrder = false
 					}
 					that.orders = res.data.list
 				})
@@ -101,6 +114,9 @@
 				uni.navigateTo({
 					url: '/pages/order_completion/order_completion?id=' + orderId
 				})
+			},
+			imgError(index) {
+				this.$set(this.orders, index, '/static/ws1.png');
 			}
 		}
 	}
