@@ -234,10 +234,11 @@ var _default = {
           });
           return;
         }
-        if (res.data.list.length <= 0) {
+        if (!res.data.list || res.data.list.length <= 0) {
           that.hasOrder = false;
+        } else {
+          that.orders = res.data.list;
         }
-        that.orders = res.data.list;
       });
     } else {
       uni.navigateTo({
