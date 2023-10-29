@@ -22,6 +22,7 @@
 						:height="600"
 				></u-swiper>
 		</view>
+		
 		<view class="navbar">
 			<view @click="link('/pages/list/list')">
 				<image src="../../static/home12.png" mode="widthFix"></image>
@@ -88,8 +89,26 @@
 				</view>
 			</scroll-view>
 		</view>
+	
 		<footers :currentx='0'></footers>
+		
+		<u-popup :show="lotteryShow" mode="center" v-model="lotteryShow" :mask-close-able="false" :closeable="true">
+			<view>
+				<pt-lottery
+					ref="pt-lottery"
+					lotteryBg="../../static/lottery/lotteryBg.png"
+					lotteryBtn="../../static/lottery/lotteryBtn.png"
+					:times="1"
+					:prizeList="prizeList"
+					:showTimes="false"
+					@start="lotteryStart"
+					@end="lotteryEnd">
+				</pt-lottery>
+			</view>
+		</u-popup>
+		
 	</view>
+	
 </template>
 
 <script>
@@ -132,6 +151,34 @@
 				},
 				videoShow: true,
 				bannerShow: false,
+				// 抽奖
+				lotteryShow: true,
+				prizeIndex: 0,
+				prizeList: [{
+					prizeName: 'iphone 12',
+					prizeIcon: '../../static/lottery/prizeIcon.png'
+				},{
+					prizeName: 'iphone 11',
+					prizeIcon: '../../static/lottery/prizeIcon.png'
+				},{
+					prizeName: 'iphone 10',
+					prizeIcon: '../../static/lottery/prizeIcon.png'
+				},{
+					prizeName: 'iphone 9',
+					prizeIcon: '../../static/lottery/prizeIcon.png'
+				},{
+					prizeName: 'iphone 8',
+					prizeIcon: '../../static/lottery/prizeIcon.png'
+				},{
+					prizeName: 'iphone 7',
+					prizeIcon: '../../static/lottery/prizeIcon.png'
+				},{
+					prizeName: 'iphone 6',
+					prizeIcon: '../../static/lottery/prizeIcon.png'
+				},{
+					prizeName: '谢谢惠顾',
+					prizeIcon: '../../static/lottery/no.png'
+				}]
 			}
 		},
 		computed: {
@@ -160,7 +207,7 @@
 				}
 				that.banners = res.data.banners
 				that.articles = res.data.articles
-			})
+			})			
 		},
 		methods: { 
 			link(url){ 
@@ -197,6 +244,27 @@
 				uni.navigateTo({
 					url: '/pages/article/detail?id=' + id
 				})
+			},
+			// 抽奖
+			lotteryStart(){
+				this.prizeIndex = Math.ceil(Math.random()*7)
+				this.$refs['pt-lottery'].init(this.prizeIndex)
+			},
+			lotteryEnd(){
+				switch (this.prizeIndex){
+					case 7:
+						uni.showToast({
+							icon: 'none',
+							title: '未中奖，再接再厉!'
+						})
+						break;
+					default:
+						uni.showToast({
+							icon: 'none',
+							title: '恭喜您获取'+this.prizeList[this.prizeIndex].prizeName
+						})
+						break;
+				}
 			}
 		}
 	}

@@ -2,6 +2,8 @@
   "navigationStyle": "custom",
   "usingComponents": {
     "u-swiper": "/uview-ui/components/u-swiper/u-swiper",
+    "u-popup": "/uview-ui/components/u-popup/u-popup",
+    "pt-lottery": "/components/pt-lottery/pt-lottery",
     "footers": "/compontents/footers/footers"
   }
 }

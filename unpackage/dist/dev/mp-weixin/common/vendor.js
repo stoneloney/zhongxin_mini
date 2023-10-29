@@ -14,7 +14,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var objectKeys = ['qy', 'env', 'error', 'version', 'lanDebug', 'cloud', 'serviceMarket', 'router', 'worklet'];
+var objectKeys = ['qy', 'env', 'error', 'version', 'lanDebug', 'cloud', 'serviceMarket', 'router', 'worklet', '__webpack_require_UNI_MP_PLUGIN__'];
 var singlePageDisableKey = ['lanDebug', 'router', 'worklet'];
 var target = typeof globalThis !== 'undefined' ? globalThis : function () {
   return this;
@@ -101,7 +101,7 @@ module.exports = _toPropertyKey, module.exports.__esModule = true, module.export
 
 /***/ }),
 
-/***/ 124:
+/***/ 121:
 /*!***********************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/api/land_place.js ***!
   \***********************************************************/
@@ -115,7 +115,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.LandPlaceList = LandPlaceList;
-var _http = __webpack_require__(/*! @/api/http.js */ 72);
+var _http = __webpack_require__(/*! @/api/http.js */ 78);
 function LandPlaceList(data, callback) {
   var apiUrl = "/land_place/list";
   return (0, _http.PostReq)(apiUrl, data, callback);
@@ -143,29 +143,7 @@ module.exports = _typeof, module.exports.__esModule = true, module.exports["defa
 
 /***/ }),
 
-/***/ 14:
-/*!************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/toPrimitive.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
-function _toPrimitive(input, hint) {
-  if (_typeof(input) !== "object" || input === null) return input;
-  var prim = input[Symbol.toPrimitive];
-  if (prim !== undefined) {
-    var res = prim.call(input, hint || "default");
-    if (_typeof(res) !== "object") return res;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return (hint === "string" ? String : Number)(input);
-}
-module.exports = _toPrimitive, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 141:
+/***/ 138:
 /*!*******************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/api/weixin.js ***!
   \*******************************************************/
@@ -183,7 +161,7 @@ exports.Pay = Pay;
 exports.PrePay = PrePay;
 exports.WeixinCode = WeixinCode;
 exports.WeixinPhone = WeixinPhone;
-var _http = __webpack_require__(/*! @/api/http.js */ 72);
+var _http = __webpack_require__(/*! @/api/http.js */ 78);
 function WeixinCode(code, callback) {
   var apiUrl = "/wx/code";
   return (0, _http.PostReq)(apiUrl, {
@@ -206,6 +184,60 @@ function WeixinPhone(code, callback) {
   var apiUrl = "/wx/phone";
   return (0, _http.PostReq)(apiUrl, {
     code: code
+  }, callback);
+}
+
+/***/ }),
+
+/***/ 14:
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toPrimitive.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
+function _toPrimitive(input, hint) {
+  if (_typeof(input) !== "object" || input === null) return input;
+  var prim = input[Symbol.toPrimitive];
+  if (prim !== undefined) {
+    var res = prim.call(input, hint || "default");
+    if (_typeof(res) !== "object") return res;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return (hint === "string" ? String : Number)(input);
+}
+module.exports = _toPrimitive, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 147:
+/*!*****************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/tour.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TourDetail = TourDetail;
+exports.TourList = TourList;
+var _http = __webpack_require__(/*! @/api/http.js */ 78);
+function TourList(page, limit, callback) {
+  var apiUrl = "/tour/list";
+  return (0, _http.PostReq)(apiUrl, {
+    page: page,
+    limit: limit
+  }, callback);
+}
+function TourDetail(id, callback) {
+  var apiUrl = "/tour/detail";
+  return (0, _http.PostReq)(apiUrl, {
+    id: id
   }, callback);
 }
 
@@ -236,38 +268,6 @@ function _construct(Parent, args, Class) {
   return _construct.apply(null, arguments);
 }
 module.exports = _construct, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 150:
-/*!*****************************************************!*\
-  !*** /Users/stonejia/vue/zhongxin_mini/api/tour.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.TourDetail = TourDetail;
-exports.TourList = TourList;
-var _http = __webpack_require__(/*! @/api/http.js */ 72);
-function TourList(page, limit, callback) {
-  var apiUrl = "/tour/list";
-  return (0, _http.PostReq)(apiUrl, {
-    page: page,
-    limit: limit
-  }, callback);
-}
-function TourDetail(id, callback) {
-  var apiUrl = "/tour/detail";
-  return (0, _http.PostReq)(apiUrl, {
-    id: id
-  }, callback);
-}
 
 /***/ }),
 
@@ -311,7 +311,7 @@ module.exports = _isNativeReflectConstruct, module.exports.__esModule = true, mo
 
 /***/ }),
 
-/***/ 175:
+/***/ 172:
 /*!*******************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/api/orders.js ***!
   \*******************************************************/
@@ -329,7 +329,7 @@ exports.cancelOrder = cancelOrder;
 exports.orderDetail = orderDetail;
 exports.orderList = orderList;
 exports.payOrderUse = payOrderUse;
-var _http = __webpack_require__(/*! @/api/http.js */ 72);
+var _http = __webpack_require__(/*! @/api/http.js */ 78);
 function orderList(data, callback) {
   var apiUrl = "/order/list";
   return (0, _http.PostReq)(apiUrl, data, callback);
@@ -400,7 +400,7 @@ module.exports = _arrayWithoutHoles, module.exports.__esModule = true, module.ex
 
 /***/ }),
 
-/***/ 198:
+/***/ 195:
 /*!********************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/api/address.js ***!
   \********************************************************/
@@ -415,7 +415,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.addressList = addressList;
 exports.addressOperate = addressOperate;
-var _http = __webpack_require__(/*! @/api/http.js */ 72);
+var _http = __webpack_require__(/*! @/api/http.js */ 78);
 function addressList(data, callback) {
   var apiUrl = "/address/list";
   return (0, _http.PostReq)(apiUrl, data, callback);
@@ -1164,8 +1164,8 @@ function populateParameters(result) {
     appVersion: "1.0.0",
     appVersionCode: "100",
     appLanguage: getAppLanguage(hostLanguage),
-    uniCompileVersion: "3.8.4",
-    uniRuntimeVersion: "3.8.4",
+    uniCompileVersion: "3.94",
+    uniRuntimeVersion: "3.94",
     uniPlatform: undefined || "mp-weixin",
     deviceBrand: deviceBrand,
     deviceModel: model,
@@ -2338,14 +2338,10 @@ function handleEvent(event) {
   }
 }
 var eventChannels = {};
-var eventChannelStack = [];
 function getEventChannel(id) {
-  if (id) {
-    var eventChannel = eventChannels[id];
-    delete eventChannels[id];
-    return eventChannel;
-  }
-  return eventChannelStack.shift();
+  var eventChannel = eventChannels[id];
+  delete eventChannels[id];
+  return eventChannel;
 }
 var hooks = ['onShow', 'onHide', 'onError', 'onPageNotFound', 'onThemeChange', 'onUnhandledRejection'];
 function initEventChannel() {
@@ -2812,7 +2808,7 @@ if (typeof Proxy !== 'undefined' && "mp-weixin" !== 'app-plus') {
       uni[name] = promisify(name, todoApis[name]);
     });
     Object.keys(extraApi).forEach(function (name) {
-      uni[name] = promisify(name, todoApis[name]);
+      uni[name] = promisify(name, extraApi[name]);
     });
   }
   Object.keys(eventApi).forEach(function (name) {
@@ -3404,23 +3400,7 @@ function resolveLocaleChain(locale) {
 
 /***/ }),
 
-/***/ 23:
-/*!***************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/classCallCheck.js ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-module.exports = _classCallCheck, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 231:
+/***/ 228:
 /*!********************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/api/article.js ***!
   \********************************************************/
@@ -3435,7 +3415,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ArticleDetail = ArticleDetail;
 exports.ArticleList = ArticleList;
-var _http = __webpack_require__(/*! @/api/http.js */ 72);
+var _http = __webpack_require__(/*! @/api/http.js */ 78);
 function ArticleList(page, limit, callback) {
   var apiUrl = "/article/list";
   return (0, _http.PostReq)(apiUrl, {
@@ -3449,6 +3429,22 @@ function ArticleDetail(id, callback) {
     id: id
   }, callback);
 }
+
+/***/ }),
+
+/***/ 23:
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/classCallCheck.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+module.exports = _classCallCheck, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 
@@ -9605,7 +9601,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 310:
+/***/ 307:
 /*!************************************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/util/province.js ***!
   \************************************************************************/
@@ -9727,7 +9723,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 311:
+/***/ 308:
 /*!********************************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/util/city.js ***!
   \********************************************************************/
@@ -10848,7 +10844,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 312:
+/***/ 309:
 /*!********************************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/util/area.js ***!
   \********************************************************************/
@@ -20099,7 +20095,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 327:
+/***/ 324:
 /*!****************************************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/compontents/ay-qrcode/qrcode_wx.js ***!
   \****************************************************************************/
@@ -20842,7 +20838,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 328:
+/***/ 325:
 /*!*******************************************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/compontents/ay-qrcode/weapp-qrcode.js ***!
   \*******************************************************************************/
@@ -22194,6 +22190,28 @@ function deepClone(obj) {
 }
 var _default = deepClone;
 exports.default = _default;
+
+/***/ }),
+
+/***/ 376:
+/*!******************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/index.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.mainInfo = mainInfo;
+var _http = __webpack_require__(/*! @/api/http.js */ 78);
+function mainInfo(callback) {
+  var apiUrl = "/main";
+  return (0, _http.GetReq)(apiUrl, {}, callback);
+}
 
 /***/ }),
 
@@ -25445,10 +25463,10 @@ module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module
 
 /***/ }),
 
-/***/ 71:
-/*!******************************************************!*\
-  !*** /Users/stonejia/vue/zhongxin_mini/api/index.js ***!
-  \******************************************************/
+/***/ 77:
+/*!********************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/voucher.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25458,16 +25476,21 @@ module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.mainInfo = mainInfo;
-var _http = __webpack_require__(/*! @/api/http.js */ 72);
-function mainInfo(callback) {
-  var apiUrl = "/main";
-  return (0, _http.GetReq)(apiUrl, {}, callback);
+exports.VoucherExchange = VoucherExchange;
+exports.VoucherTypes = VoucherTypes;
+var _http = __webpack_require__(/*! @/api/http.js */ 78);
+function VoucherExchange(data, callback) {
+  var apiUrl = "/voucher/exchange";
+  return (0, _http.PostReq)(apiUrl, data, callback);
+}
+function VoucherTypes(data, callback) {
+  var apiUrl = "/voucher/types";
+  return (0, _http.PostReq)(apiUrl, data, callback);
 }
 
 /***/ }),
 
-/***/ 72:
+/***/ 78:
 /*!*****************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/api/http.js ***!
   \*****************************************************/
@@ -25540,54 +25563,7 @@ function GetReq(reqUrl, data, callback) {
 
 /***/ }),
 
-/***/ 8:
-/*!***************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
-  \***************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 9);
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
-}
-module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 81:
-/*!********************************************************!*\
-  !*** /Users/stonejia/vue/zhongxin_mini/api/voucher.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.VoucherExchange = VoucherExchange;
-exports.VoucherTypes = VoucherTypes;
-var _http = __webpack_require__(/*! @/api/http.js */ 72);
-function VoucherExchange(data, callback) {
-  var apiUrl = "/voucher/exchange";
-  return (0, _http.PostReq)(apiUrl, data, callback);
-}
-function VoucherTypes(data, callback) {
-  var apiUrl = "/voucher/types";
-  return (0, _http.PostReq)(apiUrl, data, callback);
-}
-
-/***/ }),
-
-/***/ 82:
+/***/ 79:
 /*!*******************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/api/member.js ***!
   \*******************************************************/
@@ -25611,7 +25587,7 @@ exports.MemberPassengerList = MemberPassengerList;
 exports.MemberPassengerUpdate = MemberPassengerUpdate;
 exports.MemberTicketReserve = MemberTicketReserve;
 exports.default = void 0;
-var _http = __webpack_require__(/*! @/api/http.js */ 72);
+var _http = __webpack_require__(/*! @/api/http.js */ 78);
 var _default = {}; // 用户数据更新
 exports.default = _default;
 function MemberInfoUpdate(data, callback) {
@@ -25681,6 +25657,48 @@ function MemberInfo() {
 
 /***/ }),
 
+/***/ 8:
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 9);
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 88:
+/*!******************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/freey.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.FreeyList = FreeyList;
+var _http = __webpack_require__(/*! @/api/http.js */ 78);
+function FreeyList(data, callback) {
+  var apiUrl = "/freey/list";
+  return (0, _http.PostReq)(apiUrl, data, callback);
+}
+
+/***/ }),
+
 /***/ 9:
 /*!*****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
@@ -25696,28 +25714,6 @@ function _arrayLikeToArray(arr, len) {
   return arr2;
 }
 module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 91:
-/*!******************************************************!*\
-  !*** /Users/stonejia/vue/zhongxin_mini/api/freey.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.FreeyList = FreeyList;
-var _http = __webpack_require__(/*! @/api/http.js */ 72);
-function FreeyList(data, callback) {
-  var apiUrl = "/freey/list";
-  return (0, _http.PostReq)(apiUrl, data, callback);
-}
 
 /***/ })
 
