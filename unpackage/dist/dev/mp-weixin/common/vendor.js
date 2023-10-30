@@ -101,7 +101,7 @@ module.exports = _toPropertyKey, module.exports.__esModule = true, module.export
 
 /***/ }),
 
-/***/ 121:
+/***/ 124:
 /*!***********************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/api/land_place.js ***!
   \***********************************************************/
@@ -115,7 +115,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.LandPlaceList = LandPlaceList;
-var _http = __webpack_require__(/*! @/api/http.js */ 78);
+var _http = __webpack_require__(/*! @/api/http.js */ 72);
 function LandPlaceList(data, callback) {
   var apiUrl = "/land_place/list";
   return (0, _http.PostReq)(apiUrl, data, callback);
@@ -143,52 +143,6 @@ module.exports = _typeof, module.exports.__esModule = true, module.exports["defa
 
 /***/ }),
 
-/***/ 138:
-/*!*******************************************************!*\
-  !*** /Users/stonejia/vue/zhongxin_mini/api/weixin.js ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.AgainPrePay = AgainPrePay;
-exports.Pay = Pay;
-exports.PrePay = PrePay;
-exports.WeixinCode = WeixinCode;
-exports.WeixinPhone = WeixinPhone;
-var _http = __webpack_require__(/*! @/api/http.js */ 78);
-function WeixinCode(code, callback) {
-  var apiUrl = "/wx/code";
-  return (0, _http.PostReq)(apiUrl, {
-    code: code
-  }, callback);
-}
-function Pay(data, callback) {
-  var apiUrl = "/wx/pay";
-  return (0, _http.PostReq)(apiUrl, data, callback);
-}
-function PrePay(data, callback) {
-  var apiUrl = "/wx/prepay";
-  return (0, _http.PostReq)(apiUrl, data, callback);
-}
-function AgainPrePay(data, callback) {
-  var apiUrl = "/wx/again_prepay";
-  return (0, _http.PostReq)(apiUrl, data, callback);
-}
-function WeixinPhone(code, callback) {
-  var apiUrl = "/wx/phone";
-  return (0, _http.PostReq)(apiUrl, {
-    code: code
-  }, callback);
-}
-
-/***/ }),
-
 /***/ 14:
 /*!************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/toPrimitive.js ***!
@@ -211,10 +165,10 @@ module.exports = _toPrimitive, module.exports.__esModule = true, module.exports[
 
 /***/ }),
 
-/***/ 147:
-/*!*****************************************************!*\
-  !*** /Users/stonejia/vue/zhongxin_mini/api/tour.js ***!
-  \*****************************************************/
+/***/ 141:
+/*!*******************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/weixin.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -224,20 +178,34 @@ module.exports = _toPrimitive, module.exports.__esModule = true, module.exports[
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TourDetail = TourDetail;
-exports.TourList = TourList;
-var _http = __webpack_require__(/*! @/api/http.js */ 78);
-function TourList(page, limit, callback) {
-  var apiUrl = "/tour/list";
+exports.AgainPrePay = AgainPrePay;
+exports.Pay = Pay;
+exports.PrePay = PrePay;
+exports.WeixinCode = WeixinCode;
+exports.WeixinPhone = WeixinPhone;
+var _http = __webpack_require__(/*! @/api/http.js */ 72);
+function WeixinCode(code, callback) {
+  var apiUrl = "/wx/code";
   return (0, _http.PostReq)(apiUrl, {
-    page: page,
-    limit: limit
+    code: code
   }, callback);
 }
-function TourDetail(id, callback) {
-  var apiUrl = "/tour/detail";
+function Pay(data, callback) {
+  var apiUrl = "/wx/pay";
+  return (0, _http.PostReq)(apiUrl, data, callback);
+}
+function PrePay(data, callback) {
+  var apiUrl = "/wx/prepay";
+  return (0, _http.PostReq)(apiUrl, data, callback);
+}
+function AgainPrePay(data, callback) {
+  var apiUrl = "/wx/again_prepay";
+  return (0, _http.PostReq)(apiUrl, data, callback);
+}
+function WeixinPhone(code, callback) {
+  var apiUrl = "/wx/phone";
   return (0, _http.PostReq)(apiUrl, {
-    id: id
+    code: code
   }, callback);
 }
 
@@ -268,6 +236,38 @@ function _construct(Parent, args, Class) {
   return _construct.apply(null, arguments);
 }
 module.exports = _construct, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 150:
+/*!*****************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/tour.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TourDetail = TourDetail;
+exports.TourList = TourList;
+var _http = __webpack_require__(/*! @/api/http.js */ 72);
+function TourList(page, limit, callback) {
+  var apiUrl = "/tour/list";
+  return (0, _http.PostReq)(apiUrl, {
+    page: page,
+    limit: limit
+  }, callback);
+}
+function TourDetail(id, callback) {
+  var apiUrl = "/tour/detail";
+  return (0, _http.PostReq)(apiUrl, {
+    id: id
+  }, callback);
+}
 
 /***/ }),
 
@@ -311,7 +311,7 @@ module.exports = _isNativeReflectConstruct, module.exports.__esModule = true, mo
 
 /***/ }),
 
-/***/ 172:
+/***/ 175:
 /*!*******************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/api/orders.js ***!
   \*******************************************************/
@@ -329,7 +329,7 @@ exports.cancelOrder = cancelOrder;
 exports.orderDetail = orderDetail;
 exports.orderList = orderList;
 exports.payOrderUse = payOrderUse;
-var _http = __webpack_require__(/*! @/api/http.js */ 78);
+var _http = __webpack_require__(/*! @/api/http.js */ 72);
 function orderList(data, callback) {
   var apiUrl = "/order/list";
   return (0, _http.PostReq)(apiUrl, data, callback);
@@ -400,7 +400,7 @@ module.exports = _arrayWithoutHoles, module.exports.__esModule = true, module.ex
 
 /***/ }),
 
-/***/ 195:
+/***/ 198:
 /*!********************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/api/address.js ***!
   \********************************************************/
@@ -415,7 +415,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.addressList = addressList;
 exports.addressOperate = addressOperate;
-var _http = __webpack_require__(/*! @/api/http.js */ 78);
+var _http = __webpack_require__(/*! @/api/http.js */ 72);
 function addressList(data, callback) {
   var apiUrl = "/address/list";
   return (0, _http.PostReq)(apiUrl, data, callback);
@@ -3400,7 +3400,23 @@ function resolveLocaleChain(locale) {
 
 /***/ }),
 
-/***/ 228:
+/***/ 23:
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/classCallCheck.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+module.exports = _classCallCheck, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 231:
 /*!********************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/api/article.js ***!
   \********************************************************/
@@ -3415,7 +3431,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ArticleDetail = ArticleDetail;
 exports.ArticleList = ArticleList;
-var _http = __webpack_require__(/*! @/api/http.js */ 78);
+var _http = __webpack_require__(/*! @/api/http.js */ 72);
 function ArticleList(page, limit, callback) {
   var apiUrl = "/article/list";
   return (0, _http.PostReq)(apiUrl, {
@@ -3429,22 +3445,6 @@ function ArticleDetail(id, callback) {
     id: id
   }, callback);
 }
-
-/***/ }),
-
-/***/ 23:
-/*!***************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/classCallCheck.js ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-module.exports = _classCallCheck, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 
@@ -9601,7 +9601,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 307:
+/***/ 317:
 /*!************************************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/util/province.js ***!
   \************************************************************************/
@@ -9723,7 +9723,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 308:
+/***/ 318:
 /*!********************************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/util/city.js ***!
   \********************************************************************/
@@ -10844,7 +10844,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 309:
+/***/ 319:
 /*!********************************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/util/area.js ***!
   \********************************************************************/
@@ -20095,7 +20095,142 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 324:
+/***/ 33:
+/*!***********************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/index.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _mixin = _interopRequireDefault(__webpack_require__(/*! ./libs/mixin/mixin.js */ 34));
+var _request = _interopRequireDefault(__webpack_require__(/*! ./libs/request */ 35));
+var _queryParams = _interopRequireDefault(__webpack_require__(/*! ./libs/function/queryParams.js */ 39));
+var _route = _interopRequireDefault(__webpack_require__(/*! ./libs/function/route.js */ 40));
+var _timeFormat = _interopRequireDefault(__webpack_require__(/*! ./libs/function/timeFormat.js */ 44));
+var _timeFrom = _interopRequireDefault(__webpack_require__(/*! ./libs/function/timeFrom.js */ 45));
+var _colorGradient = _interopRequireDefault(__webpack_require__(/*! ./libs/function/colorGradient.js */ 46));
+var _guid = _interopRequireDefault(__webpack_require__(/*! ./libs/function/guid.js */ 47));
+var _color = _interopRequireDefault(__webpack_require__(/*! ./libs/function/color.js */ 48));
+var _type2icon = _interopRequireDefault(__webpack_require__(/*! ./libs/function/type2icon.js */ 49));
+var _randomArray = _interopRequireDefault(__webpack_require__(/*! ./libs/function/randomArray.js */ 50));
+var _deepClone = _interopRequireDefault(__webpack_require__(/*! ./libs/function/deepClone.js */ 37));
+var _deepMerge = _interopRequireDefault(__webpack_require__(/*! ./libs/function/deepMerge.js */ 36));
+var _addUnit = _interopRequireDefault(__webpack_require__(/*! ./libs/function/addUnit.js */ 51));
+var _test = _interopRequireDefault(__webpack_require__(/*! ./libs/function/test.js */ 38));
+var _random = _interopRequireDefault(__webpack_require__(/*! ./libs/function/random.js */ 52));
+var _trim = _interopRequireDefault(__webpack_require__(/*! ./libs/function/trim.js */ 53));
+var _toast = _interopRequireDefault(__webpack_require__(/*! ./libs/function/toast.js */ 54));
+var _getParent = _interopRequireDefault(__webpack_require__(/*! ./libs/function/getParent.js */ 55));
+var _$parent = _interopRequireDefault(__webpack_require__(/*! ./libs/function/$parent.js */ 56));
+var _sys = __webpack_require__(/*! ./libs/function/sys.js */ 57);
+var _debounce = _interopRequireDefault(__webpack_require__(/*! ./libs/function/debounce.js */ 58));
+var _throttle = _interopRequireDefault(__webpack_require__(/*! ./libs/function/throttle.js */ 59));
+var _config = _interopRequireDefault(__webpack_require__(/*! ./libs/config/config.js */ 60));
+var _zIndex = _interopRequireDefault(__webpack_require__(/*! ./libs/config/zIndex.js */ 61));
+// 引入全局mixin
+
+// 引入关于是否mixin集成小程序分享的配置
+// import wxshare from './libs/mixin/mpShare.js'
+// 全局挂载引入http相关请求拦截插件
+
+function wranning(str) {
+  // 开发环境进行信息输出,主要是一些报错信息
+  // 这个环境的来由是在程序编写时候,点击hx编辑器运行调试代码的时候,详见:
+  // 	https://uniapp.dcloud.io/frame?id=%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83%e5%92%8c%e7%94%9f%e4%ba%a7%e7%8e%af%e5%a2%83
+  if (true) {
+    console.warn(str);
+  }
+}
+
+// 尝试判断在根目录的/store中是否有$u.mixin.js，此文件uView默认为需要挂在到全局的vuex的state变量
+// HX2.6.11版本,放到try中,控制台依然会警告,暂时不用此方式，
+// let vuexStore = {};
+// try {
+// 	vuexStore = require("@/store/$u.mixin.js");
+// } catch (e) {
+// 	//TODO handle the exception
+// }
+
+// post类型对象参数转为get类型url参数
+
+var $u = {
+  queryParams: _queryParams.default,
+  route: _route.default,
+  timeFormat: _timeFormat.default,
+  date: _timeFormat.default,
+  // 另名date
+  timeFrom: _timeFrom.default,
+  colorGradient: _colorGradient.default.colorGradient,
+  colorToRgba: _colorGradient.default.colorToRgba,
+  guid: _guid.default,
+  color: _color.default,
+  sys: _sys.sys,
+  os: _sys.os,
+  type2icon: _type2icon.default,
+  randomArray: _randomArray.default,
+  wranning: wranning,
+  get: _request.default.get,
+  post: _request.default.post,
+  put: _request.default.put,
+  'delete': _request.default.delete,
+  hexToRgb: _colorGradient.default.hexToRgb,
+  rgbToHex: _colorGradient.default.rgbToHex,
+  test: _test.default,
+  random: _random.default,
+  deepClone: _deepClone.default,
+  deepMerge: _deepMerge.default,
+  getParent: _getParent.default,
+  $parent: _$parent.default,
+  addUnit: _addUnit.default,
+  trim: _trim.default,
+  type: ['primary', 'success', 'error', 'warning', 'info'],
+  http: _request.default,
+  toast: _toast.default,
+  config: _config.default,
+  // uView配置信息相关，比如版本号
+  zIndex: _zIndex.default,
+  debounce: _debounce.default,
+  throttle: _throttle.default
+};
+
+// $u挂载到uni对象上
+uni.$u = $u;
+var install = function install(Vue) {
+  Vue.mixin(_mixin.default);
+  if (Vue.prototype.openShare) {
+    Vue.mixin(mpShare);
+  }
+  // Vue.mixin(vuexStore);
+  // 时间格式化，同时两个名称，date和timeFormat
+  Vue.filter('timeFormat', function (timestamp, format) {
+    return (0, _timeFormat.default)(timestamp, format);
+  });
+  Vue.filter('date', function (timestamp, format) {
+    return (0, _timeFormat.default)(timestamp, format);
+  });
+  // 将多久以前的方法，注入到全局过滤器
+  Vue.filter('timeFrom', function (timestamp, format) {
+    return (0, _timeFrom.default)(timestamp, format);
+  });
+  Vue.prototype.$u = $u;
+};
+var _default = {
+  install: install
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+
+/***/ 334:
 /*!****************************************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/compontents/ay-qrcode/qrcode_wx.js ***!
   \****************************************************************************/
@@ -20838,7 +20973,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 325:
+/***/ 335:
 /*!*******************************************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/compontents/ay-qrcode/weapp-qrcode.js ***!
   \*******************************************************************************/
@@ -21678,141 +21813,6 @@ module.exports = QRCode;
 
 /***/ }),
 
-/***/ 33:
-/*!***********************************************************!*\
-  !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/index.js ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _mixin = _interopRequireDefault(__webpack_require__(/*! ./libs/mixin/mixin.js */ 34));
-var _request = _interopRequireDefault(__webpack_require__(/*! ./libs/request */ 35));
-var _queryParams = _interopRequireDefault(__webpack_require__(/*! ./libs/function/queryParams.js */ 39));
-var _route = _interopRequireDefault(__webpack_require__(/*! ./libs/function/route.js */ 40));
-var _timeFormat = _interopRequireDefault(__webpack_require__(/*! ./libs/function/timeFormat.js */ 44));
-var _timeFrom = _interopRequireDefault(__webpack_require__(/*! ./libs/function/timeFrom.js */ 45));
-var _colorGradient = _interopRequireDefault(__webpack_require__(/*! ./libs/function/colorGradient.js */ 46));
-var _guid = _interopRequireDefault(__webpack_require__(/*! ./libs/function/guid.js */ 47));
-var _color = _interopRequireDefault(__webpack_require__(/*! ./libs/function/color.js */ 48));
-var _type2icon = _interopRequireDefault(__webpack_require__(/*! ./libs/function/type2icon.js */ 49));
-var _randomArray = _interopRequireDefault(__webpack_require__(/*! ./libs/function/randomArray.js */ 50));
-var _deepClone = _interopRequireDefault(__webpack_require__(/*! ./libs/function/deepClone.js */ 37));
-var _deepMerge = _interopRequireDefault(__webpack_require__(/*! ./libs/function/deepMerge.js */ 36));
-var _addUnit = _interopRequireDefault(__webpack_require__(/*! ./libs/function/addUnit.js */ 51));
-var _test = _interopRequireDefault(__webpack_require__(/*! ./libs/function/test.js */ 38));
-var _random = _interopRequireDefault(__webpack_require__(/*! ./libs/function/random.js */ 52));
-var _trim = _interopRequireDefault(__webpack_require__(/*! ./libs/function/trim.js */ 53));
-var _toast = _interopRequireDefault(__webpack_require__(/*! ./libs/function/toast.js */ 54));
-var _getParent = _interopRequireDefault(__webpack_require__(/*! ./libs/function/getParent.js */ 55));
-var _$parent = _interopRequireDefault(__webpack_require__(/*! ./libs/function/$parent.js */ 56));
-var _sys = __webpack_require__(/*! ./libs/function/sys.js */ 57);
-var _debounce = _interopRequireDefault(__webpack_require__(/*! ./libs/function/debounce.js */ 58));
-var _throttle = _interopRequireDefault(__webpack_require__(/*! ./libs/function/throttle.js */ 59));
-var _config = _interopRequireDefault(__webpack_require__(/*! ./libs/config/config.js */ 60));
-var _zIndex = _interopRequireDefault(__webpack_require__(/*! ./libs/config/zIndex.js */ 61));
-// 引入全局mixin
-
-// 引入关于是否mixin集成小程序分享的配置
-// import wxshare from './libs/mixin/mpShare.js'
-// 全局挂载引入http相关请求拦截插件
-
-function wranning(str) {
-  // 开发环境进行信息输出,主要是一些报错信息
-  // 这个环境的来由是在程序编写时候,点击hx编辑器运行调试代码的时候,详见:
-  // 	https://uniapp.dcloud.io/frame?id=%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83%e5%92%8c%e7%94%9f%e4%ba%a7%e7%8e%af%e5%a2%83
-  if (true) {
-    console.warn(str);
-  }
-}
-
-// 尝试判断在根目录的/store中是否有$u.mixin.js，此文件uView默认为需要挂在到全局的vuex的state变量
-// HX2.6.11版本,放到try中,控制台依然会警告,暂时不用此方式，
-// let vuexStore = {};
-// try {
-// 	vuexStore = require("@/store/$u.mixin.js");
-// } catch (e) {
-// 	//TODO handle the exception
-// }
-
-// post类型对象参数转为get类型url参数
-
-var $u = {
-  queryParams: _queryParams.default,
-  route: _route.default,
-  timeFormat: _timeFormat.default,
-  date: _timeFormat.default,
-  // 另名date
-  timeFrom: _timeFrom.default,
-  colorGradient: _colorGradient.default.colorGradient,
-  colorToRgba: _colorGradient.default.colorToRgba,
-  guid: _guid.default,
-  color: _color.default,
-  sys: _sys.sys,
-  os: _sys.os,
-  type2icon: _type2icon.default,
-  randomArray: _randomArray.default,
-  wranning: wranning,
-  get: _request.default.get,
-  post: _request.default.post,
-  put: _request.default.put,
-  'delete': _request.default.delete,
-  hexToRgb: _colorGradient.default.hexToRgb,
-  rgbToHex: _colorGradient.default.rgbToHex,
-  test: _test.default,
-  random: _random.default,
-  deepClone: _deepClone.default,
-  deepMerge: _deepMerge.default,
-  getParent: _getParent.default,
-  $parent: _$parent.default,
-  addUnit: _addUnit.default,
-  trim: _trim.default,
-  type: ['primary', 'success', 'error', 'warning', 'info'],
-  http: _request.default,
-  toast: _toast.default,
-  config: _config.default,
-  // uView配置信息相关，比如版本号
-  zIndex: _zIndex.default,
-  debounce: _debounce.default,
-  throttle: _throttle.default
-};
-
-// $u挂载到uni对象上
-uni.$u = $u;
-var install = function install(Vue) {
-  Vue.mixin(_mixin.default);
-  if (Vue.prototype.openShare) {
-    Vue.mixin(mpShare);
-  }
-  // Vue.mixin(vuexStore);
-  // 时间格式化，同时两个名称，date和timeFormat
-  Vue.filter('timeFormat', function (timestamp, format) {
-    return (0, _timeFormat.default)(timestamp, format);
-  });
-  Vue.filter('date', function (timestamp, format) {
-    return (0, _timeFormat.default)(timestamp, format);
-  });
-  // 将多久以前的方法，注入到全局过滤器
-  Vue.filter('timeFrom', function (timestamp, format) {
-    return (0, _timeFrom.default)(timestamp, format);
-  });
-  Vue.prototype.$u = $u;
-};
-var _default = {
-  install: install
-};
-exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-
 /***/ 34:
 /*!**********************************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/mixin/mixin.js ***!
@@ -22190,28 +22190,6 @@ function deepClone(obj) {
 }
 var _default = deepClone;
 exports.default = _default;
-
-/***/ }),
-
-/***/ 376:
-/*!******************************************************!*\
-  !*** /Users/stonejia/vue/zhongxin_mini/api/index.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.mainInfo = mainInfo;
-var _http = __webpack_require__(/*! @/api/http.js */ 78);
-function mainInfo(callback) {
-  var apiUrl = "/main";
-  return (0, _http.GetReq)(apiUrl, {}, callback);
-}
 
 /***/ }),
 
@@ -25463,10 +25441,10 @@ module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module
 
 /***/ }),
 
-/***/ 77:
-/*!********************************************************!*\
-  !*** /Users/stonejia/vue/zhongxin_mini/api/voucher.js ***!
-  \********************************************************/
+/***/ 71:
+/*!******************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/index.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25476,21 +25454,23 @@ module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.VoucherExchange = VoucherExchange;
-exports.VoucherTypes = VoucherTypes;
-var _http = __webpack_require__(/*! @/api/http.js */ 78);
-function VoucherExchange(data, callback) {
-  var apiUrl = "/voucher/exchange";
-  return (0, _http.PostReq)(apiUrl, data, callback);
+exports.lottery = lottery;
+exports.mainInfo = mainInfo;
+var _http = __webpack_require__(/*! @/api/http.js */ 72);
+function mainInfo(callback) {
+  var apiUrl = "/main";
+  return (0, _http.GetReq)(apiUrl, {}, callback);
 }
-function VoucherTypes(data, callback) {
-  var apiUrl = "/voucher/types";
-  return (0, _http.PostReq)(apiUrl, data, callback);
+function lottery(id, callback) {
+  var apiUrl = "/lottery";
+  return (0, _http.GetReq)(apiUrl, {
+    id: id
+  }, callback);
 }
 
 /***/ }),
 
-/***/ 78:
+/***/ 72:
 /*!*****************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/api/http.js ***!
   \*****************************************************/
@@ -25505,9 +25485,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.GetReq = GetReq;
 exports.PostReq = PostReq;
-//const BaseUrl = "http://127.0.0.1:9805/zhongxin/api"
+var BaseUrl = "http://127.0.0.1:9805/zhongxin/api";
 //const BaseUrl = "http://118.25.191.234:9805/zhongxin/api"
-var BaseUrl = "https://hzthxcx.cohc.citic/zhongxin/api";
+//const BaseUrl = "https://hzthxcx.cohc.citic/zhongxin/api"
 // post请求
 function PostReq(reqUrl, data, callback) {
   console.log('openid:' + uni.getStorageSync('openid') + ',token:' + uni.getStorageSync('token'));
@@ -25563,7 +25543,54 @@ function GetReq(reqUrl, data, callback) {
 
 /***/ }),
 
-/***/ 79:
+/***/ 8:
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 9);
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 81:
+/*!********************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/voucher.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.VoucherExchange = VoucherExchange;
+exports.VoucherTypes = VoucherTypes;
+var _http = __webpack_require__(/*! @/api/http.js */ 72);
+function VoucherExchange(data, callback) {
+  var apiUrl = "/voucher/exchange";
+  return (0, _http.PostReq)(apiUrl, data, callback);
+}
+function VoucherTypes(data, callback) {
+  var apiUrl = "/voucher/types";
+  return (0, _http.PostReq)(apiUrl, data, callback);
+}
+
+/***/ }),
+
+/***/ 82:
 /*!*******************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/api/member.js ***!
   \*******************************************************/
@@ -25587,7 +25614,7 @@ exports.MemberPassengerList = MemberPassengerList;
 exports.MemberPassengerUpdate = MemberPassengerUpdate;
 exports.MemberTicketReserve = MemberTicketReserve;
 exports.default = void 0;
-var _http = __webpack_require__(/*! @/api/http.js */ 78);
+var _http = __webpack_require__(/*! @/api/http.js */ 72);
 var _default = {}; // 用户数据更新
 exports.default = _default;
 function MemberInfoUpdate(data, callback) {
@@ -25657,48 +25684,6 @@ function MemberInfo() {
 
 /***/ }),
 
-/***/ 8:
-/*!***************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
-  \***************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 9);
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
-}
-module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 88:
-/*!******************************************************!*\
-  !*** /Users/stonejia/vue/zhongxin_mini/api/freey.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.FreeyList = FreeyList;
-var _http = __webpack_require__(/*! @/api/http.js */ 78);
-function FreeyList(data, callback) {
-  var apiUrl = "/freey/list";
-  return (0, _http.PostReq)(apiUrl, data, callback);
-}
-
-/***/ }),
-
 /***/ 9:
 /*!*****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
@@ -25714,6 +25699,28 @@ function _arrayLikeToArray(arr, len) {
   return arr2;
 }
 module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 91:
+/*!******************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/freey.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.FreeyList = FreeyList;
+var _http = __webpack_require__(/*! @/api/http.js */ 72);
+function FreeyList(data, callback) {
+  var apiUrl = "/freey/list";
+  return (0, _http.PostReq)(apiUrl, data, callback);
+}
 
 /***/ })
 

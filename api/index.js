@@ -5,3 +5,10 @@ export function mainInfo(callback) {
 	return GetReq(apiUrl, {}, callback)
 }
 
+export function lottery(id, callback) {
+	let apiUrl = "/lottery" 
+	return GetReq(apiUrl, {id:id}, callback)
+}
+
+
+

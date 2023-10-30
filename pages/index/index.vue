@@ -92,7 +92,7 @@
 	
 		<footers :currentx='0'></footers>
 		
-		<u-popup :show="lotteryShow" mode="center" v-model="lotteryShow" :mask-close-able="false" :closeable="true">
+		<u-popup v-if="lotteryShow" mode="center" v-model="lotteryShow" :mask-close-able="false" :closeable="true">
 			<view>
 				<pt-lottery
 					ref="pt-lottery"
@@ -112,9 +112,8 @@
 </template>
 
 <script>
-	import {mapState, mapGetters, mapMutations} from 'vuex'
 	import footers from '@/compontents/footers/footers.vue'
-	import { mainInfo } from '@/api/index.js'
+	import { mainInfo, lottery } from '@/api/index.js'
 	export default {
 		components:{
 			footers: footers
@@ -128,18 +127,6 @@
 				statusBarHeight: 0,
 				//导航栏的高度
 				navBarHeight: 0,
-				/*
-				list2: [{
-				                    image: 'https://cdn.uviewui.com/uview/swiper/swiper2.png',
-				                    title: '昨夜星辰昨夜风，画楼西畔桂堂东',
-				                },{
-				                    image: 'https://cdn.uviewui.com/uview/swiper/swiper1.png',
-				                    title: '身无彩凤双飞翼，心有灵犀一点通'
-				                },{
-				                    image: 'https://cdn.uviewui.com/uview/swiper/swiper3.png',
-				                    title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
-				                }],
-				*/
 			    banners: [],
 				articles:[],
 				share: {
@@ -152,8 +139,11 @@
 				videoShow: true,
 				bannerShow: false,
 				// 抽奖
-				lotteryShow: true,
+				lotteryShow: false,
 				prizeIndex: 0,
+				prizeList: [],
+				lotteryId: 0,
+				/*
 				prizeList: [{
 					prizeName: 'iphone 12',
 					prizeIcon: '../../static/lottery/prizeIcon.png'
@@ -179,10 +169,8 @@
 					prizeName: '谢谢惠顾',
 					prizeIcon: '../../static/lottery/no.png'
 				}]
+				*/
 			}
-		},
-		computed: {
-			...mapState(['openid','token']),	
 		},
 		mounted() {
 			this.getheight()
@@ -192,7 +180,7 @@
 			setTimeout(function() {
 				that.videoShow = false
 				that.bannerShow = true
-			}, 10000)
+			}, 10000)			
 		},
 		created() {
 			var that = this
@@ -207,6 +195,20 @@
 				}
 				that.banners = res.data.banners
 				that.articles = res.data.articles
+				
+				// 初始化抽奖
+				if (res.data.lotterys.length > 0) {
+				    that.lotteryId = res.data.lotterys[0].id
+					let gifts = JSON.parse(res.data.lotterys[0].gift)
+					gifts.forEach(function(item, i) {
+						let t = {
+							prizeName: item.title,
+							prizeIcon: item.image,
+						}
+						that.prizeList.push(t)
+						that.lotteryShow = true
+					})
+				}
 			})			
 		},
 		methods: { 
@@ -247,8 +249,20 @@
 			},
 			// 抽奖
 			lotteryStart(){
+				/*
 				this.prizeIndex = Math.ceil(Math.random()*7)
 				this.$refs['pt-lottery'].init(this.prizeIndex)
+				*/
+			   var that = this
+			   lottery(that.lotteryId, (res) => {
+				   // 出错给保底数据
+				   if (res.code !== 0) {
+					  that.prizeIndex = 100
+					  that.$refs['pt-lottery'].init(this.prizeIndex)
+					  return
+				   }
+				   console.log(res)
+			   })
 			},
 			lotteryEnd(){
 				switch (this.prizeIndex){
