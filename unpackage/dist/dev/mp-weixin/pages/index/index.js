@@ -317,8 +317,8 @@ var _default = {
       var that = this;
       (0, _index.lottery)(that.lotteryId, function (res) {
         // 出错给保底数据
-        if (res.code !== 0) {
-          that.prizeIndex = 100;
+        if (res.code === 0) {
+          that.prizeIndex = res.data.index;
           that.$refs['pt-lottery'].init(_this2.prizeIndex);
           return;
         }

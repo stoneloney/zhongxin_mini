@@ -14,9 +14,7 @@
 			</view>
 			<view @click="throttle(getLottery,gapTimes)" class="pt-lottery-btn"><image :src="lotteryBtn"></image></view>
 		</view>
-		<!--
-		<view class="pt-lottery-times" v-if="showTimes2">剩余{{showTimes}}次机会</view>
-		-->
+		<!--<view class="pt-lottery-times" v-if="showTimes2">剩余1111{{showTimes}}次机会</view>-->
 	</view>
 </template>
 
@@ -60,7 +58,7 @@
 			},
 			runTimes: {
 				type: Number,
-				default: 5000
+				default: 2000
 			}
 		},
 		data() {
@@ -127,11 +125,15 @@
 					}
 				}
 				var awardIndex = 0;
-				if(index){
+				/*
+				if(index != ''){
 					awardIndex = index
 				}else{
 					awardIndex = Math.ceil(Math.random()*this.showPrizeList.length-1)
 				}
+				*/
+			   awardIndex = index
+			   
 				this.runDegs = this.runDegs || 0
 				this.runDegs = this.runDegs + (360 - this.runDegs % 360) + (360 * this.showPrizeList.length - awardIndex * (360 / this.showPrizeList.length))
 				var animationRun = uni.createAnimation({

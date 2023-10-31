@@ -140,8 +140,6 @@ exports.default = void 0;
 //
 //
 //
-//
-//
 
 /** 参数
 * lotteryBg 大转盘背景，不用纯色块，界面不好看
@@ -182,7 +180,7 @@ var _default2 = {
     },
     runTimes: {
       type: Number,
-      default: 5000
+      default: 2000
     }
   },
   data: function data() {
@@ -256,11 +254,14 @@ var _default2 = {
         }
       }
       var awardIndex = 0;
-      if (index) {
-        awardIndex = index;
-      } else {
-        awardIndex = Math.ceil(Math.random() * this.showPrizeList.length - 1);
+      /*
+      if(index != ''){
+      	awardIndex = index
+      }else{
+      	awardIndex = Math.ceil(Math.random()*this.showPrizeList.length-1)
       }
+      */
+      awardIndex = index;
       this.runDegs = this.runDegs || 0;
       this.runDegs = this.runDegs + (360 - this.runDegs % 360) + (360 * this.showPrizeList.length - awardIndex * (360 / this.showPrizeList.length));
       var animationRun = uni.createAnimation({

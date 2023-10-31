@@ -256,8 +256,8 @@
 			   var that = this
 			   lottery(that.lotteryId, (res) => {
 				   // 出错给保底数据
-				   if (res.code !== 0) {
-					  that.prizeIndex = 100
+				   if (res.code === 0) {
+					  that.prizeIndex = res.data.index
 					  that.$refs['pt-lottery'].init(this.prizeIndex)
 					  return
 				   }
