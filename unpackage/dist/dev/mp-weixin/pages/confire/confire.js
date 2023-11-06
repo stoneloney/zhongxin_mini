@@ -217,6 +217,15 @@ var _weixin = __webpack_require__(/*! @/api/weixin */ 141);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
@@ -228,7 +237,11 @@ var _default = {
       number: 0,
       msg_phone: '',
       // 信息接受人
-      pageParams: {}
+      pageParams: {},
+      // 优惠券
+      tickets: [],
+      ticket: {},
+      hasTicket: false
     };
   },
   computed: {
@@ -295,6 +308,12 @@ var _default = {
       if (that.from == "tour") {
         that.totalPrice = that.number * that.reserve.price;
       }
+      // 查看是否有优惠券可以使用
+      if (res.data.tickets.length > 0) {
+        that.hasTicket = true;
+        that.ticket = res.data.tickets[0];
+        that.totalPrice -= that.ticket.gprice;
+      }
       console.log(that.reserve);
     });
   },
@@ -347,7 +366,9 @@ var _default = {
         // 选择乘机人
         'number': this.number,
         // 购买数量
-        'msg_phone': this.msg_phone // 联系人
+        'msg_phone': this.msg_phone,
+        // 联系人
+        'ticket': this.ticket // 优惠券
       }, function (res) {
         if (res.code !== 0) {
           uni.showModal({

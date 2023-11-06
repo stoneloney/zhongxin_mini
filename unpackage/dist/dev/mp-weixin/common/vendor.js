@@ -22442,6 +22442,35 @@ exports.default = _default;
 
 /***/ }),
 
+/***/ 388:
+/*!*******************************************************!*\
+  !*** /Users/stonejia/vue/zhongxin_mini/api/ticket.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TicketDetail = TicketDetail;
+exports.TicketList = TicketList;
+var _http = __webpack_require__(/*! @/api/http.js */ 72);
+function TicketList(data, callback) {
+  var apiUrl = "/ticket/list";
+  return (0, _http.PostReq)(apiUrl, data, callback);
+}
+function TicketDetail(id, callback) {
+  var apiUrl = "/ticket/detail";
+  return (0, _http.PostReq)(apiUrl, {
+    id: id
+  }, callback);
+}
+
+/***/ }),
+
 /***/ 39:
 /*!*******************************************************************************!*\
   !*** /Users/stonejia/vue/zhongxin_mini/uview-ui/libs/function/queryParams.js ***!

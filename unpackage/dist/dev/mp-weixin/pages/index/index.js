@@ -265,7 +265,8 @@ var _default = {
         gifts.forEach(function (item, i) {
           var t = {
             prizeName: item.title,
-            prizeIcon: item.image
+            prizeIcon: item.image,
+            prizeType: item.giftType
           };
           that.prizeList.push(t);
           that.lotteryShow = true;
@@ -316,29 +317,40 @@ var _default = {
       */
       var that = this;
       (0, _index.lottery)(that.lotteryId, function (res) {
-        // 出错给保底数据
         if (res.code === 0) {
           that.prizeIndex = res.data.index;
-          that.$refs['pt-lottery'].init(_this2.prizeIndex);
+          if (res.data.index >= 0) {
+            that.$refs['pt-lottery'].init(_this2.prizeIndex);
+          } else {
+            if (res.data.close) {
+              // 关闭抽奖并提示未中奖
+              that.lotteryShow = false;
+              return;
+            }
+            uni.showToast({
+              title: '很遗憾，未中奖',
+              icon: 'none',
+              duration: 2000
+            });
+          }
           return;
+        } else {
+          console.log('-------------');
+          uni.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 2000
+          });
         }
         console.log(res);
       });
     },
     lotteryEnd: function lotteryEnd() {
-      switch (this.prizeIndex) {
-        case 7:
-          uni.showToast({
-            icon: 'none',
-            title: '未中奖，再接再厉!'
-          });
-          break;
-        default:
-          uni.showToast({
-            icon: 'none',
-            title: '恭喜您获取' + this.prizeList[this.prizeIndex].prizeName
-          });
-          break;
+      if (this.prizeList[this.prizeIndex].prizeType !== 100) {
+        uni.showToast({
+          icon: 'none',
+          title: '恭喜您获取' + this.prizeList[this.prizeIndex].prizeName
+        });
       }
     }
   }

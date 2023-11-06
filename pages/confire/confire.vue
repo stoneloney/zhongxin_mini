@@ -45,6 +45,15 @@
 				</view>
 			</view>
 		</view>
+		<view class="contact2" v-if="hasTicket">
+			<text class="title">优惠</text>
+			<view class="change">
+				<view class="fl2">
+					<text>代金券￥{{ticket.gprice}}</text>
+					<text style="color:#FF4200;">-￥{{ticket.gprice}}</text>
+				</view>
+			</view>
+		</view>
 		<view class="footer">
 			<text class="price">￥<text>{{ totalPrice }} </text></text>
 			<view class="btn" @click="PrePay()">立即支付</view>
@@ -65,7 +74,11 @@
 				id: '',
 				number: 0,
 				msg_phone: '',  // 信息接受人
-				pageParams: {}
+				pageParams: {},
+				// 优惠券
+				tickets: [],
+				ticket: {},
+			    hasTicket: false,
 			}
 		},
 		computed: {
@@ -132,6 +145,12 @@
 				if (that.from == "tour") {
 					that.totalPrice = that.number * that.reserve.price
 				}
+				// 查看是否有优惠券可以使用
+				if (res.data.tickets.length > 0) {
+					that.hasTicket = true
+					that.ticket = res.data.tickets[0]
+					that.totalPrice -= that.ticket.gprice
+				}
 				console.log(that.reserve)
 			})
 		},
@@ -182,7 +201,8 @@
 					'from': this.from,
 					'select_ids': this.selectIds,   // 选择乘机人
 					'number': this.number,          // 购买数量
-					'msg_phone': this.msg_phone     // 联系人
+					'msg_phone': this.msg_phone     ,// 联系人
+					'ticket': this.ticket,           // 优惠券
 				}, (res) => {
 					if (res.code !== 0) {
 						uni.showModal({
@@ -298,6 +318,7 @@
 			}
 			.change{
 				width: 100%;
+				height: 200rpx;
 				display: flex;
 				align-items: flex-start;
 				margin-top: 30rpx;
@@ -333,6 +354,96 @@
 				}
 				.fl{
 					width: 170rpx;
+					display: flex;
+					align-items: center;
+					height: 70rpx;
+					margin-right: 14rpx;
+					justify-content: space-between;
+					text{
+						font-size: 28rpx;
+						color: #444A58;
+					}
+				}
+				.fl2{
+					width: 80%;
+					display: flex;
+					align-items: center;
+					height: 70rpx;
+					margin-right: 14rpx;
+					justify-content: space-between;
+					text{
+						font-size: 28rpx;
+						color: #444A58;
+					}
+				}
+			}
+		}
+		.contact2 {
+			overflow: hidden;
+			width: 100%;
+			height: 300rpx;
+			background: #fff;
+			border-radius: 20rpx;
+			margin-top: 19rpx;
+			position: relative;
+			z-index: 99;
+			padding: 36rpx 26rpx 34rpx 26rpx;
+			.title{
+				display: block;
+				font-size: 28rpx;
+				color: #444A58;
+				font-weight: bold;
+				margin-bottom: 2rpx;
+			}
+			.change{
+				width: 100%;
+				display: flex;
+				align-items: flex-start;
+				margin-top: 30rpx;
+				justify-content: space-between;
+				.fs{
+					height: 100%;
+					width: calc(100% - 184rpx);
+					font-size: 12px;
+					position: relative;
+					// &::after{
+					// 	content: '';
+					// 	width: 1px;
+					// 	height: 27rpx;
+					// 	background: #E3E3E3;
+					// 	position: absolute;
+					// 	left: 0;
+					// 	top: 50%;
+					// 	transform: translateY(-50%);
+					// }
+					input{
+						height: 70rpx;
+						width: 100%;
+						border-bottom: 1px solid #EEEEEE;
+						font-size: 28rpx;
+						color: #333;
+					}
+					text{
+						display: block;
+						font-size: 24rpx;
+						color: #2765F2;
+						margin-top: 16rpx;
+					}
+				}
+				.fl{
+					width: 170rpx;
+					display: flex;
+					align-items: center;
+					height: 70rpx;
+					margin-right: 14rpx;
+					justify-content: space-between;
+					text{
+						font-size: 28rpx;
+						color: #444A58;
+					}
+				}
+				.fl2{
+					width: 100%;
 					display: flex;
 					align-items: center;
 					height: 70rpx;
